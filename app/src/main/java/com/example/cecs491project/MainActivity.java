@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
     }
 
+    //After Medication button is pressed, go to Medications Page
     public void launchMedication(View v)
     {
         Intent i = new Intent(this, MedicationsActivity.class);

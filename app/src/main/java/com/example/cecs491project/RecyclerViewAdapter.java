@@ -154,14 +154,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
 
         }
 
-        //public TextView getTextView() {
-        //  return tv_medName;
-        //}
     }
     public interface OnTodoClickListener {
         void onTodoClick(int position);
-        //void onTodoCheck(RecyclerView.ViewHolder viewHolder, int position);
-        //void onToDoRadioButtonClick(President president);
+
     }
 
 }

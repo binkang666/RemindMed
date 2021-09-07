@@ -95,11 +95,13 @@ public class MedicationsActivity extends AppCompatActivity implements RecyclerVi
         startActivity(i);
     }
 
+    //When medication is tapped, edit it
     @Override
     public void onTodoClick(int position) {
         Intent intent = new Intent(MedicationsActivity.this, AddOrEditMedication.class );
         intent.putExtra("id", medicationsList.get(position).getMedicineNumber());
         startActivity(intent);
+
     }
 
     //Swipe right to delete
