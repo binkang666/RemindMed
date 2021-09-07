@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">RemindMe</string>
+    <string name="title_home">Home Page</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="medication_info">Medication</string>
+    <string name="add_medication">Add Medication</string>
+    <string name="medication_name">Medication Name</string>
+    <string name="pill_count">Pill Count</string>
+    <string name="medication_dosage">Dosage</string>
+    <string name="refill_count">Refill Count</string>
+    <string name="button_confirm">Confirm</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="medication_number">Medication Number</string>
+    <string name="sort_alphabetically">A->Z</string>
+    <string name="sort_alphabetically_reverse">Z->A</string>
+    <string name="sort_whenCreated">When Created</string>
+    <string name="sort_pillCount">Pill count from lowest to highest</string>
+    <string name="sort_dosage">Dosage from lowest to strongest</string>
+    <string name="sort_reffilCount">Refill Count from lowest to highest</string>
+</resources>
