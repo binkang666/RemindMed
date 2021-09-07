@@ -126,7 +126,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:button="@drawable/ic_delete"
-        android:text="Tap  to delete medication"
+        android:text="Swipe Right to Delete Medication"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
