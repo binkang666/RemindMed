@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "878412431643",
+    "project_id": "remindmed-27119",
+    "storage_bucket": "remindmed-27119.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:878412431643:android:5f52df4daad4fc268213be",
+        "android_client_info": {
+          "package_name": "com.example.remindmed"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "878412431643-8s4fimgapv537t4ntt9crbasoptsu41n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDquL_1KkzGnkkkd4ceWeKRkOTdnTwP6y4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "878412431643-8s4fimgapv537t4ntt9crbasoptsu41n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
