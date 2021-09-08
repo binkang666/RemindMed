@@ -46,7 +46,7 @@ public class MedicationsActivity extends AppCompatActivity implements RecyclerVi
         recyclerView.setLayoutManager(layoutManager);
         mAdapter = new RecyclerViewAdapter(medicationsList, this, this);
         recyclerView.setAdapter(mAdapter);
-        Toast.makeText(this, "Medications count = " + medicationsList.size(), Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Medications count = " + medicationsList.size(), Toast.LENGTH_SHORT).show();
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
     }
 

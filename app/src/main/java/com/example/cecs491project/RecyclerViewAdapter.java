@@ -67,7 +67,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
         viewHolder.tv_medPillCount.setText(String.valueOf(medicationsList.get(position).getPillCount()));
         viewHolder.tv_medDosage.setText(String.valueOf(medicationsList.get(position).getDosage()));
         viewHolder.tv_medRefilCount.setText(String.valueOf(medicationsList.get(position).getRefillCount()));
-        viewHolder.checkBox.setTag(medicationsList.get(position));
+//        viewHolder.checkBox.setTag(medicationsList.get(position));
 //        viewHolder.checkBox.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
