@@ -3,9 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project/app/src/main/res/drawable/stroke_box.xml" value="0.225" />
         <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project/app/src/main/res/layout/activity_add_or_edit_medication.xml" value="0.16590678824721378" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project/app/src/main/res/layout/activity_login.xml" value="0.33" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project/app/src/main/res/layout/activity_login_menu.xml" value="0.16590678824721378" />
         <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project/app/src/main/res/layout/activity_main.xml" value="0.16590678824721378" />
         <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project/app/src/main/res/layout/activity_medications.xml" value="0.1" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project/app/src/main/res/layout/activity_register.xml" value="0.16590678824721378" />
         <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project/app/src/main/res/layout/fragment_dashboard.xml" value="0.1" />
         <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project/app/src/main/res/layout/fragment_home.xml" value="0.16590678824721378" />
         <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project/app/src/main/res/layout/fragment_notifications.xml" value="0.1" />

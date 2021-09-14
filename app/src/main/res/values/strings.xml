@@ -18,4 +18,9 @@
     <string name="sort_pillCount">Pill count from lowest to highest</string>
     <string name="sort_dosage">Dosage from lowest to strongest</string>
     <string name="sort_reffilCount">Refill Count from lowest to highest</string>
+    <string name="register">register</string>
+    <string name="login">login</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Forgot password?</string>
 </resources>
