@@ -1,5 +1,6 @@
 package com.example.cecs491project.ui.login;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -7,10 +8,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.cecs491project.MainActivity;
 import com.example.cecs491project.R;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,6 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button login;
     private EditText email;
     private EditText password;
+    private Button reset;
 
     private FirebaseAuth auth;
 
@@ -34,6 +38,11 @@ public class LoginActivity extends AppCompatActivity {
         login = findViewById(R.id.login);
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
+        reset = findViewById(R.id.forgot_password);
+
+        ImageView logo = (ImageView) findViewById(R.id.logo);
+        logo.setImageResource(R.drawable.logo);
+
         auth = FirebaseAuth.getInstance();
 
         register.setOnClickListener(view -> {
@@ -47,6 +56,11 @@ public class LoginActivity extends AppCompatActivity {
             loginUser(email_str, password_str);
         });
 
+        reset.setOnClickListener(view -> {
+            startActivity(new Intent(LoginActivity.this, resetPasswordActivity.class));
+            finish();
+        });
+
     }
 
     //login in user
@@ -55,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_LONG).show();
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
             finish();
-        });
+        }).addOnFailureListener(e -> Toast.makeText(LoginActivity.this,"Email or Password is Incorrect!", Toast.LENGTH_LONG).show());
     }
 
     //Make sure the user will stay logged in

@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="400dp"
+        android:layout_marginTop="500dp"
         android:background="@android:color/transparent"
         android:text="@string/register"
         android:textColor="@color/darkGray"
@@ -42,7 +42,7 @@
         android:id="@+id/email"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="300dp"
         android:layout_centerHorizontal="true"
         android:background="@drawable/stroke_box"
         android:backgroundTint="@color/gainsboro"
@@ -68,5 +68,12 @@
         android:inputType="textPassword"
         android:singleLine="true"
         android:autofillHints="password"/>
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp" />
 
 </RelativeLayout>

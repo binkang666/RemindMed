@@ -42,12 +42,12 @@ public class RegisterActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
 
         register.setOnClickListener(view -> {
-                if(validateEmail() && validatePassword()){
-                    String email_str = email.getText().toString();
-                    String password_str = password.getText().toString();
-                    registerUser(email_str,password_str);
-                }
-            });
+            if(validateEmail() && validatePassword()){
+                String email_str = email.getText().toString();
+                String password_str = password.getText().toString();
+                registerUser(email_str,password_str);
+            }
+        });
     }
 
     private boolean validateEmail(){
@@ -85,12 +85,16 @@ public class RegisterActivity extends AppCompatActivity {
         auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(RegisterActivity.this, task -> {
             if(task.isSuccessful()){
                 Toast.makeText(RegisterActivity.this, "Register Successful", Toast.LENGTH_LONG).show();
-                startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                 finish();
             }
             else{
                 Toast.makeText(RegisterActivity.this, "Register Failed", Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    public void goBack(View view) {
+        startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
     }
 }

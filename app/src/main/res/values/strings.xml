@@ -25,4 +25,10 @@
     <string name="forgot_password">Forgot password?</string>
     <string name="logout">logout</string>
     <string name="log_out">Log out</string>
+    <string name="send_request">Send Request</string>
+    <string name="back_to_log_in">Back To Log In</string>
+    <string name="note_2">Enter your email and we\'ll send you a link to get back into your account</string>
+    <string name="note_1">Trouble logging in?</string>
+    <string name="hyperlink">Enter your email address and password. Learn more about Password Standard at\n<a href="https://www.csulb.edu/information-technology/information-security/information-security/password-standard">https://www.csulb.edu</a></string>
+    <string name="create_account">Create Account</string>
 </resources>
