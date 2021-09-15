@@ -14,6 +14,7 @@ import com.example.cecs491project.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -47,11 +48,24 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
+
+    //login in user
     private void loginUser(String email, String password){
         auth.signInWithEmailAndPassword(email,password).addOnSuccessListener(authResult -> {
             Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_LONG).show();
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
             finish();
         });
+    }
+
+    //Make sure the user will stay logged in
+    @Override
+    protected void onStart(){
+        super.onStart();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if(user !=null){
+            startActivity(new Intent(LoginActivity.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
+        }
     }
 }
