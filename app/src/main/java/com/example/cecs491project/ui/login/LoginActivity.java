@@ -3,9 +3,15 @@ package com.example.cecs491project.ui.login;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -21,11 +27,11 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private Button register;
-    private Button login;
-    private EditText email;
-    private EditText password;
-    private Button reset;
+    private Button register_btn;
+    private Button login_btn;
+    private EditText email_txt;
+    private EditText password_txt;
+    private Button reset_btn;
 
     private FirebaseAuth auth;
 
@@ -34,33 +40,56 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        register = findViewById(R.id.register);
-        login = findViewById(R.id.login);
-        email = findViewById(R.id.email);
-        password = findViewById(R.id.password);
-        reset = findViewById(R.id.forgot_password);
+        register_btn = findViewById(R.id.register);
+        login_btn = findViewById(R.id.login);
+        email_txt = findViewById(R.id.email);
+        password_txt = findViewById(R.id.password);
+        reset_btn = findViewById(R.id.forgot_password);
 
         ImageView logo = (ImageView) findViewById(R.id.logo);
         logo.setImageResource(R.drawable.logo);
-
         auth = FirebaseAuth.getInstance();
 
-        register.setOnClickListener(view -> {
-            startActivity(new Intent(LoginActivity.this,RegisterActivity.class));
-            finish();
-        });
+        setListeners();
 
-        login.setOnClickListener(view -> {
-            String email_str = email.getText().toString();
-            String password_str = password.getText().toString();
-            loginUser(email_str, password_str);
-        });
+    }
 
-        reset.setOnClickListener(view -> {
-            startActivity(new Intent(LoginActivity.this, resetPasswordActivity.class));
-            finish();
-        });
+    //Hide input keypad after focus changed
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (getCurrentFocus() != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        }
+        return super.dispatchTouchEvent(ev);
+    }
 
+    //set all Listeners
+    private void setListeners(){
+        OnClick onClick = new OnClick();
+        register_btn.setOnClickListener(onClick);
+        login_btn.setOnClickListener(onClick);
+        reset_btn.setOnClickListener(onClick);
+    }
+    private class OnClick implements View.OnClickListener{
+        @Override
+        public void onClick(View view) {
+            switch(view.getId()){
+                case R.id.register:
+                    startActivity(new Intent(LoginActivity.this,RegisterActivity.class));
+                    finish();
+                    break;
+                case R.id.login:
+                    String email_str = email_txt.getText().toString();
+                    String password_str = password_txt.getText().toString();
+                    loginUser(email_str, password_str);
+                    break;
+                case R.id.forgot_password:
+                    startActivity(new Intent(LoginActivity.this, resetPasswordActivity.class));
+                    finish();
+                    break;
+            }
+        }
     }
 
     //login in user
