@@ -3,13 +3,18 @@ package com.example.cecs491project.ui.login;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
 import android.util.Patterns;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cecs491project.MainActivity;
@@ -39,7 +44,13 @@ public class RegisterActivity extends AppCompatActivity {
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
         register = findViewById(R.id.register);
+
+        //connect to firebase authorization
         auth = FirebaseAuth.getInstance();
+
+        //make hyperlink clickable and direct to web browser
+        TextView website = (TextView) findViewById(R.id. note_2);
+        website.setMovementMethod(LinkMovementMethod.getInstance());
 
         register.setOnClickListener(view -> {
             if(validateEmail() && validatePassword()){
@@ -48,6 +59,16 @@ public class RegisterActivity extends AppCompatActivity {
                 registerUser(email_str,password_str);
             }
         });
+    }
+
+    //Hide input keypad after focus changed
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (getCurrentFocus() != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        }
+        return super.dispatchTouchEvent(ev);
     }
 
     private boolean validateEmail(){
