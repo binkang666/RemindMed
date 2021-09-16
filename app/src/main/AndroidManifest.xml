@@ -21,9 +21,9 @@
             android:name=".ui.login.RegisterActivity"
             android:theme="@style/Theme.CECS491Project.NoActionBar"
             android:exported="true" />
-        <activity android:name=".AddOrEditMedication" />
+        <activity android:name=".ui.medication.AddOrEditMedication" />
         <activity
-            android:name=".MedicationsActivity"
+            android:name=".ui.medication.MedicationsActivity"
             android:label="Medications" />
         <activity
             android:name=".ui.login.LoginActivity"

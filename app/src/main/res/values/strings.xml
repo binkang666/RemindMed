@@ -31,4 +31,6 @@
     <string name="note_1">Trouble logging in?</string>
     <string name="hyperlink">Enter your email address and password. Learn more about Password Standard at\n<a href="https://www.csulb.edu/information-technology/information-security/information-security/password-standard">https://www.csulb.edu</a></string>
     <string name="create_account">Create Account</string>
+    <string name="setting">Setting</string>
+    <string name="title_Medication">Medication</string>> />
 </resources>

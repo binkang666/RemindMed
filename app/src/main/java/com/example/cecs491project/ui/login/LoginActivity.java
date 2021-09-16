@@ -1,16 +1,12 @@
 package com.example.cecs491project.ui.login;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,9 +15,6 @@ import android.widget.Toast;
 
 import com.example.cecs491project.MainActivity;
 import com.example.cecs491project.R;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -47,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
         reset_btn = findViewById(R.id.forgot_password);
 
         ImageView logo = (ImageView) findViewById(R.id.logo);
-        logo.setImageResource(R.drawable.logo);
+        logo.setImageResource(R.drawable.icon_logo);
         auth = FirebaseAuth.getInstance();
 
         setListeners();

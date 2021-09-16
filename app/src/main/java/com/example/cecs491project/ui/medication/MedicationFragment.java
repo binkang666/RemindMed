@@ -1,4 +1,4 @@
-package com.example.cecs491project.ui.dashboard;
+package com.example.cecs491project.ui.medication;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,25 +11,25 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-
 import com.example.cecs491project.R;
-import com.example.cecs491project.databinding.FragmentDashboardBinding;
+import com.example.cecs491project.databinding.FragmentMedicationBinding;
+import com.example.cecs491project.ui.medication.MedicationViewModel;
 
-public class DashboardFragment extends Fragment {
+public class MedicationFragment extends Fragment {
 
-    private DashboardViewModel dashboardViewModel;
-    private FragmentDashboardBinding binding;
+    private MedicationViewModel medicationViewModel;
+    private FragmentMedicationBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        dashboardViewModel =
-                new ViewModelProvider(this).get(DashboardViewModel.class);
+        medicationViewModel =
+                new ViewModelProvider(this).get(MedicationViewModel.class);
 
-        binding = FragmentDashboardBinding.inflate(inflater, container, false);
+        binding = FragmentMedicationBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textDashboard;
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        final TextView textView = binding.textMedication;
+        medicationViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

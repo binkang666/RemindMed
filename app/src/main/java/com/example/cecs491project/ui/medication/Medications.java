@@ -1,4 +1,4 @@
-package com.example.cecs491project;
+package com.example.cecs491project.ui.medication;
 
 import java.util.Comparator;
 

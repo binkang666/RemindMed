@@ -1,4 +1,4 @@
-package com.example.cecs491project;
+package com.example.cecs491project.ui.medication;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -6,23 +6,21 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
+import com.example.cecs491project.MainActivity;
+import com.example.cecs491project.R;
+import com.example.cecs491project.RecyclerViewAdapter;
+
 import java.util.List;
 
-public class MedicationsActivity extends AppCompatActivity implements RecyclerViewAdapter.OnTodoClickListener{
+public class MedicationsActivity extends AppCompatActivity implements RecyclerViewAdapter.OnTodoClickListener {
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -91,7 +89,7 @@ public class MedicationsActivity extends AppCompatActivity implements RecyclerVi
 
     public void launchAddOrEditMedication(View v)
     {
-        Intent i = new Intent(this, AddOrEditMedication.class);
+        Intent i = new Intent(MedicationsActivity.this, AddOrEditMedication.class);
         startActivity(i);
     }
 

@@ -1,4 +1,4 @@
-package com.example.cecs491project;
+package com.example.cecs491project.ui.medication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.cecs491project.MainActivity;
+import com.example.cecs491project.R;
 
 import java.util.List;
 
@@ -91,9 +94,9 @@ public class AddOrEditMedication extends AppCompatActivity {
         });
     }
 
-    /*
+
     public void ConfirmButton(View v)
-    {
+    {/*
         if (medNumber >= 0)
         {
             //update
@@ -115,12 +118,12 @@ public class AddOrEditMedication extends AppCompatActivity {
         //go back to main activity
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
-
-    }*/
+*/
+    }
 
     public void CancelButton(View v)
     {
-        Intent i = new Intent(this, MedicationsActivity.class);
+        Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
     }
 
