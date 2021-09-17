@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">RemindMe</string>
+    <string name="app_name">RemindMed</string>
     <string name="title_home">Home Page</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
@@ -18,7 +18,7 @@
     <string name="sort_pillCount">Pill count from lowest to highest</string>
     <string name="sort_dosage">Dosage from lowest to strongest</string>
     <string name="sort_reffilCount">Refill Count from lowest to highest</string>
-    <string name="register">register</string>
+    <string name="register">register here</string>
     <string name="login">login</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
@@ -34,5 +34,9 @@
     <string name="setting">Setting</string>
     <string name="title_Medication">Medication</string>
     <string name="checkbox">CheckBox</string>
-    <string name="remember_me">Remember me</string>> />
+    <string name="remember_me">Remember me</string>
+    <string name="openNavDrawer">Navigation Drawer Open</string> />
+    <string name="closeNavDrawer">Navigation Drawer CLose</string>
+    <string name="app">APP</string>
+    />
 </resources>

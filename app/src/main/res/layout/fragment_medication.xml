@@ -26,7 +26,7 @@
         android:onClick="launchMedication"
         android:focusable="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="450dp"
+        android:layout_marginTop="580dp"
         android:src="@android:drawable/ic_input_add"/>
 
 

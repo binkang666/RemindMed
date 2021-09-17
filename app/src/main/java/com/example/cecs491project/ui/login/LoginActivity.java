@@ -59,7 +59,6 @@ public class LoginActivity extends AppCompatActivity {
                     editor.putString("pref_pass",password_txt.getText().toString());
                     editor.putBoolean("pref_check", checked);
                     editor.apply();
-                    Toast.makeText(getApplicationContext(), "Credentials remembered", Toast.LENGTH_SHORT).show();
 
                 }else{
                     preferences.edit().clear().apply();

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="STORAGAE">
+        <menu>
+            <item android:title="My Reminders"
+                android:icon="@drawable/ic_baseline_folder_24" />
+            <item android:title="My Medications"
+                android:icon="@drawable/ic_baseline_people_24" />
+            <item android:title="Starred"
+                android:icon="@drawable/ic_baseline_star_24" />
+            <item android:title="Recent"
+                android:icon="@drawable/ic_baseline_access_time_24" />
+        </menu>
+    </item>
+
+    <item android:title="@string/app">
+        <menu>
+            <item android:title="@string/setting"
+                android:icon="@drawable/ic_baseline_settings_applications_24" />
+            <item android:title="@string/log_out"
+                android:icon="@drawable/ic_baseline_power_settings_new_24"
+                android:onClick="logout"/>
+        </menu>
+    </item>
+
+</menu>
