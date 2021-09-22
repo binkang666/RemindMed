@@ -38,5 +38,6 @@
     <string name="openNavDrawer">Navigation Drawer Open</string> />
     <string name="closeNavDrawer">Navigation Drawer CLose</string>
     <string name="app">APP</string>
+    <string name="your_personal_medical_assistant">Your Personal Medical Assistant</string>
     />
 </resources>
