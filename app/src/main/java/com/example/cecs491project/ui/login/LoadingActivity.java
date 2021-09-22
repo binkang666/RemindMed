@@ -32,9 +32,9 @@ public class LoadingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_loading);
 
         lottieAnimationView = findViewById(R.id.lottie);
-        lottieAnimationView.animate().setDuration(2500).setStartDelay(5000);
+        lottieAnimationView.animate().setDuration(1500).setStartDelay(4000);
         lottieAnimationbubble = findViewById(R.id.lottie_bubble);
-        lottieAnimationbubble.animate().setDuration(2500).setStartDelay(5000);
+        lottieAnimationbubble.animate().setDuration(1500).setStartDelay(4000);
 
         Animation topAnim, botAnim;
         topAnim= AnimationUtils.loadAnimation(this, R.anim.top_slide_in);
@@ -55,6 +55,6 @@ public class LoadingActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             }
             finish();
-        }, 5000);
+        }, 4000);
     }
 }
