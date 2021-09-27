@@ -9,7 +9,12 @@
         android:title="@string/title_home" />
 
     <item
-        android:id="@+id/navigation_Medication"
+        android:id="@+id/navigation_reminder"
+        android:icon="@drawable/icon_my_reminder"
+        android:title="@string/reminder" />
+
+    <item
+        android:id="@+id/navigation_medication"
         android:icon="@drawable/icon_my_health"
         android:title="@string/title_Medication" />
 

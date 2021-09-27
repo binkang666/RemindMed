@@ -1,7 +1,6 @@
 package com.example.cecs491project;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -10,20 +9,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.Registry;
-import com.bumptech.glide.annotation.GlideModule;
-import com.bumptech.glide.module.AppGlideModule;
-import com.example.cecs491project.ui.login.LoginActivity;
-import com.example.cecs491project.ui.medication.AddOrEditMedication;
-import com.example.cecs491project.ui.medication.MedicationsActivity;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -37,21 +24,25 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
+import com.bumptech.glide.Glide;
 import com.example.cecs491project.databinding.ActivityMainBinding;
-import com.google.android.gms.tasks.Task;
+import com.example.cecs491project.ui.login.LoginActivity;
+import com.example.cecs491project.ui.medication.AddOrEditMedication;
+import com.example.cecs491project.ui.medication.MedicationsActivity;
+import com.example.cecs491project.ui.reminder.addReminderActivity;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import org.w3c.dom.Text;
-
-import java.io.InputStream;
 import java.util.Objects;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -92,9 +83,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         firebaseStorage = FirebaseStorage.getInstance();
         storageReference = firebaseStorage.getReference();
-
-        System.out.println(myUserName);
-
         getUserInfo();
 
     }
@@ -175,6 +163,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+    public void addReminder(View view) {
+        Intent i = new Intent(this, addReminderActivity.class);
+        startActivity(i);
+    }
 
 
     //After Medication button is pressed, go to Medications Page

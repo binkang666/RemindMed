@@ -70,5 +70,7 @@
     <string name="categories">Categories</string>
     <string name="tablet">TABLET</string>
     <string name="total_medicine">Total Medicine</string>
+    <string name="reminder">Reminder</string>
+    <string name="title_Reminder">Reminder</string>
     />
 </resources>
