@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:android="urn:oasis:names:tc:xliff:document:1.2">
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">#009688</item>
+        <item name="colorPrimaryDark">#00796b</item>
+        <item name="colorAccent">#ffab91</item>
+    </style>
+
+    <style name="LightTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorBackground">#f1f1f1</item>
+        <item name="textColorPrimary">@color/textDarkPrimary</item>
+        <item name="settingFontPrimary">@color/settingFontPrimary</item>
+        <item name="textColorSecondary">@color/textDarkSecondary</item>
+        <item name="textLightPrimary">@color/textLightPrimary</item>
+        <item name="textLightSecondary">@color/textLightSecondary</item>
+        <item name="colorDivider">@color/colorDivider</item>
+        <item name="colorControlHighlight">@color/colorControlHighlight</item>
+        <item name="toolbarTheme">@style/toolbarThemeLight</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+        <item name="reminderAnimator">@color/ReminderAnimatorLight</item>
+    </style>
+    <style name="DarkTheme" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <item name="colorPrimary">@color/darkPrimary</item>
+        <item name="colorPrimaryDark">@color/darkPrimary</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="colorBackground">#282828</item>
+
+        <item name="textColorPrimary">#FFFFFF</item>
+        <item name="textColorSecondary">#bdbdbd</item>
+
+        <item name="settingFontPrimary">#FFFFFF</item>
+
+        <item name="textLightPrimary">#212121</item>
+        <item name="textLightSecondary">#bdbdbd</item>
+
+        <item name="colorDivider">#353535</item>
+        <item name="colorControlHighlight">#515151</item>
+
+        <item name="reminderAnimator">@color/ReminderAnimatorDark</item>
+
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="toolbarTheme">@style/toolbarThemeDark</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
+    </style>
+
+    <style name="BlackTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="colorPrimary">#101010</item>
+        <item name="colorPrimaryDark">#101010</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorBackground">#000000</item>
+        <item name="textColorPrimary">#fff</item>
+        <item name="settingFontPrimary">#fff</item>
+        <item name="textColorSecondary">#cacaca</item>
+        <item name="textLightPrimary">#000000</item>
+        <item name="textLightSecondary">#cacaca</item>
+        <item name="colorDivider">#101010</item>
+        <item name="colorControlHighlight">#7f7f7f7f</item>
+        <item name="toolbarTheme">@style/toolbarThemeDark</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
+        <item name="reminderAnimator">@color/ReminderAnimatorDark</item>
+    </style>
+
+    <style name="BlueGrey" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <item name="colorPrimary">#2a363c</item>
+        <item name="colorPrimaryDark">#2a363c</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="colorBackground">#263238</item>
+
+        <item name="textColorPrimary">#FFFFFF</item>
+        <item name="textColorSecondary">#bdbdbd</item>
+
+        <item name="settingFontPrimary">#FFFFFF</item>
+
+        <item name="textLightPrimary">#212121</item>
+        <item name="textLightSecondary">#bdbdbd</item>
+
+        <item name="colorDivider">#2e3a40</item>
+        <item name="colorControlHighlight">#515151</item>
+
+        <item name="reminderAnimator">@color/ReminderAnimatorDark</item>
+
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="toolbarTheme">@style/toolbarThemeDark</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
+    </style>
+
+    <style name="NightMode" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <item name="colorPrimary">#373740</item>
+        <item name="colorPrimaryDark">#373740</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="colorBackground">#33333D</item>
+
+        <item name="textColorPrimary">#FFFFFF</item>
+        <item name="textColorSecondary">#bdbdbd</item>
+
+        <item name="settingFontPrimary">#FFFFFF</item>
+
+        <item name="textLightPrimary">#212121</item>
+        <item name="textLightSecondary">#bdbdbd</item>
+
+        <item name="colorDivider">#3b3b45</item>
+        <item name="colorControlHighlight">#40404a</item>
+
+        <item name="reminderAnimator">@color/ReminderAnimatorDark</item>
+
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="toolbarTheme">@style/toolbarThemeDark</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
+    </style>
+
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="toolbarThemeLight">
+        <item name="android:textColorPrimary">#000</item>
+        <item name="android:textColorSecondary">#000</item>
+    </style>
+    <style name="toolbarThemeDark">
+        <item name="android:textColorPrimary">#ffffff</item>
+        <item name="android:textColorSecondary">#ffffff</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="SettingListStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/setting_item_ripple</item>
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+    </style>
+
+    <style name="AnimationTansition">
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
+    </style>
+
+    <style name="CollapsedAppBar" parent="@android:style/TextAppearance.Medium">
+        <item name="android:fontFamily">@font/quicksand_regular</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">?attr/textColorPrimary</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="ExpandedAppBar" parent="@android:style/TextAppearance.Medium">
+        <item name="android:fontFamily">@font/quicksand_medium</item>
+        <item name="android:textSize">36sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="RedAccent"><item name="colorAccent">#ef5350</item></style>
+    <style name="PinkAccent"><item name="colorAccent">#ec407a</item></style>
+    <style name="PurpleAccent"><item name="colorAccent">#ab47bc</item></style>
+    <style name="DeepPurpleAccent"><item name="colorAccent">#7e57c2</item></style>
+    <style name="IndigoAccent"><item name="colorAccent">#5c6bc0</item></style>
+    <style name="BlueAccent"><item name="colorAccent">@color/bluePrimary</item></style>
+    <style name="LightBlueAccent"><item name="colorAccent">@color/lightBluePrimary</item></style>
+    <style name="CyanAccent"><item name="colorAccent">@color/cyanPrimary</item></style>
+    <style name="TealAccent"><item name="colorAccent">#26a69a</item></style>
+    <style name="GreenAccent"><item name="colorAccent">@color/greenPrimary</item></style>
+    <style name="LightGreenAccent"><item name="colorAccent">@color/lightGreenPrimary</item></style>
+    <style name="LimeAccent"><item name="colorAccent">@color/limePrimary</item></style>
+    <style name="YellowAccent"><item name="colorAccent">@color/yellowPrimary</item></style>
+    <style name="AmberAccent"><item name="colorAccent">@color/amberPrimary</item></style>
+    <style name="OrangeAccent"><item name="colorAccent">@color/orangePrimary</item></style>
+    <style name="DeepOrangeAccent"><item name="colorAccent">@color/deepOrangePrimary</item></style>
+    <style name="BrownAccent"><item name="colorAccent">#8d6e63</item></style>
+    <style name="BlueGreyAccent"><item name="colorAccent">#78909c</item></style>
+
+    <style name="HowManyTimes">
+        <item name="android:layout_width">44dp</item>
+        <item name="android:layout_height">44dp</item>
+        <item name="android:fontFamily">@font/robotoregular</item>
+        <item name="android:background">@drawable/accent_preview</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:stateListAnimator">@null</item>
+    </style>
+
+    <style name="TextInputEditText">
+        <item name="android:textColor">?attr/textColorSecondary</item>
+    </style>
+
+</resources>

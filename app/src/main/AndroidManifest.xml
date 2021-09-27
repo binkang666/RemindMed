@@ -8,20 +8,26 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.CECS491Project">
+        android:theme="@style/LightTheme">
+        <activity
+            android:name=".ui.reminder.addReminderActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.reminder.ReminderActivity"
+            android:exported="true" />
         <activity
             android:name=".ui.login.resetPasswordActivity"
-            android:theme="@style/Theme.CECS491Project.NoActionBar"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/Theme.CECS491Project.NoActionBar" />
         <activity
             android:name=".MainActivity"
-            android:theme="@style/Theme.CECS491Project.NoActionBar"
             android:exported="true"
-            android:label="@string/app_name" />
+            android:label="@string/app_name"
+            android:theme="@style/Theme.CECS491Project.NoActionBar" />
         <activity
             android:name=".ui.login.RegisterActivity"
-            android:theme="@style/Theme.CECS491Project.NoActionBar"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/Theme.CECS491Project.NoActionBar" />
         <activity android:name=".ui.medication.AddOrEditMedication" />
         <activity
             android:name=".ui.medication.MedicationsActivity"
@@ -30,22 +36,16 @@
             android:name=".ui.login.LoginActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.CECS491Project.NoActionBar">
-        </activity>
-
+            android:theme="@style/Theme.CECS491Project.NoActionBar" />
         <activity
             android:name=".ui.login.LoadingActivity"
             android:exported="true">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
-
-
-
-
     </application>
 
 </manifest>

@@ -35,9 +35,40 @@
     <string name="title_Medication">Medication</string>
     <string name="checkbox">CheckBox</string>
     <string name="remember_me">Remember me</string>
-    <string name="openNavDrawer">Navigation Drawer Open</string> />
+    <string name="openNavDrawer">Navigation Drawer Open</string>
+    />
     <string name="closeNavDrawer">Navigation Drawer CLose</string>
     <string name="app">APP</string>
     <string name="your_personal_medical_assistant">Your Personal Medical Assistant</string>
+    <string name="image">image</string>
+    <string name="save">SAVE</string>
+    <string name="add_reminder">Add Reminder</string>
+    <string name="before_meal">Before Meal</string>
+    <string name="after_meal">After Meal</string>
+    <string name="enter_medicine_name">Enter Medicine Name</string>
+    <string name="start_date">Start Date</string>
+    <string name="add_picture">Add Picture</string>
+    <string name="how_many_times_a_day">How many times a day</string>
+    <string name="_7">7</string>
+    <string name="_1">1</string>
+    <string name="_2">2</string>
+    <string name="_3">3</string>
+    <string name="_4">4</string>
+    <string name="_5">5</string>
+    <string name="_6_hour">6 hour</string>
+    <string name="_4_hour">4 hour</string>
+    <string name="_2_hour">2 hour</string>
+    <string name="in_every">In every</string>
+    <string name="_22_sep_2021">22 Sep, 2021</string>
+    <string name="end_date">End Date</string>
+    <string name="_10_00pm">10:00pm</string>
+    <string name="_02_30pm">02:30pm</string>
+    <string name="_08_30am">08:30am</string>
+    <string name="injection">INJECTION</string>
+    <string name="drops">DROPS</string>
+    <string name="capsule">CAPSULE</string>
+    <string name="categories">Categories</string>
+    <string name="tablet">TABLET</string>
+    <string name="total_medicine">Total Medicine</string>
     />
 </resources>

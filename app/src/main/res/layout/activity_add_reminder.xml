@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.reminder.addReminderActivity">
+
+    <ImageView
+        android:id="@+id/ASClose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/ic_close_black_24dp"
+        android:contentDescription="@string/image"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/SAVE"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/quicksand_medium"
+        android:text="@string/save"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/Card_View"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/drawable_card_standard"
+        android:paddingBottom="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+        <ImageButton
+            android:id="@+id/imageButton6"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/addmore"
+            android:elevation="3dp"
+            app:layout_constraintBottom_toBottomOf="@+id/button11"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/button11"
+            app:layout_constraintTop_toTopOf="@+id/button11" />
+
+        <Button
+            android:id="@+id/button11"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/button_on_click"
+            android:elevation="2dp"
+            android:fontFamily="@font/quicksand_regular"
+            android:onClick="onClickBeforeAfter"
+            android:stateListAnimator="@null"
+            android:text="@string/_6_hour"
+            android:textColor="?attr/textColorSecondary"
+            app:layout_constraintEnd_toStartOf="@+id/imageButton6"
+            app:layout_constraintStart_toEndOf="@+id/button10"
+            app:layout_constraintTop_toTopOf="@+id/button10" />
+
+        <Button
+            android:id="@+id/button10"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/button_on_click"
+            android:elevation="2dp"
+            android:fontFamily="@font/quicksand_regular"
+            android:onClick="onClickBeforeAfter"
+            android:stateListAnimator="@null"
+            android:text="@string/_4_hour"
+            android:textColor="?attr/textColorSecondary"
+            app:layout_constraintEnd_toStartOf="@+id/button11"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/button13"
+            app:layout_constraintTop_toTopOf="@+id/button13" />
+
+        <Button
+            android:id="@+id/button13"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/button_on_click"
+            android:elevation="2dp"
+            android:fontFamily="@font/quicksand_regular"
+            android:onClick="onClickBeforeAfter"
+            android:stateListAnimator="@null"
+            android:text="@string/_2_hour"
+            android:textColor="?attr/textColorSecondary"
+            app:layout_constraintEnd_toStartOf="@+id/button10"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView59" />
+
+        <TextView
+            android:id="@+id/textView59"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/quicksand_regular"
+            android:text="@string/in_every"
+            android:textColor="?attr/colorAccent"
+            android:textSize="17sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button6" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/quantity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/btnStartDate"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnStartDate">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/quicksand_regular"
+                android:hint="Add note here"
+                android:inputType="text"
+                android:textColor="?attr/textColorPrimary"
+                android:textColorHint="?attr/colorAccent"
+                android:textSize="17sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btnEndDate"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/startend_rect"
+            android:drawableEnd="@drawable/dropdownarrow"
+            android:fontFamily="@font/quicksand_regular"
+            android:gravity="center_vertical"
+            android:onClick="showDatePicker"
+            android:paddingStart="8dp"
+            android:paddingEnd="6dp"
+            android:stateListAnimator="@null"
+            android:hint="select end date"
+            android:textColor="?attr/textColorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textView56"
+            app:layout_constraintTop_toTopOf="@+id/btnStartDate" />
+
+        <TextView
+            android:id="@+id/textView56"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/quicksand_regular"
+            android:text="@string/end_date"
+            android:textColor="?attr/textColorSecondary"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/textView55"
+            app:layout_constraintTop_toTopOf="@+id/textView55" />
+
+
+        <Button
+            android:id="@+id/clockTime"
+            android:layout_width="330dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"
+            android:alpha="1"
+            android:background="@drawable/rect_dark"
+            android:fontFamily="@font/quicksand_regular"
+            android:onClick="showTimePicker"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"
+            android:hint="Choose Start Time"
+            android:textAllCaps="false"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ctg_Tablet" />
+
+        <Button
+            android:id="@+id/ctg_Injection"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="16dp"
+            android:alpha="0.25"
+            android:background="@drawable/categories_teal"
+            android:fontFamily="@font/quicksand_regular"
+            android:onClick="onClickCategories"
+            android:singleLine="true"
+            android:text="@string/injection"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/ctg_Drops"
+            app:layout_constraintTop_toTopOf="@+id/ctg_Tablet" />
+
+        <Button
+            android:id="@+id/ctg_Drops"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:alpha="0.25"
+            android:background="@drawable/categories_pink"
+            android:fontFamily="@font/quicksand_regular"
+            android:onClick="onClickCategories"
+            android:text="@string/drops"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@+id/ctg_Injection"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/ctg_Capsule"
+            app:layout_constraintTop_toTopOf="@+id/ctg_Tablet" />
+
+        <Button
+            android:id="@+id/ctg_Capsule"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:alpha="0.25"
+            android:onClick="onClickCategories"
+            android:background="@drawable/categories_purple"
+            android:fontFamily="@font/quicksand_regular"
+            android:text="@string/capsule"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@+id/ctg_Drops"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/ctg_Tablet"
+            app:layout_constraintTop_toTopOf="@+id/ctg_Tablet" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:hint="Enter Reminder Name"
+            android:textColorHint="?attr/colorAccent"
+            android:backgroundTint="?attr/colorAccent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/quicksand_regular"
+                android:inputType="text"
+                android:textColorHint="?attr/colorAccent"
+                android:textSize="24sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/textView39"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/quicksand_regular"
+            android:text="@string/categories"
+            android:textColor="?attr/textColorSecondary"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+
+        <Button
+            android:id="@+id/ctg_Tablet"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="4dp"
+            android:alpha="0.25"
+            android:background="@drawable/categories_red"
+            android:fontFamily="@font/quicksand_regular"
+            android:onClick="onClickCategories"
+            android:text="@string/tablet"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@+id/ctg_Capsule"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView39" />
+
+        <TextView
+            android:id="@+id/textView55"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/quicksand_regular"
+            android:text="@string/start_date"
+            android:textColor="?attr/textColorSecondary"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/textView56"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button13" />
+
+        <Button
+            android:id="@+id/btnStartDate"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/startend_rect"
+            android:drawableEnd="@drawable/dropdownarrow"
+            android:fontFamily="@font/quicksand_regular"
+            android:gravity="center_vertical"
+            android:onClick="showDatePicker"
+            android:paddingStart="8dp"
+            android:paddingEnd="6dp"
+            android:stateListAnimator="@null"
+            android:hint="select start date"
+            android:textColor="?attr/textColorPrimary"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/textView56"
+            app:layout_constraintStart_toStartOf="@+id/textView55"
+            app:layout_constraintTop_toBottomOf="@+id/textView55" />
+
+        <Button
+            android:id="@+id/BeforeMeal"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/button_on_click"
+            android:elevation="3dp"
+            android:fontFamily="@font/quicksand_regular"
+            android:onClick="onClickBeforeAfter"
+            android:stateListAnimator="@null"
+            android:text="@string/before_meal"
+            android:textColor="?attr/textColorSecondary"
+            app:layout_constraintEnd_toStartOf="@+id/AfterMeal"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/clockTime" />
+
+        <Button
+            android:id="@+id/AfterMeal"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/button_on_click"
+            android:elevation="3dp"
+            android:fontFamily="@font/quicksand_regular"
+            android:onClick="onClickBeforeAfter"
+            android:stateListAnimator="@null"
+            android:text="@string/after_meal"
+            android:textColor="?attr/textColorSecondary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/BeforeMeal"
+            app:layout_constraintTop_toTopOf="@+id/BeforeMeal" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/button_on_click"
+            android:drawableStart="@drawable/ic_camera_black_24dp"
+            android:elevation="3dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="10dp"
+            android:stateListAnimator="@null"
+            android:text="@string/add_picture"
+            android:textColor="?attr/textColorSecondary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/btnEndDate"
+            app:layout_constraintTop_toBottomOf="@+id/btnEndDate" />
+
+        <TextView
+            android:id="@+id/textView57"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/quicksand_regular"
+            android:text="@string/how_many_times_a_day"
+            android:textColor="?attr/colorAccent"
+            android:textSize="17sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/BeforeMeal" />
+
+        <Button
+            android:id="@+id/button50"
+            style="@style/HowManyTimes"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="4dp"
+            android:text="@string/_7"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toStartOf="@+id/imageButton5"
+            app:layout_constraintStart_toEndOf="@+id/button1"
+            app:layout_constraintTop_toTopOf="@+id/button1" />
+
+        <Button
+            android:id="@+id/button6"
+            style="@style/HowManyTimes"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
+            android:text="@string/_1"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toStartOf="@+id/button7"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView57" />
+
+        <Button
+            android:id="@+id/button7"
+            style="@style/HowManyTimes"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="4dp"
+            android:text="@string/_2"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toStartOf="@+id/button8"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/button6"
+            app:layout_constraintTop_toTopOf="@+id/button6" />
+
+        <Button
+            android:id="@+id/button8"
+            style="@style/HowManyTimes"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="4dp"
+            android:text="@string/_3"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toStartOf="@+id/button9"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/button7"
+            app:layout_constraintTop_toTopOf="@+id/button7" />
+
+        <Button
+            android:id="@+id/button9"
+            style="@style/HowManyTimes"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="4dp"
+            android:text="@string/_4"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toStartOf="@+id/button1"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/button8"
+            app:layout_constraintTop_toTopOf="@+id/button8" />
+
+        <Button
+            android:id="@+id/button1"
+            style="@style/HowManyTimes"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="4dp"
+            android:text="@string/_5"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toStartOf="@+id/button50"
+            app:layout_constraintStart_toEndOf="@+id/button9"
+            app:layout_constraintTop_toTopOf="@+id/button9" />
+
+        <ImageButton
+            android:id="@+id/imageButton5"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/addmore"
+            android:elevation="3dp"
+            app:layout_constraintBottom_toBottomOf="@+id/button50"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.802"
+            app:layout_constraintStart_toEndOf="@+id/button50"
+            app:layout_constraintTop_toTopOf="@+id/button50" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/HiddenOptions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="btnStartDate,button3,textView56,textView55,quantity,btnEndDate" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/BeforeOrAfter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="BeforeMeal,AfterMeal" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/Group_Tablet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="clockTime" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/Drop_Group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="button6,textView57,button10,button1,imageButton5,imageButton6,textView59,button13,button7,button50,button11,button8,button9" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:gravity="center"
+        android:theme="?attr/toolbarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/quicksand_bold"
+            android:text="@string/add_reminder"
+            android:textColor="?attr/textColorPrimary"
+            android:textSize="20sp" />
+    </androidx.appcompat.widget.Toolbar>
+</androidx.constraintlayout.widget.ConstraintLayout>

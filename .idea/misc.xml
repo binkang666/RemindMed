@@ -23,6 +23,21 @@
         <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project/app/src/main/res/menu/bottom_nav_menu.xml" value="0.22" />
         <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project/app/src/main/res/menu/sort_menu.xml" value="0.19895833333333332" />
         <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project/app/src/main/res/menu/top_nav_setting.xml" value="0.19895833333333332" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project10/app/src/main/res/drawable-xhdpi/addmore.xml" value="0.29444444444444445" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project10/app/src/main/res/drawable-xhdpi/drawable_card_standard.xml" value="0.29444444444444445" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project10/app/src/main/res/drawable-xhdpi/ic_camera_black_24dp.xml" value="0.25555555555555554" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project10/app/src/main/res/drawable-xhdpi/ic_close_black_24dp.xml" value="0.24351851851851852" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project10/app/src/main/res/drawable-xhdpi/rect_dark.xml" value="0.29444444444444445" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project10/app/src/main/res/drawable-xhdpi/setting_item_ripple.xml" value="0.25555555555555554" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project10/app/src/main/res/drawable-xhdpi/startend_rect.xml" value="0.29444444444444445" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project10/app/src/main/res/drawable/bordershadow.xml" value="0.29444444444444445" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project10/app/src/main/res/drawable/button_on_click.xml" value="0.31731601731601733" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project10/app/src/main/res/drawable/round.xml" value="0.29444444444444445" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project10/app/src/main/res/drawable/shadow.xml" value="0.29444444444444445" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project10/app/src/main/res/layout/activity_add_or_edit_medication.xml" value="0.16438703140830802" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project10/app/src/main/res/layout/activity_add_reminder.xml" value="0.44166666666666665" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project10/app/src/main/res/layout/activity_loading.xml" value="0.20425724637681159" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project10/app/src/main/res/layout/activity_reminder.xml" value="0.1778115501519757" />
         <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project2/app/src/main/res/drawable-xhdpi/ic_baseline_access_time_24.xml" value="0.24114583333333334" />
         <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project2/app/src/main/res/drawable-xhdpi/ic_baseline_folder_24.xml" value="0.24114583333333334" />
         <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project2/app/src/main/res/drawable-xhdpi/ic_baseline_people_24.xml" value="0.24114583333333334" />
