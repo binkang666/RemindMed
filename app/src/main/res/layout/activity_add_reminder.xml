@@ -46,20 +46,20 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <ImageButton
-            android:id="@+id/imageButton6"
+            android:id="@+id/custom_interval_hrs"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_marginStart="4dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/addmore"
             android:elevation="3dp"
-            app:layout_constraintBottom_toBottomOf="@+id/button11"
+            app:layout_constraintBottom_toBottomOf="@+id/label_6_hours"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/button11"
-            app:layout_constraintTop_toTopOf="@+id/button11" />
+            app:layout_constraintStart_toEndOf="@+id/label_6_hours"
+            app:layout_constraintTop_toTopOf="@+id/label_6_hours" />
 
-        <Button
-            android:id="@+id/button11"
+        <CheckBox
+            android:id="@+id/label_6_hours"
             android:layout_width="0dp"
             android:layout_height="36dp"
             android:layout_marginEnd="4dp"
@@ -70,12 +70,12 @@
             android:stateListAnimator="@null"
             android:text="@string/_6_hour"
             android:textColor="?attr/textColorSecondary"
-            app:layout_constraintEnd_toStartOf="@+id/imageButton6"
-            app:layout_constraintStart_toEndOf="@+id/button10"
-            app:layout_constraintTop_toTopOf="@+id/button10" />
+            app:layout_constraintEnd_toStartOf="@+id/custom_interval_hrs"
+            app:layout_constraintStart_toEndOf="@+id/label_4_hours"
+            app:layout_constraintTop_toTopOf="@+id/label_4_hours" />
 
-        <Button
-            android:id="@+id/button10"
+        <CheckBox
+            android:id="@+id/label_4_hours"
             android:layout_width="0dp"
             android:layout_height="36dp"
             android:layout_marginEnd="8dp"
@@ -86,13 +86,13 @@
             android:stateListAnimator="@null"
             android:text="@string/_4_hour"
             android:textColor="?attr/textColorSecondary"
-            app:layout_constraintEnd_toStartOf="@+id/button11"
+            app:layout_constraintEnd_toStartOf="@+id/label_6_hours"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/button13"
-            app:layout_constraintTop_toTopOf="@+id/button13" />
+            app:layout_constraintStart_toEndOf="@+id/label_2_hours"
+            app:layout_constraintTop_toTopOf="@+id/label_2_hours" />
 
-        <Button
-            android:id="@+id/button13"
+        <CheckBox
+            android:id="@+id/label_2_hours"
             android:layout_width="0dp"
             android:layout_height="36dp"
             android:layout_marginStart="16dp"
@@ -105,13 +105,13 @@
             android:stateListAnimator="@null"
             android:text="@string/_2_hour"
             android:textColor="?attr/textColorSecondary"
-            app:layout_constraintEnd_toStartOf="@+id/button10"
+            app:layout_constraintEnd_toStartOf="@+id/label_4_hours"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView59" />
+            app:layout_constraintTop_toBottomOf="@+id/label_hours_interval" />
 
         <TextView
-            android:id="@+id/textView59"
+            android:id="@+id/label_hours_interval"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -121,10 +121,10 @@
             android:textColor="?attr/colorAccent"
             android:textSize="17sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button6" />
+            app:layout_constraintTop_toBottomOf="@+id/med_days" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/quantity"
+            android:id="@+id/reminder_note"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -147,6 +147,41 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+
+        <TextView
+            android:id="@+id/label_start_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/quicksand_regular"
+            android:text="@string/start_date"
+            android:textColor="?attr/textColorSecondary"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/label_end_date"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/label_2_hours" />
+
+        <Button
+            android:id="@+id/btnStartDate"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/startend_rect"
+            android:drawableEnd="@drawable/dropdownarrow"
+            android:fontFamily="@font/quicksand_regular"
+            android:gravity="center_vertical"
+            android:onClick="showDatePicker"
+            android:paddingStart="8dp"
+            android:paddingEnd="6dp"
+            android:stateListAnimator="@null"
+            android:hint="select start date"
+            android:textColor="?attr/textColorPrimary"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/label_end_date"
+            app:layout_constraintStart_toStartOf="@+id/label_start_date"
+            app:layout_constraintTop_toBottomOf="@+id/label_start_date" />
+
         <Button
             android:id="@+id/btnEndDate"
             android:layout_width="0dp"
@@ -163,11 +198,11 @@
             android:hint="select end date"
             android:textColor="?attr/textColorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/textView56"
+            app:layout_constraintStart_toStartOf="@+id/label_end_date"
             app:layout_constraintTop_toTopOf="@+id/btnStartDate" />
 
         <TextView
-            android:id="@+id/textView56"
+            android:id="@+id/label_end_date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/quicksand_regular"
@@ -176,8 +211,8 @@
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/textView55"
-            app:layout_constraintTop_toTopOf="@+id/textView55" />
+            app:layout_constraintStart_toEndOf="@+id/label_start_date"
+            app:layout_constraintTop_toTopOf="@+id/label_start_date" />
 
 
         <Button
@@ -199,61 +234,8 @@
             android:textColor="@color/white"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ctg_Tablet" />
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
-        <Button
-            android:id="@+id/ctg_Injection"
-            android:layout_width="0dp"
-            android:layout_height="36dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginEnd="16dp"
-            android:alpha="0.25"
-            android:background="@drawable/categories_teal"
-            android:fontFamily="@font/quicksand_regular"
-            android:onClick="onClickCategories"
-            android:singleLine="true"
-            android:text="@string/injection"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/ctg_Drops"
-            app:layout_constraintTop_toTopOf="@+id/ctg_Tablet" />
-
-        <Button
-            android:id="@+id/ctg_Drops"
-            android:layout_width="0dp"
-            android:layout_height="36dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginEnd="4dp"
-            android:alpha="0.25"
-            android:background="@drawable/categories_pink"
-            android:fontFamily="@font/quicksand_regular"
-            android:onClick="onClickCategories"
-            android:text="@string/drops"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toStartOf="@+id/ctg_Injection"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/ctg_Capsule"
-            app:layout_constraintTop_toTopOf="@+id/ctg_Tablet" />
-
-        <Button
-            android:id="@+id/ctg_Capsule"
-            android:layout_width="0dp"
-            android:layout_height="36dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginEnd="4dp"
-            android:alpha="0.25"
-            android:onClick="onClickCategories"
-            android:background="@drawable/categories_purple"
-            android:fontFamily="@font/quicksand_regular"
-            android:text="@string/capsule"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toStartOf="@+id/ctg_Drops"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/ctg_Tablet"
-            app:layout_constraintTop_toTopOf="@+id/ctg_Tablet" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout"
@@ -279,70 +261,8 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/textView39"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/quicksand_regular"
-            android:text="@string/categories"
-            android:textColor="?attr/textColorSecondary"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
-        <Button
-            android:id="@+id/ctg_Tablet"
-            android:layout_width="0dp"
-            android:layout_height="36dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="4dp"
-            android:alpha="0.25"
-            android:background="@drawable/categories_red"
-            android:fontFamily="@font/quicksand_regular"
-            android:onClick="onClickCategories"
-            android:text="@string/tablet"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toStartOf="@+id/ctg_Capsule"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView39" />
 
-        <TextView
-            android:id="@+id/textView55"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/quicksand_regular"
-            android:text="@string/start_date"
-            android:textColor="?attr/textColorSecondary"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toStartOf="@+id/textView56"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button13" />
-
-        <Button
-            android:id="@+id/btnStartDate"
-            android:layout_width="0dp"
-            android:layout_height="32dp"
-            android:layout_marginEnd="24dp"
-            android:background="@drawable/startend_rect"
-            android:drawableEnd="@drawable/dropdownarrow"
-            android:fontFamily="@font/quicksand_regular"
-            android:gravity="center_vertical"
-            android:onClick="showDatePicker"
-            android:paddingStart="8dp"
-            android:paddingEnd="6dp"
-            android:stateListAnimator="@null"
-            android:hint="select start date"
-            android:textColor="?attr/textColorPrimary"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toStartOf="@+id/textView56"
-            app:layout_constraintStart_toStartOf="@+id/textView55"
-            app:layout_constraintTop_toBottomOf="@+id/textView55" />
 
         <Button
             android:id="@+id/BeforeMeal"
@@ -380,154 +300,121 @@
             app:layout_constraintStart_toEndOf="@+id/BeforeMeal"
             app:layout_constraintTop_toTopOf="@+id/BeforeMeal" />
 
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="0dp"
-            android:layout_height="36dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/button_on_click"
-            android:drawableStart="@drawable/ic_camera_black_24dp"
-            android:elevation="3dp"
-            android:paddingStart="16dp"
-            android:paddingEnd="10dp"
-            android:stateListAnimator="@null"
-            android:text="@string/add_picture"
-            android:textColor="?attr/textColorSecondary"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/btnEndDate"
-            app:layout_constraintTop_toBottomOf="@+id/btnEndDate" />
-
-        <TextView
-            android:id="@+id/textView57"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <LinearLayout
+            android:id="@+id/med_days"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_marginStart="8dp"
-            android:fontFamily="@font/quicksand_regular"
-            android:text="@string/how_many_times_a_day"
-            android:textColor="?attr/colorAccent"
-            android:textSize="17sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/BeforeMeal" />
-
-        <Button
-            android:id="@+id/button50"
-            style="@style/HowManyTimes"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginEnd="4dp"
-            android:text="@string/_7"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintEnd_toStartOf="@+id/imageButton5"
-            app:layout_constraintStart_toEndOf="@+id/button1"
-            app:layout_constraintTop_toTopOf="@+id/button1" />
-
-        <Button
-            android:id="@+id/button6"
-            style="@style/HowManyTimes"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="4dp"
-            android:text="@string/_1"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintEnd_toStartOf="@+id/button7"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView57" />
-
-        <Button
-            android:id="@+id/button7"
-            style="@style/HowManyTimes"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginEnd="4dp"
-            android:text="@string/_2"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintEnd_toStartOf="@+id/button8"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/button6"
-            app:layout_constraintTop_toTopOf="@+id/button6" />
-
-        <Button
-            android:id="@+id/button8"
-            style="@style/HowManyTimes"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginEnd="4dp"
-            android:text="@string/_3"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintEnd_toStartOf="@+id/button9"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/button7"
-            app:layout_constraintTop_toTopOf="@+id/button7" />
-
-        <Button
-            android:id="@+id/button9"
-            style="@style/HowManyTimes"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginEnd="4dp"
-            android:text="@string/_4"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintEnd_toStartOf="@+id/button1"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/button8"
-            app:layout_constraintTop_toTopOf="@+id/button8" />
-
-        <Button
-            android:id="@+id/button1"
-            style="@style/HowManyTimes"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginEnd="4dp"
-            android:text="@string/_5"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintEnd_toStartOf="@+id/button50"
-            app:layout_constraintStart_toEndOf="@+id/button9"
-            app:layout_constraintTop_toTopOf="@+id/button9" />
-
-        <ImageButton
-            android:id="@+id/imageButton5"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
             android:layout_marginEnd="16dp"
-            android:background="@drawable/addmore"
-            android:elevation="3dp"
-            app:layout_constraintBottom_toBottomOf="@+id/button50"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.802"
-            app:layout_constraintStart_toEndOf="@+id/button50"
-            app:layout_constraintTop_toTopOf="@+id/button50" />
+            android:layout_marginTop="@dimen/sixteen_dp"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/AfterMeal">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/HiddenOptions"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:constraint_referenced_ids="btnStartDate,button3,textView56,textView55,quantity,btnEndDate" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/quicksand_regular"
+                android:text="Medicine Days"
+                android:textColor="?attr/colorAccent"
+                android:textSize="17sp" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/BeforeOrAfter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:constraint_referenced_ids="BeforeMeal,AfterMeal" />
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/every_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="@dimen/eight_dp"
+                android:text="Every Day" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/Group_Tablet"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:constraint_referenced_ids="clockTime" />
+            <LinearLayout
+                android:id="@+id/checkbox_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="7">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/Drop_Group"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:constraint_referenced_ids="button6,textView57,button10,button1,imageButton5,imageButton6,textView59,button13,button7,button50,button11,button8,button9" />
+                <CheckBox
+                    android:id="@+id/dv_sunday"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/background_day_view"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="S" />
+
+                <CheckBox
+                    android:id="@+id/dv_monday"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/background_day_view"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="M" />
+
+
+                <CheckBox
+                    android:id="@+id/dv_tuesday"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/background_day_view"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="T" />
+
+                <CheckBox
+                    android:id="@+id/dv_wednesday"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/background_day_view"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="W" />
+
+                <CheckBox
+                    android:id="@+id/dv_thursday"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/background_day_view"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="T" />
+
+                <CheckBox
+                    android:id="@+id/dv_friday"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/background_day_view"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="F" />
+
+
+                <CheckBox
+                    android:id="@+id/dv_saturday"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/background_day_view"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="S" />
+            </LinearLayout>
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

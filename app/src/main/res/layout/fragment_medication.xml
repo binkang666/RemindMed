@@ -23,7 +23,7 @@
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="15dp"
         android:clickable="true"
-        android:onClick="launchMedication"
+        android:onClick="launchAddOrEditMedication"
         android:focusable="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="580dp"

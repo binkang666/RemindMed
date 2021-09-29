@@ -1,152 +1,318 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.medication.AddOrEditMedication">
 
-    <TextView
-        android:id="@+id/textViewAddMedication"
+    <ImageView
+        android:id="@+id/ASClose"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/add_medication"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/ic_close_black_24dp"
+        android:contentDescription="@string/image"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
         app:layout_constraintStart_toStartOf="parent"
+        android:stateListAnimator="@null"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textViewMedicationName"
+        android:id="@+id/SAVE"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/medication_name"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewAddMedication" />
-
-    <TextView
-        android:id="@+id/textViewPillCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/pill_count"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextMedicationName" />
-
-    <TextView
-        android:id="@+id/textViewDosage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/medication_dosage"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPillCount" />
-
-    <TextView
-        android:id="@+id/textViewRefillCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/refill_count"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDosage" />
-
-    <EditText
-        android:id="@+id/editTextMedicationName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="@string/medication_name"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewMedicationName" />
-
-    <EditText
-        android:id="@+id/editTextPillCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="@string/pill_count"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewPillCount" />
-
-    <EditText
-        android:id="@+id/editTextDosage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="@string/medication_dosage"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDosage" />
-
-    <EditText
-        android:id="@+id/editTextRefillCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="@string/refill_count"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewRefillCount" />
-
-    <Button
-        android:id="@+id/buttonConfirm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:onClick="ConfirmButton"
-        android:text="@string/button_confirm"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextRefillCount" />
-
-    <Button
-        android:id="@+id/buttonCancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="16dp"
-        android:onClick="CancelButton"
-        android:text="@string/button_cancel"
-        app:layout_constraintStart_toEndOf="@+id/buttonConfirm"
-        app:layout_constraintTop_toBottomOf="@+id/editTextRefillCount" />
-
-    <TextView
-        android:id="@+id/textViewMedID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-
-        android:visibility="visible"
+        android:fontFamily="@font/quicksand_medium"
+        android:stateListAnimator="@null"
+        android:text="@string/save"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewAddMedication" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/Card_View"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="@string/medication_number"
+        android:background="@drawable/drawable_card_standard"
+        android:paddingBottom="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
-        app:layout_constraintEnd_toStartOf="@+id/textViewMedID"
-        app:layout_constraintTop_toBottomOf="@+id/textViewAddMedication" />
+        <TextView
+            android:id="@+id/textViewMedicationName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/medication_name"
+            android:fontFamily="@font/quicksand_regular"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <EditText
+            android:id="@+id/editTextMedicationName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="@string/medication_name"
+            android:inputType="textPersonName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewMedicationName" />
+
+        <TextView
+            android:id="@+id/textView39"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/quicksand_regular"
+            android:text="@string/categories"
+            android:textColor="?attr/textColorSecondary"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextMedicationName" />
+
+        <Button
+            android:id="@+id/ctg_Tablet"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="4dp"
+            android:alpha="0.25"
+            android:background="@drawable/categories_red"
+            android:fontFamily="@font/quicksand_regular"
+            android:onClick="onClickCategories"
+            android:text="@string/tablet"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@+id/ctg_Capsule"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView39" />
+
+        <Button
+            android:id="@+id/ctg_Capsule"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:alpha="0.25"
+            android:onClick="onClickCategories"
+            android:background="@drawable/categories_purple"
+            android:fontFamily="@font/quicksand_regular"
+            android:text="@string/capsule"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@+id/ctg_Drops"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/ctg_Tablet"
+            app:layout_constraintTop_toTopOf="@+id/ctg_Tablet" />
+
+        <Button
+            android:id="@+id/ctg_Drops"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:alpha="0.25"
+            android:background="@drawable/categories_pink"
+            android:fontFamily="@font/quicksand_regular"
+            android:onClick="onClickCategories"
+            android:text="@string/drops"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@+id/ctg_Injection"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/ctg_Capsule"
+            app:layout_constraintTop_toTopOf="@+id/ctg_Tablet" />
+
+        <Button
+            android:id="@+id/ctg_Injection"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="16dp"
+            android:alpha="0.25"
+            android:background="@drawable/categories_teal"
+            android:fontFamily="@font/quicksand_regular"
+            android:onClick="onClickCategories"
+            android:singleLine="true"
+            android:text="@string/injection"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/ctg_Drops"
+            app:layout_constraintTop_toTopOf="@+id/ctg_Tablet" />
+
+
+        <TextView
+            android:id="@+id/textViewPillCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/quicksand_regular"
+            android:layout_marginTop="16dp"
+            android:text="@string/pill_count"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ctg_Tablet" />
+
+        <TextView
+            android:id="@+id/textViewDosage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/quicksand_regular"
+            android:layout_marginTop="16dp"
+            android:text="@string/medication_dosage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextPillCount" />
+
+        <TextView
+            android:id="@+id/textViewRefillCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/quicksand_regular"
+            android:layout_marginTop="16dp"
+            android:text="@string/refill_count"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextDosage" />
+
+
+        <EditText
+            android:id="@+id/editTextPillCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+
+            android:ems="10"
+            android:hint="@string/pill_count"
+            android:inputType="textPersonName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewPillCount" />
+
+        <EditText
+            android:id="@+id/editTextDosage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:ems="10"
+            android:hint="@string/medication_dosage"
+            android:inputType="textPersonName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewDosage" />
+
+        <EditText
+            android:id="@+id/editTextRefillCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:ems="10"
+            android:hint="@string/refill_count"
+            android:inputType="textPersonName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewRefillCount" />
+
+
+        <TextView
+            android:id="@+id/textViewMedID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="parent" />
+
+        <TextView
+            android:id="@+id/label_med_note"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/quicksand_regular"
+            android:layout_marginTop="16dp"
+            android:text="Note"
+            app:layout_constraintTop_toBottomOf="@id/editTextRefillCount"
+            app:layout_constraintStart_toStartOf="parent">
+        </TextView>
+
+        <EditText
+            android:id="@+id/medication_note"
+            android:layout_width="match_parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/stroke_box"
+            android:layout_height="60dp"
+            android:inputType="text|textMultiLine"
+            app:layout_constraintTop_toBottomOf="@id/label_med_note"/>
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/button_on_click"
+            android:drawableStart="@drawable/ic_camera_black_24dp"
+            android:elevation="3dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="10dp"
+            android:stateListAnimator="@null"
+            android:text="@string/add_picture"
+            android:textColor="?attr/textColorSecondary"
+            android:layout_marginStart="@dimen/sixteen_dp"
+            android:layout_marginVertical="@dimen/sixteen_dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/medication_note" />
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/select_categories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/Drop_Group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="button3, textView39, textViewMedicationName, editTextMedicationName, editTextPillCount, editTextPillCount, editTextDosage, textViewDosage, editTextRefillCount, textViewRefillCount, label_med_note, medication_note" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:gravity="center"
+        android:theme="?attr/toolbarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/quicksand_bold"
+            android:text="@string/add_medication"
+            android:textColor="?attr/textColorPrimary"
+            android:textSize="20sp" />
+    </androidx.appcompat.widget.Toolbar>
 </androidx.constraintlayout.widget.ConstraintLayout>

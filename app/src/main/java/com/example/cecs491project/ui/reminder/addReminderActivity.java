@@ -21,6 +21,7 @@ import java.util.Objects;
 
 
 //TODO: user will probably need to select the medicine from the medication list.
+//TODO: by selecting the everyday check box, all the box will be checked automatically.
 public class addReminderActivity extends AppCompatActivity  {
 
     private ImageView ASClose ;
@@ -30,6 +31,7 @@ public class addReminderActivity extends AppCompatActivity  {
     private Button btnStartDate , btnEndDate ;
     int hour, minutes;
 
+    private Button tablet, capsule, drops, injections;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,28 +57,18 @@ public class addReminderActivity extends AppCompatActivity  {
         btnStartDate = findViewById(R.id.btnStartDate);
         btnEndDate = findViewById(R.id.btnEndDate);
 
+        tablet = findViewById(R.id.ctg_Tablet);
+        capsule = findViewById(R.id.ctg_Capsule);
+        drops = findViewById(R.id.ctg_Drops);
+        injections = findViewById(R.id.ctg_Injection);
+
         SAVE.setZ(20);
         Card_View.setZ(2);
         ASClose.setZ(20);
 
 
     }
-    public void onClickCategories( View view ){
-        int id = view.getId();
-        if(id == R.id.ctg_Tablet) {
-            //TODO:change the color of the button when pressed and then changed back after different option is selected.
-        }
-        else if(id == R.id.ctg_Drops){
 
-        }
-        else if(id == R.id.ctg_Capsule) {
-
-        }
-        else if(id == R.id.ctg_Injection){
-
-        }
-
-    }
     public void showDatePicker(View view){
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
@@ -152,5 +144,8 @@ public class addReminderActivity extends AppCompatActivity  {
         }
         return super.dispatchTouchEvent(ev);
     }
+
+
+
 
 }
