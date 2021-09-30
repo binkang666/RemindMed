@@ -3,19 +3,21 @@ package com.example.cecs491project.ui.medication;
 import java.util.Comparator;
 
 public class Medications {
-    private int medicineNumber;
     private String medicationName;
+    private String categories;
     private int pillCount;
     private double dosage;
     private int refillCount;
+    private String note;
 
 
-    public Medications(int medicineNumber, String medicationName, int pillCount, double dosage, int refillCount) {
-        this.medicineNumber = medicineNumber;
+    public Medications(String medicationName, String categories, int pillCount, double dosage, int refillCount, String Note) {
         this.medicationName = medicationName;
+        this.categories = categories;
         this.pillCount = pillCount;
         this.dosage = dosage;
         this.refillCount = refillCount;
+        this.note = Note;
     }
 
 
@@ -33,30 +35,23 @@ public class Medications {
         }
     };
 
-    public static Comparator<Medications> MedicationNameDateCreatedCompare = new Comparator<Medications>() {
-        @Override
-        public int compare(Medications m1, Medications m2) {
-            return m1.getMedicineNumber() - m2.getMedicineNumber();
-        }
-    };
-
     @Override
     public String toString() {
         return "Medications{" +
-                "medicineNumber=" + medicineNumber +
                 ", medicationName='" + medicationName + '\'' +
+                ", categories=" + categories +
                 ", pillCount=" + pillCount +
                 ", dosage=" + dosage +
                 ", refillCount=" + refillCount +
+                ", Note=" + note +
                 '}';
     }
 
-    public int getMedicineNumber() {
-        return medicineNumber;
+    public String getCategories(){
+        return categories;
     }
-
-    public void setMedicineNumber(int medicineNumber) {
-        this.medicineNumber = medicineNumber;
+    public void setCategories(String categories) {
+        this.categories = categories;
     }
 
     public String getMedicationName() {
@@ -89,6 +84,14 @@ public class Medications {
 
     public void setRefillCount(int refillCount) {
         this.refillCount = refillCount;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 
 

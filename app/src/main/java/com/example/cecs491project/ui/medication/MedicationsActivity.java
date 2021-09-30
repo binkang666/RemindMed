@@ -1,11 +1,5 @@
 package com.example.cecs491project.ui.medication;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -14,13 +8,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.cecs491project.MainActivity;
 import com.example.cecs491project.R;
-import com.example.cecs491project.RecyclerViewAdapter;
 
 import java.util.List;
 
-public class MedicationsActivity extends AppCompatActivity implements RecyclerViewAdapter.OnTodoClickListener {
+public class MedicationsActivity extends AppCompatActivity /*implements RecyclerViewAdapter.OnTodoClickListener */{
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -42,7 +41,7 @@ public class MedicationsActivity extends AppCompatActivity implements RecyclerVi
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        mAdapter = new RecyclerViewAdapter(medicationsList, this, this);
+     /*   mAdapter = new RecyclerViewAdapter(medicationsList, this, this);*/
         recyclerView.setAdapter(mAdapter);
         Toast.makeText(this, "Medications count = " + medicationsList.size(), Toast.LENGTH_SHORT).show();
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
@@ -92,7 +91,7 @@ public class MedicationsActivity extends AppCompatActivity implements RecyclerVi
         Intent i = new Intent(MedicationsActivity.this, AddOrEditMedication.class);
         startActivity(i);
     }
-
+/*
     //When medication is tapped, edit it
     @Override
     public void onTodoClick(int position) {
@@ -101,7 +100,7 @@ public class MedicationsActivity extends AppCompatActivity implements RecyclerVi
         startActivity(intent);
 
     }
-
+*/
     //Swipe right to delete
     ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
         @Override

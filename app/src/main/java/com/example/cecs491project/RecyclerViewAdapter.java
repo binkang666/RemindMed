@@ -60,7 +60,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
         // contents of the view with that element
         Medications medications = medicationsList.get(position);
         ViewHolder viewHolder = (ViewHolder) holder;
-        viewHolder.tv_medNumber.setText(String.valueOf(medicationsList.get(position).getMedicineNumber()));
         viewHolder.tv_medName.setText(medicationsList.get(position).getMedicationName());
         viewHolder.tv_medPillCount.setText(String.valueOf(medicationsList.get(position).getPillCount()));
         viewHolder.tv_medDosage.setText(String.valueOf(medicationsList.get(position).getDosage()));
@@ -111,7 +110,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
      * (custom ViewHolder).
      */
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private final TextView tv_medNumber;
         private final TextView tv_medName;
         private final TextView tv_medPillCount;
         private final TextView tv_medDosage;
@@ -124,7 +122,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
             super(view);
             // Define click listener for the ViewHolder's View
 
-            tv_medNumber = (TextView) view.findViewById(R.id.textViewMedNumber);
             tv_medName = (TextView) view.findViewById(R.id.textViewMedName);
             tv_medPillCount = (TextView) view.findViewById(R.id.textViewMedPillCount);
             tv_medDosage = (TextView) view.findViewById(R.id.textViewMedDosage);
