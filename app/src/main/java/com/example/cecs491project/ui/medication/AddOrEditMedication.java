@@ -31,8 +31,6 @@ import java.util.Objects;
 
 public class AddOrEditMedication extends AppCompatActivity {
 
-    List<Medications> medicationsList;
-    MyMedication myMedication = (MyMedication) this.getApplication();
     EditText et_medName, et_medPillCount, et_medDosage, et_medRefillCount, medicationNote;
     private TextView SAVE;
     private View Card_View ;

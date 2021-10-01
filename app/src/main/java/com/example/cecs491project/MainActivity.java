@@ -21,9 +21,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.NavigationUI;
 
 import com.bumptech.glide.Glide;
 import com.example.cecs491project.databinding.ActivityMainBinding;
@@ -31,7 +28,6 @@ import com.example.cecs491project.ui.home.HomeFragment;
 import com.example.cecs491project.ui.login.LoginActivity;
 import com.example.cecs491project.ui.medication.AddOrEditMedication;
 import com.example.cecs491project.ui.medication.MedicationFragment;
-import com.example.cecs491project.ui.medication.MedicationsActivity;
 import com.example.cecs491project.ui.notifications.NotificationsFragment;
 import com.example.cecs491project.ui.reminder.ReminderFragment;
 import com.example.cecs491project.ui.reminder.addReminderActivity;
@@ -53,7 +49,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private ActivityMainBinding binding;
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
@@ -224,13 +219,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startActivity(i);
     }
 
-
-    //After Medication button is pressed, go to Medications Page
-    public void launchMedication(View v)
-    {
-        Intent i = new Intent(this, MedicationsActivity.class);
-        startActivity(i);
-    }
 
     public void launchAddOrEditMedication(View v)
     {
