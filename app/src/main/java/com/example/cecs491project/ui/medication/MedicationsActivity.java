@@ -2,118 +2,71 @@ package com.example.cecs491project.ui.medication;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
+import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cecs491project.MainActivity;
 import com.example.cecs491project.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 
-import java.util.List;
+import java.util.ArrayList;
 
-public class MedicationsActivity extends AppCompatActivity /*implements RecyclerViewAdapter.OnTodoClickListener */{
-
-    private RecyclerView recyclerView;
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager layoutManager;
-
-    MyMedication myMedication = (MyMedication) this.getApplication();
-    List<Medications> medicationsList;
-
-    Menu menu;
+public class MedicationsActivity extends AppCompatActivity {
+    RecyclerView recyclerView;
+    ArrayList<Medications> medicationsArrayList;
+    MedicationAdapter medicationAdapter;
+    FirebaseFirestore db;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_medications);
+        setContentView(R.layout.fragment_medication);
 
-        medicationsList = myMedication.getMedicationsList();
-
-        recyclerView = findViewById(R.id.rv_medications);
+        recyclerView = findViewById(R.id.med_list);
         recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-     /*   mAdapter = new RecyclerViewAdapter(medicationsList, this, this);*/
-        recyclerView.setAdapter(mAdapter);
-        Toast.makeText(this, "Medications count = " + medicationsList.size(), Toast.LENGTH_SHORT).show();
-        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        db = FirebaseFirestore.getInstance();
+        medicationsArrayList = new ArrayList<Medications>();
+        medicationAdapter = new MedicationAdapter(MedicationsActivity.this, medicationsArrayList);
+
+        recyclerView.setAdapter(medicationAdapter);
+        EventChangeListener();
+
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.sort_menu, menu);
-        return true;
+    private void EventChangeListener(){
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        db.collection("User Database")
+                .document(uid).collection("Medication").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                if(error!=null){
+                    Log.e("Firestore error", error.getMessage());
+                    return;
+                }
+                for(DocumentChange dc : value.getDocumentChanges()){
+                    if(dc.getType() == DocumentChange.Type.ADDED){
+                        medicationsArrayList.add(dc.getDocument().toObject(Medications.class));
+                    }
+                    medicationAdapter.notifyDataSetChanged();
+                }
+            }
+        });
     }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch(item.getItemId())
-        {
-            //Bug when sorting. Deletes all medications, or edits wrong one
-//            case R.id.menu_sortMedicineName:
-//                //sort alphabetically
-//                Collections.sort(medicationsList, Medications.MedicationNameAZCompare);
-//                Toast.makeText(getApplicationContext(), "Sort alphabetically", Toast.LENGTH_SHORT).show();
-//                mAdapter.notifyDataSetChanged(); //Let adapter know we changed the order
-//                return true;
-//
-//            case R.id.menu_sortMedicineNameReverse:
-//                Collections.sort(medicationsList, Medications.MedicationNameZACompare);
-//                Toast.makeText(getApplicationContext(), "Sort alphabetically REVERSED", Toast.LENGTH_SHORT).show();
-//                mAdapter.notifyDataSetChanged(); //Let adapter know we changed the order
-//                return true;
-//
-//            case R.id.menu_sortWhenCreated:
-//                Collections.sort(medicationsList, Medications.MedicationNameDateCreatedCompare);
-//                Toast.makeText(getApplicationContext(), "Sort When Date Created", Toast.LENGTH_SHORT).show();
-//                mAdapter.notifyDataSetChanged(); //Let adapter know we changed the order
-//                return true;
-            case R.id.navigation_home:
-                Intent i = new Intent(this, MainActivity.class);
-                startActivity(i);
-
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
 
     public void launchAddOrEditMedication(View v)
     {
         Intent i = new Intent(MedicationsActivity.this, AddOrEditMedication.class);
         startActivity(i);
     }
-/*
-    //When medication is tapped, edit it
-    @Override
-    public void onTodoClick(int position) {
-        Intent intent = new Intent(MedicationsActivity.this, AddOrEditMedication.class );
-        intent.putExtra("id", medicationsList.get(position).getMedicineNumber());
-        startActivity(intent);
-
-    }
-*/
-    //Swipe right to delete
-    ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
-        @Override
-        public boolean onMove(@NonNull RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder,  RecyclerView.ViewHolder target) {
-            return false;
-        }
-
-        @Override
-        public void onSwiped(@NonNull  RecyclerView.ViewHolder viewHolder, int direction) {
-            medicationsList.remove(viewHolder.getAdapterPosition());
-            mAdapter.notifyDataSetChanged();
-            Toast.makeText(MedicationsActivity.this, "Medication delete", Toast.LENGTH_SHORT).show();
-        }
-
-    };
 }

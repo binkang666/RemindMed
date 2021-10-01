@@ -3,13 +3,21 @@
 
     <item android:title="STORAGAE">
         <menu>
-            <item android:title="My Reminders"
+            <item
+                android:id="@+id/nav_home"
+                android:title="Home"
                 android:icon="@drawable/ic_baseline_folder_24" />
-            <item android:title="My Medications"
+            <item
+                android:id="@+id/nav_medication"
+                android:title="Medications"
                 android:icon="@drawable/ic_baseline_people_24" />
-            <item android:title="Starred"
+            <item
+                android:id="@+id/nav_reminder"
+                android:title="Reminders"
                 android:icon="@drawable/ic_baseline_star_24" />
-            <item android:title="Recent"
+            <item
+                android:id="@+id/nav_notification"
+                android:title="Notifications"
                 android:icon="@drawable/ic_baseline_access_time_24" />
         </menu>
     </item>

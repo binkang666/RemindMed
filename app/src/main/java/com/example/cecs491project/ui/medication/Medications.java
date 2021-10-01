@@ -10,6 +10,7 @@ public class Medications {
     private int refillCount;
     private String note;
 
+    public Medications(){ }
 
     public Medications(String medicationName, String categories, int pillCount, double dosage, int refillCount, String Note) {
         this.medicationName = medicationName;
@@ -18,6 +19,11 @@ public class Medications {
         this.dosage = dosage;
         this.refillCount = refillCount;
         this.note = Note;
+    }
+
+    public Medications(String medicationName, String categories){
+        this.medicationName = medicationName;
+        this.categories = categories;
     }
 
 

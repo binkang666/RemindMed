@@ -6,28 +6,34 @@
     android:layout_height="match_parent"
     tools:context=".ui.medication.MedicationFragment">
 
-    <TextView
-        android:id="@+id/text_medication"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/buttonAddMedication"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="15dp"
-        android:clickable="true"
-        android:onClick="launchAddOrEditMedication"
-        android:focusable="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="580dp"
-        android:src="@android:drawable/ic_input_add"/>
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="20dp"
+        android:contentDescription="todo"
+        android:clickable="true"
+        android:focusable="true"
+        app:backgroundTint="@color/colorPrimary"
+        android:src="@android:drawable/ic_menu_add"
+        android:onClick="launchAddOrEditMedication" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/med_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:paddingVertical="50dp">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 
 

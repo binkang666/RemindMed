@@ -20,18 +20,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
 import com.bumptech.glide.Glide;
 import com.example.cecs491project.databinding.ActivityMainBinding;
+import com.example.cecs491project.ui.home.HomeFragment;
 import com.example.cecs491project.ui.login.LoginActivity;
 import com.example.cecs491project.ui.medication.AddOrEditMedication;
+import com.example.cecs491project.ui.medication.MedicationFragment;
 import com.example.cecs491project.ui.medication.MedicationsActivity;
+import com.example.cecs491project.ui.notifications.NotificationsFragment;
+import com.example.cecs491project.ui.reminder.ReminderFragment;
 import com.example.cecs491project.ui.reminder.addReminderActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
@@ -53,39 +59,89 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private NavigationView navigationView;
     private Toolbar toolbar;
     private CircleImageView profilePic;
-    private TextView myUserName;
+    private TextView myUserName, toolbarText;
     public Uri imageURI;
     private FirebaseStorage firebaseStorage;
     private StorageReference storageReference;
     private DatabaseReference databaseReference;
     FirebaseAuth auth;
 
+    HomeFragment homeFragment;
+    MedicationFragment medicationFragment;
+    ReminderFragment reminderFragment;
+    NotificationsFragment notificationsFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-
-        //Bot Nav UI
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
-        NavigationUI.setupWithNavController(binding.navView, navController);
+        setContentView(R.layout.activity_main);
 
         //Side Nav Drawer UI
         toolbar = findViewById(R.id.main_toolbar);
         setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(0);
+
         drawerLayout = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.side_nav_view);
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.openNavDrawer, R.string.closeNavDrawer);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
+
+        navigationView = findViewById(R.id.side_nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         firebaseStorage = FirebaseStorage.getInstance();
         storageReference = firebaseStorage.getReference();
         getUserInfo();
 
+        homeFragment = new HomeFragment();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.add(R.id.container, homeFragment);
+        ft.commit();
+        bottomNavigationOnClick();
     }
+
+    private void bottomNavigationOnClick() {
+        BottomNavigationView bottomNav = findViewById(R.id.nav_view);
+        bottomNav.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                        medicationFragment = new MedicationFragment();
+                        homeFragment = new HomeFragment();
+                        reminderFragment = new ReminderFragment();
+                        notificationsFragment = new NotificationsFragment();
+
+                        toolbarText = findViewById(R.id.toolbarText);
+                        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                        int id = menuItem.getItemId();
+                        if ( id == R.id.navigation_dashboard){
+
+                            ft.replace(R.id.container, homeFragment);
+                            toolbarText.setText("RemindMed");
+                            ((NavigationView)findViewById(R.id.side_nav_view)).setCheckedItem(R.id.nav_home);
+
+                        }else if ( id == R.id.navigation_medication){
+
+                            ft.replace(R.id.container, medicationFragment);
+                            toolbarText.setText("Medications");
+                            ((NavigationView)findViewById(R.id.side_nav_view)).setCheckedItem(R.id.nav_medication);
+
+                        }else if ( id == R.id.navigation_notifications){
+
+                            ft.replace(R.id.container, notificationsFragment);
+                            toolbarText.setText("Notifications");
+                            ((NavigationView)findViewById(R.id.side_nav_view)).setCheckedItem(R.id.nav_notification);
+                        }else if( id == R.id.navigation_reminder){
+                            ft.replace(R.id.container, reminderFragment);
+                            toolbarText.setText("Reminders");
+                            ((NavigationView)findViewById(R.id.side_nav_view)).setCheckedItem(R.id.nav_reminder);
+                        }
+                        ft.commit();
+                        return true ;
+                    }
+                });
+    }
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.

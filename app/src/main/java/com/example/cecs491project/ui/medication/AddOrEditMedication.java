@@ -119,7 +119,7 @@ public class AddOrEditMedication extends AppCompatActivity {
                     }
                 }
             });
-
+            finish();
         });
     }
 

@@ -20,14 +20,17 @@
         android:id="@+id/buttonAddReminder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="15dp"
-        android:clickable="true"
-        android:onClick="addReminder"
-        android:focusable="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="580dp"
-        android:src="@android:drawable/ic_input_add"/>
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="20dp"
+        android:contentDescription="todo"
+        android:clickable="true"
+        android:focusable="true"
+        app:backgroundTint="@color/colorPrimary"
+        android:src="@android:drawable/ic_menu_add"
+        android:onClick="addReminder" />
 
 
 
