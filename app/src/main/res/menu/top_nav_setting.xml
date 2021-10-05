@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/navigation_setting"
@@ -9,7 +10,14 @@
     <item
         android:id="@+id/navigation_logout"
         android:title="@string/log_out"
-        android:onClick="logout"
+        android:onClick="logout"/>
+    <item
+        android:id="@+id/camera"
+        android:title="camera"
+        android:onClick="openCamera"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/icon_my_camera"
         />
+
 
 </menu>

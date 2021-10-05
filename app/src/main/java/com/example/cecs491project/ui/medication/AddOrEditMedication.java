@@ -1,7 +1,12 @@
 package com.example.cecs491project.ui.medication;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.transition.TransitionManager;
 import android.view.MotionEvent;
 import android.view.View;
@@ -12,10 +17,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import com.example.cecs491project.MainActivity;
 import com.example.cecs491project.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -35,6 +44,8 @@ public class AddOrEditMedication extends AppCompatActivity {
     private TextView SAVE;
     private View Card_View ;
     private ImageView ASClose ;
+    private Button cameraBtn;
+    private ImageView medPic;
 
     private Button tablet, capsule, drops, injections;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -51,6 +62,20 @@ public class AddOrEditMedication extends AppCompatActivity {
         initializePage();
 
         ASClose.setOnClickListener(v -> AddOrEditMedication.super.onBackPressed());
+        cameraBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(ContextCompat.checkSelfPermission(AddOrEditMedication.this,
+                        Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED){
+                    ActivityCompat.requestPermissions(AddOrEditMedication.this,
+                            new String[]{
+                                    Manifest.permission.CAMERA
+                            }, 100);
+                }
+                Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(i, 100);
+            }
+        });
 
     }
 
@@ -63,6 +88,8 @@ public class AddOrEditMedication extends AppCompatActivity {
         SAVE = findViewById(R.id.SAVE);
         Card_View = findViewById(R.id.Card_View);
         medicationNote = findViewById(R.id.medication_note);
+        cameraBtn = findViewById(R.id.camera_to_add_med);
+        medPic = findViewById(R.id.med_pics);
 
         tablet = findViewById(R.id.ctg_Tablet);
         capsule = findViewById(R.id.ctg_Capsule);
@@ -213,5 +240,15 @@ public class AddOrEditMedication extends AppCompatActivity {
             imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
         }
         return super.dispatchTouchEvent(ev);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 100){
+            Bitmap captureImage= (Bitmap) data.getExtras().get("data");
+            medPic.setImageBitmap(captureImage);
+
+        }
     }
 }

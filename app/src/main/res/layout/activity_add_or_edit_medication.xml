@@ -258,7 +258,7 @@
             app:layout_constraintTop_toBottomOf="@id/label_med_note"/>
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/camera_to_add_med"
             android:layout_width="0dp"
             android:layout_height="36dp"
             android:layout_marginTop="8dp"
@@ -276,6 +276,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/medication_note" />
 
+        <ImageView
+            android:id="@+id/med_pics"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/sixteen_dp"
+            app:layout_constraintTop_toBottomOf="@id/camera_to_add_med"
+            app:layout_constraintStart_toStartOf="parent">
+
+        </ImageView>
+
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/select_categories"
@@ -289,7 +299,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="gone"
-            app:constraint_referenced_ids="button3, textView39, textViewMedicationName, editTextMedicationName, editTextPillCount, editTextPillCount, editTextDosage, textViewDosage, editTextRefillCount, textViewRefillCount, label_med_note, medication_note" />
+            app:constraint_referenced_ids="camera_to_add_med, textView39, textViewMedicationName, editTextMedicationName, editTextPillCount, editTextPillCount, editTextDosage, textViewDosage, editTextRefillCount, textViewRefillCount, label_med_note, medication_note" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

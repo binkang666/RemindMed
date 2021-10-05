@@ -76,6 +76,7 @@ public class MedicationFragment extends Fragment {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 if(error!=null){
+
                     if(progressDialog.isShowing()){
                         progressDialog.dismiss();
                     }
@@ -94,6 +95,8 @@ public class MedicationFragment extends Fragment {
             }
         });
     }
+
+
     public void launchAddOrEditMedication(View v)
     {
         Intent i = new Intent(getContext(), AddOrEditMedication.class);

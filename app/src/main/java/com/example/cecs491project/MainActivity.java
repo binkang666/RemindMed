@@ -1,14 +1,19 @@
 package com.example.cecs491project;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,14 +23,16 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
-import com.example.cecs491project.databinding.ActivityMainBinding;
 import com.example.cecs491project.ui.home.HomeFragment;
 import com.example.cecs491project.ui.login.LoginActivity;
+import com.example.cecs491project.ui.map.MapFragment;
 import com.example.cecs491project.ui.medication.AddOrEditMedication;
 import com.example.cecs491project.ui.medication.MedicationFragment;
 import com.example.cecs491project.ui.notifications.NotificationsFragment;
@@ -34,6 +41,7 @@ import com.example.cecs491project.ui.reminder.addReminderActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
@@ -65,23 +73,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     MedicationFragment medicationFragment;
     ReminderFragment reminderFragment;
     NotificationsFragment notificationsFragment;
+    MapFragment mapFragment;
+
+    private Button cameraBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Side Nav Drawer UI
+        initializePage();
+    }
+
+    private void initializePage(){
         toolbar = findViewById(R.id.main_toolbar);
+        drawerLayout = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.side_nav_view);
+        cameraBtn = findViewById(R.id.camera);
+        toolbarText = findViewById(R.id.toolbarText);
+
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setTitle(0);
 
-        drawerLayout = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.openNavDrawer, R.string.closeNavDrawer);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
 
-        navigationView = findViewById(R.id.side_nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         firebaseStorage = FirebaseStorage.getInstance();
@@ -95,54 +112,56 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         bottomNavigationOnClick();
     }
 
+    //bot nav item options
     private void bottomNavigationOnClick() {
         BottomNavigationView bottomNav = findViewById(R.id.nav_view);
-        bottomNav.setOnNavigationItemSelectedListener(
-                new BottomNavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                        medicationFragment = new MedicationFragment();
-                        homeFragment = new HomeFragment();
-                        reminderFragment = new ReminderFragment();
-                        notificationsFragment = new NotificationsFragment();
+        bottomNav.setOnItemSelectedListener(item -> {
+                    medicationFragment = new MedicationFragment();
+                    homeFragment = new HomeFragment();
+                    reminderFragment = new ReminderFragment();
+                    notificationsFragment = new NotificationsFragment();
+                    mapFragment = new MapFragment();
 
-                        toolbarText = findViewById(R.id.toolbarText);
-                        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                        int id = menuItem.getItemId();
-                        if ( id == R.id.navigation_dashboard){
+                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                    int id = item.getItemId();
+                    if ( id == R.id.navigation_dashboard){
 
-                            ft.replace(R.id.container, homeFragment);
-                            toolbarText.setText("RemindMed");
-                            ((NavigationView)findViewById(R.id.side_nav_view)).setCheckedItem(R.id.nav_home);
+                        ft.replace(R.id.container, homeFragment);
+                        toolbarText.setText("RemindMed");
+                        ((NavigationView)findViewById(R.id.side_nav_view)).setCheckedItem(R.id.nav_home);
 
-                        }else if ( id == R.id.navigation_medication){
+                    }else if ( id == R.id.navigation_medication){
 
-                            ft.replace(R.id.container, medicationFragment);
-                            toolbarText.setText("Medications");
-                            ((NavigationView)findViewById(R.id.side_nav_view)).setCheckedItem(R.id.nav_medication);
+                        ft.replace(R.id.container, medicationFragment);
+                        toolbarText.setText("Medications");
+                        ((NavigationView)findViewById(R.id.side_nav_view)).setCheckedItem(R.id.nav_medication);
 
-                        }else if ( id == R.id.navigation_notifications){
+                    }else if ( id == R.id.navigation_notifications){
 
-                            ft.replace(R.id.container, notificationsFragment);
-                            toolbarText.setText("Notifications");
-                            ((NavigationView)findViewById(R.id.side_nav_view)).setCheckedItem(R.id.nav_notification);
-                        }else if( id == R.id.navigation_reminder){
-                            ft.replace(R.id.container, reminderFragment);
-                            toolbarText.setText("Reminders");
-                            ((NavigationView)findViewById(R.id.side_nav_view)).setCheckedItem(R.id.nav_reminder);
-                        }
-                        ft.commit();
-                        return true ;
+                        ft.replace(R.id.container, notificationsFragment);
+                        toolbarText.setText("Notifications");
+                        ((NavigationView)findViewById(R.id.side_nav_view)).setCheckedItem(R.id.nav_notification);
+                    }else if( id == R.id.navigation_reminder){
+                        ft.replace(R.id.container, reminderFragment);
+                        toolbarText.setText("Reminders");
+                        ((NavigationView)findViewById(R.id.side_nav_view)).setCheckedItem(R.id.nav_reminder);
+                    }else if(id == R.id.navigation_map){
+                        ft.replace(R.id.container, mapFragment);
+                        toolbarText.setText("Map");
+                        ((NavigationView)findViewById(R.id.side_nav_view)).setCheckedItem(R.id.nav_map);
                     }
+                    ft.commit();
+                    return true ;
                 });
     }
 
+    //side nav item selected options
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
-        switch (item.getItemId()) {
+        int id = item.getItemId();
 
-            case R.id.profilePic: {
+            if (id == R.id.profilePic){
                 profilePic = findViewById(R.id.profilePic);
                 profilePic.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -153,9 +172,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     }
                 });
                 choosePic();
-                break;
             }
-        }
+            else if(id == R.id.nav_medication){
+                medicationFragment = new MedicationFragment();
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.container, medicationFragment);
+                toolbarText.setText("Medications");
+                ((NavigationView)findViewById(R.id.side_nav_view)).setCheckedItem(R.id.nav_medication);
+                ft.commit();
+
+            }
+
         //close navigation drawer
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
@@ -171,10 +198,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        //select image to upload as profile image
         if(requestCode == 1 && resultCode == RESULT_OK && data !=null && data.getData() !=null){
             imageURI = data.getData();
             profilePic.setImageURI(imageURI);
             uploadPic();
+        }
+        //take photos for anything(notes, medication) using camera
+        if(requestCode == 100){
+            Bitmap captureImage = (Bitmap) data.getExtras().get("data");
+
         }
     }
 
@@ -298,13 +331,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         StorageReference ref = FirebaseStorage.getInstance().getReference().child("images/" + user +"_profile_picture.jpg");
 
-        ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                CircleImageView pic = (CircleImageView) headerView.findViewById(R.id.profilePic);
-                profilePic = findViewById(R.id.profilePic);
-                Glide.with(pic).load(uri).centerCrop().into(profilePic);
-            }
+        ref.getDownloadUrl().addOnSuccessListener(uri -> {
+            CircleImageView pic = (CircleImageView) headerView.findViewById(R.id.profilePic);
+            profilePic = findViewById(R.id.profilePic);
+            Glide.with(pic).load(uri).centerCrop().into(profilePic);
         });
 
 
@@ -317,5 +347,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
+    public void openCamera(MenuItem item) {
 
+        if(ContextCompat.checkSelfPermission(MainActivity.this,
+                Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(MainActivity.this,
+                    new String[]{
+                            Manifest.permission.CAMERA
+                    }, 100);
+        }
+
+        Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(i, 100);
+    }
 }
