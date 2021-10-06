@@ -19,6 +19,12 @@
     <string name="sort_dosage">Dosage from lowest to strongest</string>
     <string name="sort_reffilCount">Refill Count from lowest to highest</string>
     <string name="register">register here</string>
+    <string name="minbefmeal30">30 minutes before meal</string>
+    <string name="hmtiad">How many times in a day</string>
+    <string name="beforafter">Before or After Meal</string>
+    <string name="basics">Basics</string>
+    <string name="meditype">Medicine Type</string>
+    <string name="gas_amp_gas_pains"><![CDATA[Gas & gas pains]]></string>
     <string name="login">login</string>
     <string name="email">Email</string>
     <string name="password">Password</string>

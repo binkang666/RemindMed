@@ -25,12 +25,14 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.example.cecs491project.R;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -116,7 +118,9 @@ public class AddMedication extends AppCompatActivity {
 
             String medName = et_medName.getText().toString();
             tabletMap.put("Categories", categories);
-            int pillCount = 0, dosage = 0, refillCount = 0;
+            int pillCount = 0;
+            double dosage = 0.0;
+            int refillCount = 0;
             String Note = "";
             try {
                 pillCount = Integer.parseInt(et_medPillCount.getText().toString());
@@ -125,7 +129,7 @@ public class AddMedication extends AppCompatActivity {
                 e.printStackTrace();
             }
             try{
-                dosage = Integer.parseInt(et_medDosage.getText().toString());
+                dosage = Double.parseDouble(et_medDosage.getText().toString());
                 tabletMap.put("Dosage", dosage);
             } catch (Exception e) {
                 e.printStackTrace();

@@ -3,6 +3,7 @@ package com.example.cecs491project.ui.medication;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,10 +18,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.cecs491project.R;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Objects;
 
 public class MedicationFragment extends Fragment implements MedicationAdapter.OnItemClickListener {
@@ -75,15 +79,33 @@ public class MedicationFragment extends Fragment implements MedicationAdapter.On
         medicationAdapter.setOnItemClickListener(new MedicationAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(DocumentSnapshot documentSnapshot, int pos) {
-                Medications medications = documentSnapshot.toObject(Medications.class);
-                String id = documentSnapshot.getId();
-                String path = documentSnapshot.getReference().getPath();
-                Toast.makeText(getContext(), "Edit Function In Development", Toast.LENGTH_SHORT).show();
+                String docID = documentSnapshot.getId();
+                Map<String, Object> s = documentSnapshot.getData();
+
+                String name = (String) s.get("medicationName");
+                int pillCount = Math.toIntExact(Long.parseLong(String.valueOf(s.get("pillCount"))));
+                int refillCount = Math.toIntExact(Long.parseLong(String.valueOf(s.get("refillCount"))));
+                double dosage = (double) (s.get("dosage"));
+                String note = (String) s.get("note");
+                String cate = (String) s.get("categories");
+
+                Bundle bundle = new Bundle();
+                bundle.putString("name", name);
+                bundle.putString("docID", docID);
+                bundle.putString("note", note);
+                bundle.putString("cate", cate);
+                bundle.putInt("count", pillCount);
+                bundle.putInt("refill", refillCount);
+                bundle.putDouble("dos", dosage);
+
+                Intent i = new Intent(getContext(), MedicationDetails.class);
+                i.putExtras(bundle);
+                startActivity(i);
             }
         });
 
-
     }
+
 
     @Override
     public void onStart() {
