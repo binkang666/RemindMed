@@ -24,7 +24,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.example.cecs491project.MainActivity;
 import com.example.cecs491project.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -34,7 +33,6 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -54,7 +52,7 @@ public class AddOrEditMedication extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_or_edit_medication);
+        setContentView(R.layout.activity_add_medication);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -108,43 +106,61 @@ public class AddOrEditMedication extends AppCompatActivity {
     //TODO： User should be able to add the medication even if some information remain unfinished. (right now, you need to add every information to add)
     //TODO: add picture feature can be deleted if unnecessary.
     private void addMedToDatabase(String categories){
+
         SAVE.setOnClickListener(view -> {
 
             String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-
             Map<String, Object> tabletMap = new HashMap<>();
+
             String medName = et_medName.getText().toString();
-            tabletMap.put("Categories",categories);
+            tabletMap.put("Categories", categories);
+            int pillCount = 0, dosage = 0, refillCount = 0;
+            String Note = "";
+            try {
+                pillCount = Integer.parseInt(et_medPillCount.getText().toString());
+                tabletMap.put("Pill Count", pillCount);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            try{
+                dosage = Integer.parseInt(et_medDosage.getText().toString());
+                tabletMap.put("Dosage", dosage);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            try{
+                refillCount = Integer.parseInt(et_medRefillCount.getText().toString());
+                tabletMap.put("Refill Count", refillCount);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            try{
+                Note = medicationNote.getText().toString();
+                tabletMap.put("Medication Note", Note);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            try {
+                DocumentReference userTablet = db.collection("User Database")
+                        .document(userID).collection("Medication").document(medName);
 
-            int pillCount =  Integer.parseInt(et_medPillCount.getText().toString());
-            tabletMap.put("Pill Count", pillCount);
-            int dosage =  Integer.parseInt(et_medDosage.getText().toString());
-            tabletMap.put("Dosage", dosage);
-            int refillCount =  Integer.parseInt(et_medRefillCount.getText().toString());
-            tabletMap.put("Refill Count", refillCount);
+                Medications med = new Medications(medName, categories, pillCount, dosage, refillCount, Note);
 
-            String Note = medicationNote.getText().toString();
-            tabletMap.put("Medication Note", Note);
-
-
-            DocumentReference userTablet = db.collection("User Database")
-                    .document(userID).collection("Medication").document(medName);
-
-            Medications med = new Medications(medName, categories, pillCount,  dosage, refillCount, Note);
-
-            userTablet.set(med).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if(task.isSuccessful()){
-                        makeSnackBarMessage("Medication added");
+                userTablet.set(med).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            makeSnackBarMessage("Medication added");
+                        } else {
+                            makeSnackBarMessage("Failed");
+                        }
                     }
-                    else{
-                        makeSnackBarMessage("Failed");
-                    }
-                }
-            });
-            finish();
+                });
+                finish();
+            }catch (Exception e){
+                makeSnackBarMessage("Medication name and type must be entered.");
+            }
         });
     }
 

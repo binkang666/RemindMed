@@ -14,10 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.cecs491project.MainActivity;
 import com.example.cecs491project.R;
-import com.example.cecs491project.databinding.FragmentMedicationBinding;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
@@ -28,8 +25,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 
 public class MedicationFragment extends Fragment {
-
-    private FragmentMedicationBinding binding;
 
     private ArrayList<Medications> medicationsArrayList;
     RecyclerView recyclerView;
@@ -61,12 +56,6 @@ public class MedicationFragment extends Fragment {
 
         EventChangeListener();
         return view;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
     }
 
     private void EventChangeListener(){
