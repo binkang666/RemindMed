@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                     FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                     int id = item.getItemId();
-                    if ( id == R.id.navigation_dashboard){
+                    if ( id == R.id.navigation_home){
 
                         ft.replace(R.id.container, homeFragment);
                         toolbarText.setText("RemindMed");
