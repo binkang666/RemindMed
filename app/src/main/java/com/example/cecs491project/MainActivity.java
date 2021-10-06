@@ -33,7 +33,7 @@ import com.bumptech.glide.Glide;
 import com.example.cecs491project.ui.home.HomeFragment;
 import com.example.cecs491project.ui.login.LoginActivity;
 import com.example.cecs491project.ui.map.MapFragment;
-import com.example.cecs491project.ui.medication.AddOrEditMedication;
+import com.example.cecs491project.ui.medication.AddMedication;
 import com.example.cecs491project.ui.medication.MedicationFragment;
 import com.example.cecs491project.ui.notifications.NotificationsFragment;
 import com.example.cecs491project.ui.reminder.ReminderFragment;
@@ -41,7 +41,6 @@ import com.example.cecs491project.ui.reminder.addReminderActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
@@ -255,7 +254,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void launchAddOrEditMedication(View v)
     {
-        Intent i = new Intent(MainActivity.this, AddOrEditMedication.class);
+        Intent i = new Intent(MainActivity.this, AddMedication.class);
         startActivity(i);
     }
 

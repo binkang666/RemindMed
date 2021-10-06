@@ -36,7 +36,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class AddOrEditMedication extends AppCompatActivity {
+public class AddMedication extends AppCompatActivity {
 
     EditText et_medName, et_medPillCount, et_medDosage, et_medRefillCount, medicationNote;
     private TextView SAVE;
@@ -59,13 +59,13 @@ public class AddOrEditMedication extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setTitle(0);
         initializePage();
 
-        ASClose.setOnClickListener(v -> AddOrEditMedication.super.onBackPressed());
+        ASClose.setOnClickListener(v -> AddMedication.super.onBackPressed());
         cameraBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(ContextCompat.checkSelfPermission(AddOrEditMedication.this,
+                if(ContextCompat.checkSelfPermission(AddMedication.this,
                         Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED){
-                    ActivityCompat.requestPermissions(AddOrEditMedication.this,
+                    ActivityCompat.requestPermissions(AddMedication.this,
                             new String[]{
                                     Manifest.permission.CAMERA
                             }, 100);
@@ -76,6 +76,7 @@ public class AddOrEditMedication extends AppCompatActivity {
         });
 
     }
+
 
     private void initializePage() {
         et_medName = findViewById(R.id.editTextMedicationName);
