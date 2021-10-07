@@ -1,15 +1,14 @@
 package com.example.cecs491project.ui.medication;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,21 +17,24 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.cecs491project.R;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.CountDownLatch;
 
-public class MedicationFragment extends Fragment implements MedicationAdapter.OnItemClickListener {
+public class MedicationFragment extends Fragment {
 
     RecyclerView recyclerView;
     MedicationAdapter medicationAdapter;
     FirebaseFirestore db;
     View view;
+    ProgressBar progressBar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,12 +44,15 @@ public class MedicationFragment extends Fragment implements MedicationAdapter.On
                              ViewGroup container, Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.fragment_medication, container, false);
-        EventChangeListener();
 
+        progressBar = view.findViewById(R.id.progressbar);
+
+        EventChangeListener();
         return view;
     }
 
     private void EventChangeListener(){
+        CountDownLatch done = new CountDownLatch(1);
         db = FirebaseFirestore.getInstance();
         String uid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
@@ -103,7 +108,12 @@ public class MedicationFragment extends Fragment implements MedicationAdapter.On
                 startActivity(i);
             }
         });
-
+        query.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                progressBar.setVisibility(view.GONE);
+            }
+        });
     }
 
 
@@ -111,6 +121,7 @@ public class MedicationFragment extends Fragment implements MedicationAdapter.On
     public void onStart() {
         super.onStart();
         medicationAdapter.startListening();
+
     }
 
     @Override
@@ -125,8 +136,4 @@ public class MedicationFragment extends Fragment implements MedicationAdapter.On
         startActivity(i);
     }
 
-    @Override
-    public void onItemClick(DocumentSnapshot documentSnapshot, int pos) {
-
-    }
 }

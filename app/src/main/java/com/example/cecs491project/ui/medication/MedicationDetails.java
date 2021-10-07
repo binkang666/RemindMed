@@ -1,5 +1,6 @@
 package com.example.cecs491project.ui.medication;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -7,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -16,7 +18,6 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import java.util.Objects;
 
-//TODO: back button somehow not working, need fix
 public class MedicationDetails extends AppCompatActivity {
 
     TextView tx_name, tx_cate, tx_count, tx_refill, tx_dosage, tx_note;
@@ -30,7 +31,7 @@ public class MedicationDetails extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setHomeButtonEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
@@ -79,9 +80,11 @@ public class MedicationDetails extends AppCompatActivity {
         finish();
     }
 
-    public void goBack(View view) {
-        Intent intent = new Intent(MedicationDetails.this, MainActivity.class);
-        startActivity(intent);
-        finish();
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        super.onBackPressed();
+        return true;
     }
+
 }
