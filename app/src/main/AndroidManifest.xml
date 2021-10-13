@@ -4,8 +4,9 @@
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -13,6 +14,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/LightTheme">
+        <activity
+            android:name=".ui.medication.MedicationDetails"
+            android:exported="true" />
+        <activity
+            android:name=".ui.medication.EditMedication"
+            android:exported="true" />
         <activity
             android:name=".ui.reminder.addReminderActivity"
             android:exported="true" />
@@ -32,7 +39,7 @@
             android:name=".ui.login.RegisterActivity"
             android:exported="true"
             android:theme="@style/Theme.CECS491Project.NoActionBar" />
-        <activity android:name=".ui.medication.AddOrEditMedication" />
+        <activity android:name=".ui.medication.AddMedication" />
         <activity
             android:name=".ui.login.LoginActivity"
             android:exported="true"
@@ -50,7 +57,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyD7w9xXLFcDgB10Ba65oSWCCAGuFBZNrgU"/>
+            android:value="AIzaSyD7w9xXLFcDgB10Ba65oSWCCAGuFBZNrgU" />
     </application>
 
 </manifest>

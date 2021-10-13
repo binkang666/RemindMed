@@ -11,54 +11,71 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cecs491project.R;
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.util.ArrayList;
 
-public class MedicationAdapter extends RecyclerView.Adapter<MedicationAdapter.ViewHolder> {
+
+public class MedicationAdapter extends FirestoreRecyclerAdapter<Medications, MedicationAdapter.ViewHolder> {
 
 
-    Context context;
-    ArrayList<Medications> medicationsArrayList;
+    private OnItemClickListener listener;
 
-    public MedicationAdapter(Context context, ArrayList<Medications> medicationsArrayList) {
-        this.context = context;
-        this.medicationsArrayList = medicationsArrayList;
+    public MedicationAdapter(@NonNull FirestoreRecyclerOptions<Medications> medications) {
+        super(medications);
+    }
+
+    @Override
+    protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull Medications model) {
+
+        holder.med_name.setText(model.getMedicationName());
+        holder.med_type.setText(model.getCategories());
+
     }
 
     @NonNull
     @Override
-    public MedicationAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_medication_details, parent,false);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_medication_details,
+                parent,false);
         return new ViewHolder(v);
     }
 
-    @Override
-    public void onBindViewHolder(@NonNull MedicationAdapter.ViewHolder holder, int position) {
+    public void deleteItem(int pos){
+        getSnapshots().getSnapshot(pos).getReference().delete();
 
-        Medications medications = medicationsArrayList.get(position);
-
-        holder.med_name.setText(medications.getMedicationName());
-        holder.med_type.setText(medications.getCategories());
     }
 
+    class ViewHolder extends RecyclerView.ViewHolder{
 
-    @Override
-    public int getItemCount() {
-        return medicationsArrayList.size();
-    }
+        TextView med_name;
+        TextView med_type;
+        ImageView categories;
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
-
-        private final TextView med_name;
-        private final TextView med_type;
-        private final ImageView categories;
-
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(View itemView) {
             super(itemView);
             categories = itemView.findViewById(R.id.categories_pics);
             med_name = itemView.findViewById(R.id.medicineName);
             med_type = itemView.findViewById(R.id.medicineType);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int pos = getAdapterPosition();
+                    if(pos != RecyclerView.NO_POSITION && listener != null){
+                        listener.onItemClick(getSnapshots().getSnapshot(pos), pos);
+                    }
+
+                }
+            });
         }
+    }
+
+    public interface OnItemClickListener{
+        void onItemClick(DocumentSnapshot documentSnapshot, int pos);
+    }
+    public void setOnItemClickListener(OnItemClickListener listener){
+        this.listener = listener;
     }
 }

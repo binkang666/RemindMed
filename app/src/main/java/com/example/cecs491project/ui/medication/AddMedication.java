@@ -25,6 +25,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.example.cecs491project.R;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
@@ -32,12 +33,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class AddOrEditMedication extends AppCompatActivity {
+public class AddMedication extends AppCompatActivity {
 
     EditText et_medName, et_medPillCount, et_medDosage, et_medRefillCount, medicationNote;
     private TextView SAVE;
@@ -62,14 +64,13 @@ public class AddOrEditMedication extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setTitle(0);
         initializePage();
 
-
-        ASClose.setOnClickListener(v -> AddOrEditMedication.super.onBackPressed());
+        ASClose.setOnClickListener(v -> AddMedication.super.onBackPressed());
         cameraBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(ContextCompat.checkSelfPermission(AddOrEditMedication.this,
+                if(ContextCompat.checkSelfPermission(AddMedication.this,
                         Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED){
-                    ActivityCompat.requestPermissions(AddOrEditMedication.this,
+                    ActivityCompat.requestPermissions(AddMedication.this,
                             new String[]{
                                     Manifest.permission.CAMERA
                             }, 100);
@@ -80,6 +81,7 @@ public class AddOrEditMedication extends AppCompatActivity {
         });
 
     }
+
 
     private void initializePage() {
         et_medName = findViewById(R.id.editTextMedicationName);
@@ -119,7 +121,9 @@ public class AddOrEditMedication extends AppCompatActivity {
 
             String medName = et_medName.getText().toString();
             tabletMap.put("Categories", categories);
-            int pillCount = 0, dosage = 0, refillCount = 0;
+            int pillCount = 0;
+            double dosage = 0.0;
+            int refillCount = 0;
             String Note = "";
             try {
                 pillCount = Integer.parseInt(et_medPillCount.getText().toString());
@@ -128,7 +132,7 @@ public class AddOrEditMedication extends AppCompatActivity {
                 e.printStackTrace();
             }
             try{
-                dosage = Integer.parseInt(et_medDosage.getText().toString());
+                dosage = Double.parseDouble(et_medDosage.getText().toString());
                 tabletMap.put("Dosage", dosage);
             } catch (Exception e) {
                 e.printStackTrace();

@@ -321,7 +321,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/quicksand_bold"
-            android:text="@string/add_medication"
+            android:text="Edit Medication"
             android:textColor="?attr/textColorPrimary"
             android:textSize="20sp" />
     </androidx.appcompat.widget.Toolbar>

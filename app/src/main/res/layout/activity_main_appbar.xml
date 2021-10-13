@@ -28,6 +28,6 @@
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
-    <include layout="@layout/act_main_content"/>
+    <include layout="@layout/activity_main_content"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

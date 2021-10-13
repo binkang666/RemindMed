@@ -9,7 +9,7 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
     <include
-        layout="@layout/act_main_appbar"
+        layout="@layout/activity_main_appbar"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
