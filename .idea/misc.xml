@@ -121,6 +121,11 @@
         <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project8/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1574074074074074" />
         <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project8/app/src/main/res/mipmap-xxxhdpi/ic_launcher.xml" value="0.27314814814814814" />
         <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project8/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.xml" value="0.1574074074074074" />
+        <entry key="..\:/Users/stfny/UnityProjects/CECS491Project/app/src/main/res/layout/activity_add_medication.xml" value="0.25900900900900903" />
+        <entry key="..\:/Users/stfny/UnityProjects/CECS491Project/app/src/main/res/layout/activity_add_reminder.xml" value="0.2980561555075594" />
+        <entry key="..\:/Users/stfny/UnityProjects/CECS491Project/app/src/main/res/layout/dropdown_med.xml" value="0.335" />
+        <entry key="..\:/Users/stfny/UnityProjects/CECS491Project/app/src/main/res/layout/fragment_medication.xml" value="0.335" />
+        <entry key="..\:/Users/stfny/UnityProjects/CECS491Project/app/src/main/res/layout/fragment_reminder.xml" value="0.1691995947315096" />
       </map>
     </option>
   </component>

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,15 +15,31 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.cecs491project.R;
 import com.example.cecs491project.databinding.FragmentReminderBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class ReminderFragment extends Fragment {
-
+    private ArrayList<Reminder> remindersArrayList;
+    private Button save;
     private ReminderViewModel reminderViewModel;
     private FragmentReminderBinding binding;
 
+
+    protected void OnCreate(Bundle savedInstanceState){
+
+
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+
+
+
+
 
         return inflater.inflate(R.layout.fragment_reminder,container, false);
     }

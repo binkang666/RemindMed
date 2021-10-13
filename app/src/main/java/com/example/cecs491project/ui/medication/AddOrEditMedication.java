@@ -29,6 +29,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -45,6 +46,7 @@ public class AddOrEditMedication extends AppCompatActivity {
     private Button cameraBtn;
     private ImageView medPic;
 
+
     private Button tablet, capsule, drops, injections;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -54,10 +56,12 @@ public class AddOrEditMedication extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_medication);
 
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setTitle(0);
         initializePage();
+
 
         ASClose.setOnClickListener(v -> AddOrEditMedication.super.onBackPressed());
         cameraBtn.setOnClickListener(new View.OnClickListener() {
@@ -164,6 +168,8 @@ public class AddOrEditMedication extends AppCompatActivity {
         });
     }
 
+    // If the tablet, capsule... etc buttons are clicked on this function will instantiate
+    //
     public void onClickCategories( View view ){
         int id = view.getId();
         TransitionManager.beginDelayedTransition((ConstraintLayout)findViewById(R.id.Card_View));

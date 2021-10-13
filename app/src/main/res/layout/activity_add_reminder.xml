@@ -219,96 +219,32 @@
             android:id="@+id/clockTime"
             android:layout_width="330dp"
             android:layout_height="40dp"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
-            android:layout_marginEnd="8dp"
             android:alpha="1"
             android:background="@drawable/rect_dark"
             android:fontFamily="@font/quicksand_regular"
+            android:hint="Choose Start Time"
             android:onClick="showTimePicker"
             android:paddingStart="4dp"
             android:paddingEnd="4dp"
-            android:hint="Choose Start Time"
             android:textAllCaps="false"
-            android:textColorHint="@color/white"
             android:textColor="@color/white"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:hint="Enter Reminder Name"
-            android:textColorHint="?attr/colorAccent"
-            android:backgroundTint="?attr/colorAccent"
+            android:textColorHint="@color/white"
+            app:layout_constraintBottom_toTopOf="@+id/med_days"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/quicksand_regular"
-                android:inputType="text"
-                android:textColorHint="?attr/colorAccent"
-                android:textSize="24sp" />
+            app:layout_constraintTop_toBottomOf="@+id/medication_spinner" />
 
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-
-
-        <Button
-            android:id="@+id/BeforeMeal"
-            android:layout_width="0dp"
-            android:layout_height="36dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/button_on_click"
-            android:elevation="3dp"
-            android:fontFamily="@font/quicksand_regular"
-            android:onClick="onClickBeforeAfter"
-            android:stateListAnimator="@null"
-            android:text="@string/before_meal"
-            android:textColor="?attr/textColorSecondary"
-            app:layout_constraintEnd_toStartOf="@+id/AfterMeal"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/clockTime" />
-
-        <Button
-            android:id="@+id/AfterMeal"
-            android:layout_width="0dp"
-            android:layout_height="36dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/button_on_click"
-            android:elevation="3dp"
-            android:fontFamily="@font/quicksand_regular"
-            android:onClick="onClickBeforeAfter"
-            android:stateListAnimator="@null"
-            android:text="@string/after_meal"
-            android:textColor="?attr/textColorSecondary"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/BeforeMeal"
-            app:layout_constraintTop_toTopOf="@+id/BeforeMeal" />
 
         <LinearLayout
             android:id="@+id/med_days"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="@dimen/sixteen_dp"
+            android:layout_marginTop="24dp"
             android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@id/AfterMeal">
+            app:layout_constraintTop_toBottomOf="@+id/clockTime"
+            tools:layout_editor_absoluteX="8dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -326,6 +262,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="@dimen/eight_dp"
+                android:onClick="onClickDays"
                 android:text="Every Day" />
 
             <LinearLayout
@@ -341,6 +278,7 @@
                     android:layout_height="40dp"
                     android:layout_margin="4dp"
                     android:layout_weight="1"
+                    android:onClick="onClickDays"
                     android:background="@drawable/background_day_view"
                     android:button="@null"
                     android:gravity="center"
@@ -352,6 +290,7 @@
                     android:layout_height="40dp"
                     android:layout_margin="4dp"
                     android:layout_weight="1"
+                    android:onClick="onClickDays"
                     android:background="@drawable/background_day_view"
                     android:button="@null"
                     android:gravity="center"
@@ -364,6 +303,7 @@
                     android:layout_height="40dp"
                     android:layout_margin="4dp"
                     android:layout_weight="1"
+                    android:onClick="onClickDays"
                     android:background="@drawable/background_day_view"
                     android:button="@null"
                     android:gravity="center"
@@ -375,6 +315,7 @@
                     android:layout_height="40dp"
                     android:layout_margin="4dp"
                     android:layout_weight="1"
+                    android:onClick="onClickDays"
                     android:background="@drawable/background_day_view"
                     android:button="@null"
                     android:gravity="center"
@@ -386,6 +327,7 @@
                     android:layout_height="40dp"
                     android:layout_margin="4dp"
                     android:layout_weight="1"
+                    android:onClick="onClickDays"
                     android:background="@drawable/background_day_view"
                     android:button="@null"
                     android:gravity="center"
@@ -397,6 +339,7 @@
                     android:layout_height="40dp"
                     android:layout_margin="4dp"
                     android:layout_weight="1"
+                    android:onClick="onClickDays"
                     android:background="@drawable/background_day_view"
                     android:button="@null"
                     android:gravity="center"
@@ -409,12 +352,55 @@
                     android:layout_height="40dp"
                     android:layout_margin="4dp"
                     android:layout_weight="1"
+                    android:onClick="onClickDays"
                     android:background="@drawable/background_day_view"
                     android:button="@null"
                     android:gravity="center"
                     android:text="S" />
             </LinearLayout>
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="286dp"
+            android:fontFamily="@font/quicksand_regular"
+            android:text="Medication"
+            android:textColor="?attr/colorAccent"
+            android:textSize="17sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Spinner
+            android:id="@+id/medication_spinner"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:spinnerMode="dropdown"
+            app:layout_constraintBottom_toTopOf="@+id/clockTime"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.444"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+        <TextView
+            android:id="@+id/selectedMed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/quicksand_regular"
+            android:text="@string/select_medication"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/medication_spinner"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/medication_spinner" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -427,6 +413,7 @@
         android:gravity="center"
         android:theme="?attr/toolbarTheme"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
