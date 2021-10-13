@@ -1,6 +1,5 @@
 package com.example.cecs491project.ui.medication;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +13,6 @@ import com.example.cecs491project.R;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.DocumentSnapshot;
-
-import java.util.ArrayList;
 
 
 public class MedicationAdapter extends FirestoreRecyclerAdapter<Medications, MedicationAdapter.ViewHolder> {
@@ -32,6 +29,21 @@ public class MedicationAdapter extends FirestoreRecyclerAdapter<Medications, Med
 
         holder.med_name.setText(model.getMedicationName());
         holder.med_type.setText(model.getCategories());
+        String cate = model.getCategories();
+        switch (cate) {
+            case "Tablet":
+                holder.category.setImageResource(R.drawable.tablet);
+                break;
+            case "Capsule":
+                holder.category.setImageResource(R.drawable.capsule);
+                break;
+            case "Drops":
+                holder.category.setImageResource(R.drawable.drops);
+                break;
+            case "Injection":
+                holder.category.setImageResource(R.drawable.injection);
+                break;
+        }
 
     }
 
@@ -48,26 +60,25 @@ public class MedicationAdapter extends FirestoreRecyclerAdapter<Medications, Med
 
     }
 
+
     class ViewHolder extends RecyclerView.ViewHolder{
 
         TextView med_name;
         TextView med_type;
-        ImageView categories;
+        ImageView category;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            categories = itemView.findViewById(R.id.categories_pics);
+            category = itemView.findViewById(R.id.categories_pics);
             med_name = itemView.findViewById(R.id.medicineName);
             med_type = itemView.findViewById(R.id.medicineType);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    int pos = getAdapterPosition();
-                    if(pos != RecyclerView.NO_POSITION && listener != null){
-                        listener.onItemClick(getSnapshots().getSnapshot(pos), pos);
-                    }
 
+            itemView.setOnClickListener(view -> {
+                int pos = getAdapterPosition();
+                if(pos != RecyclerView.NO_POSITION && listener != null){
+                    listener.onItemClick(getSnapshots().getSnapshot(pos), pos);
                 }
+
             });
         }
     }

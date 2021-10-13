@@ -1,14 +1,17 @@
 package com.example.cecs491project.ui.medication;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -78,7 +81,23 @@ public class MedicationFragment extends Fragment {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                medicationAdapter.deleteItem(viewHolder.getAdapterPosition());
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+                alertDialog.setMessage("Are you sure you want to delete this medication?");
+                alertDialog.setCancelable(false);
+                alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        medicationAdapter.deleteItem(viewHolder.getAdapterPosition());
+                        Toast.makeText(getContext(), "Medication Deleted", Toast.LENGTH_LONG).show();
+                    }
+                });
+                alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        medicationAdapter.notifyItemChanged(viewHolder.getAdapterPosition());
+                    }
+                });
+                alertDialog.create().show();
             }
         }).attachToRecyclerView(recyclerView);
         medicationAdapter.setOnItemClickListener(new MedicationAdapter.OnItemClickListener() {
@@ -135,5 +154,6 @@ public class MedicationFragment extends Fragment {
         Intent i = new Intent(getContext(), AddMedication.class);
         startActivity(i);
     }
+
 
 }
