@@ -71,6 +71,7 @@ import android.widget.ArrayAdapter;
 //TODO: by selecting the everyday check box, all the box will be checked automatically.
 public class addReminderActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
     TextInputLayout et_reminderNote;
+    TextInputLayout reminderName;
     //ProgressDialog progressDialog;
     private Spinner medications;
     private ArrayList<Medications> medArrayList;
@@ -113,6 +114,7 @@ public class addReminderActivity extends AppCompatActivity implements AdapterVie
         // This is to create the drop down menu
         //progressDialog = new ProgressDialog(getBaseContext());
         et_reminderNote = findViewById(R.id.reminder_note);
+        reminderName = findViewById(R.id.reminder_name_textInput);
         medications = findViewById(R.id.medication_spinner);
         startDate ="";
         endDate ="";
@@ -148,7 +150,10 @@ public class addReminderActivity extends AppCompatActivity implements AdapterVie
 
     private void addRemToDatabase(ArrayList<Day> days){
         SAVE.setOnClickListener(view -> {
-            if(selectedItem == "Select Medication"){
+            if(reminderName.getEditText().getText().toString().trim() == ""){
+                Toast.makeText(getApplicationContext(),"Please input a reminder name", Toast.LENGTH_SHORT).show();
+            }
+            else if(selectedItem == "Select Medication"){
                 Toast.makeText(getApplicationContext(),"Please select a medication", Toast.LENGTH_SHORT).show();
             }
             else if(daysInput.size()==0){
@@ -159,62 +164,49 @@ public class addReminderActivity extends AppCompatActivity implements AdapterVie
             }
             else {
                 String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                //Toast toast1 = Toast.makeText(getApplicationContext(), "you have clicked save", Toast.LENGTH_SHORT );
-                //toast1.show();
 
-                //Map<String, Object> remMap = new HashMap<>();
                 Medications med1 = new Medications();
                 String time = "";
                 String note = "";
-
-                //remMap.put("Days", days);
+                String remName = "";
+                try{
+                    remName = reminderName.getEditText().getText().toString().trim();
+                }catch(Exception e) {
+                    e.printStackTrace();
+                }
                 try {
                     note = et_reminderNote.getEditText().getText().toString().trim();
-                    //remMap.put("Note", note);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 try {
-                    //String medName = medications.getSelectedItem().toString();
-
                     med1 = medArrayList.get(medNames.indexOf(selectedItem)-1);
-                    // Temporary medication added
-                    //med1 = new Medications("hi", "Tablet", 2, 3, 2, "");
-                    //remMap.put("Medication:", med1);
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 try {
-
                     time = String.valueOf(hour) + ":" + String.valueOf(minutes);
-                    //remMap.put("Time", time);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 try {
-
-                    //remMap.put("StartDate: ", startDate);
-                    //remMap.put("EndDate:", endDate);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 try {
-                    //Toast toast2 = Toast.makeText(getApplicationContext(),
-                    //"Reminder" + med1.toString() + daysInput.toString() + startDate +endDate
-                    //, Toast.LENGTH_SHORT );
-                    //toast2.show();
                     DocumentReference userTablet = db.collection("User Database")
-                            .document(userID).collection("Reminder").document(med1.getMedicationName());
-                    Reminder rem = new Reminder(selectedItem, daysInput, time, startDate, endDate, note);
+                            .document(userID).collection("Reminder").document(remName);
+                    Reminder rem = new Reminder(remName, selectedItem, daysInput, time, startDate, endDate, note);
                     userTablet.set(rem).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
                                 makeSnackBarMessage("Reminder added");
-                                Toast toast2 = Toast.makeText(getApplicationContext(),
-                                        "Reminder" + daysInput.toString() + startDate + endDate
-                                        , Toast.LENGTH_SHORT);
-                                toast2.show();
+                                //Toast toast2 = Toast.makeText(getApplicationContext(),
+                                        //"Reminder" + daysInput.toString() + startDate + endDate
+                                        //, Toast.LENGTH_SHORT);
+                                //toast2.show();
                             } else {
                                 makeSnackBarMessage("Failed");
                             }

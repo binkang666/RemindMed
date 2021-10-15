@@ -13,6 +13,7 @@ enum Day{
 }
 
 public class Reminder {
+    private String reminderName;
     private String medicationName;
     private ArrayList<Day> days; // if chosen everyday, then choose all days.
     private String time;
@@ -22,6 +23,16 @@ public class Reminder {
 
     // constructors
     public Reminder(){}
+
+    public Reminder(String reminderName, String medicationName, ArrayList<Day> days, String time, String startDate, String endDate, String note) {
+        this.reminderName = reminderName;
+        this.medicationName = medicationName;
+        this.days = days;
+        this.time = time;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.note = note;
+    }
 
     public String getMedicationName() {
         return medicationName;
