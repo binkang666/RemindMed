@@ -6,12 +6,14 @@ import com.example.cecs491project.ui.medication.Medications;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 
 enum Day{
     Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday
 }
 
-public class Reminder extends Medications{
+public class Reminder {
+    private String medicationName;
     private ArrayList<Day> days; // if chosen everyday, then choose all days.
     private String time;
     private String startDate;
@@ -21,9 +23,25 @@ public class Reminder extends Medications{
     // constructors
     public Reminder(){}
 
-    public Reminder(String medName, String categories, int pillCount, double dosage, int refillCount, String medNote
-            , ArrayList<Day> days, String time, String startDate, String endDate, String note){
-        super(medName,categories,pillCount,dosage,refillCount,medNote);
+    public String getMedicationName() {
+        return medicationName;
+    }
+
+    public void setMedicationName(String medicationName) {
+        this.medicationName = medicationName;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public Reminder(String medicationName,
+                    ArrayList<Day> days, String time, String startDate, String endDate, String note){
+        this.medicationName = medicationName;
         this.days = days;
         this.time = time;
         this.startDate = startDate;
@@ -41,8 +59,20 @@ public class Reminder extends Medications{
                 "}";
 
     }
-
-
+    public static Comparator<Reminder> MedicationNameAZCompare = new Comparator<Reminder>() {
+        @Override
+        public int compare(Reminder m1, Reminder m2) {
+            return m1.getMedicationName().compareTo(m2.getMedicationName());
+        }
+    };
+/*
+    public static Comparator<Medications> MedicationNameZACompare = new Comparator<Medications>() {
+        @Override
+        public int compare(Medications m1, Medications m2) {
+            return m2.getMedicationName().compareTo(m1.getMedicationName());
+        }
+    };
+*/
     //getters and setters
 
     public ArrayList<Day> getDays() {

@@ -45,71 +45,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
-        <ImageButton
-            android:id="@+id/custom_interval_hrs"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/addmore"
-            android:elevation="3dp"
-            app:layout_constraintBottom_toBottomOf="@+id/label_6_hours"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/label_6_hours"
-            app:layout_constraintTop_toTopOf="@+id/label_6_hours" />
-
-        <CheckBox
-            android:id="@+id/label_6_hours"
-            android:layout_width="0dp"
-            android:layout_height="36dp"
-            android:layout_marginEnd="4dp"
-            android:background="@drawable/button_on_click"
-            android:elevation="2dp"
-            android:fontFamily="@font/quicksand_regular"
-            android:onClick="onClickBeforeAfter"
-            android:stateListAnimator="@null"
-            android:text="@string/_6_hour"
-            android:textColor="?attr/textColorSecondary"
-            app:layout_constraintEnd_toStartOf="@+id/custom_interval_hrs"
-            app:layout_constraintStart_toEndOf="@+id/label_4_hours"
-            app:layout_constraintTop_toTopOf="@+id/label_4_hours" />
-
-        <CheckBox
-            android:id="@+id/label_4_hours"
-            android:layout_width="0dp"
-            android:layout_height="36dp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/button_on_click"
-            android:elevation="2dp"
-            android:fontFamily="@font/quicksand_regular"
-            android:onClick="onClickBeforeAfter"
-            android:stateListAnimator="@null"
-            android:text="@string/_4_hour"
-            android:textColor="?attr/textColorSecondary"
-            app:layout_constraintEnd_toStartOf="@+id/label_6_hours"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/label_2_hours"
-            app:layout_constraintTop_toTopOf="@+id/label_2_hours" />
-
-        <CheckBox
-            android:id="@+id/label_2_hours"
-            android:layout_width="0dp"
-            android:layout_height="36dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/button_on_click"
-            android:elevation="2dp"
-            android:fontFamily="@font/quicksand_regular"
-            android:onClick="onClickBeforeAfter"
-            android:stateListAnimator="@null"
-            android:text="@string/_2_hour"
-            android:textColor="?attr/textColorSecondary"
-            app:layout_constraintEnd_toStartOf="@+id/label_4_hours"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/label_hours_interval" />
-
         <TextView
             android:id="@+id/label_hours_interval"
             android:layout_width="wrap_content"
@@ -153,14 +88,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:fontFamily="@font/quicksand_regular"
             android:text="@string/start_date"
             android:textColor="?attr/textColorSecondary"
             android:textSize="16sp"
             app:layout_constraintEnd_toStartOf="@+id/label_end_date"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/label_2_hours" />
+            app:layout_constraintTop_toBottomOf="@+id/label_hours_interval" />
 
         <Button
             android:id="@+id/btnStartDate"
@@ -262,7 +197,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="@dimen/eight_dp"
-                android:onClick="onClickDays"
+                android:onClick="onClickEveryDay"
                 android:text="Every Day" />
 
             <LinearLayout
@@ -388,18 +323,6 @@
             app:layout_constraintHorizontal_bias="0.444"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-        <TextView
-            android:id="@+id/selectedMed"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/quicksand_regular"
-            android:text="@string/select_medication"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/medication_spinner"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/medication_spinner" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
