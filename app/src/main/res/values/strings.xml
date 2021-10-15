@@ -81,5 +81,10 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="map">Map</string>
+    <string name="RemindMed">RemindMed</string>
+    <string name="Medications">Medications</string>
+    <string name="Notifications">Notifications</string>
+    <string name="Reminders">Reminders</string>
+    <string name="Map">Map</string>
     />
 </resources>

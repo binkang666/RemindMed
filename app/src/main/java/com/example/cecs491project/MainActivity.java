@@ -2,13 +2,13 @@ package com.example.cecs491project;
 
 import android.Manifest;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -38,18 +38,25 @@ import com.example.cecs491project.ui.medication.MedicationFragment;
 import com.example.cecs491project.ui.notifications.NotificationsFragment;
 import com.example.cecs491project.ui.reminder.ReminderFragment;
 import com.example.cecs491project.ui.reminder.addReminderActivity;
+import com.example.cecs491project.ui.setting.SettingActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
+import java.io.Console;
+import java.util.List;
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -58,15 +65,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     private DrawerLayout drawerLayout;
-    private NavigationView navigationView;
-    private Toolbar toolbar;
     private CircleImageView profilePic;
-    private TextView myUserName, toolbarText;
+    private TextView toolbarText;
     public Uri imageURI;
-    private FirebaseStorage firebaseStorage;
-    private StorageReference storageReference;
-    private DatabaseReference databaseReference;
-    FirebaseAuth auth;
 
     HomeFragment homeFragment;
     MedicationFragment medicationFragment;
@@ -74,7 +75,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     NotificationsFragment notificationsFragment;
     MapFragment mapFragment;
 
-    private Button cameraBtn;
+    public MainActivity() {
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,10 +87,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void initializePage(){
-        toolbar = findViewById(R.id.main_toolbar);
+        Toolbar toolbar = findViewById(R.id.main_toolbar);
         drawerLayout = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.side_nav_view);
-        cameraBtn = findViewById(R.id.camera);
+        NavigationView navigationView = findViewById(R.id.side_nav_view);
+        Button cameraBtn = findViewById(R.id.camera);
         toolbarText = findViewById(R.id.toolbarText);
 
         setSupportActionBar(toolbar);
@@ -100,8 +102,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         navigationView.setNavigationItemSelectedListener(this);
 
-        firebaseStorage = FirebaseStorage.getInstance();
-        storageReference = firebaseStorage.getReference();
         getUserInfo();
 
         homeFragment = new HomeFragment();
@@ -126,27 +126,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     if ( id == R.id.navigation_home){
 
                         ft.replace(R.id.container, homeFragment);
-                        toolbarText.setText("RemindMed");
+                        toolbarText.setText(R.string.RemindMed);
                         ((NavigationView)findViewById(R.id.side_nav_view)).setCheckedItem(R.id.nav_home);
 
                     }else if ( id == R.id.navigation_medication){
 
                         ft.replace(R.id.container, medicationFragment);
-                        toolbarText.setText("Medications");
+                        toolbarText.setText(R.string.Medications);
                         ((NavigationView)findViewById(R.id.side_nav_view)).setCheckedItem(R.id.nav_medication);
 
                     }else if ( id == R.id.navigation_notifications){
 
                         ft.replace(R.id.container, notificationsFragment);
-                        toolbarText.setText("Notifications");
+                        toolbarText.setText(R.string.Notifications);
                         ((NavigationView)findViewById(R.id.side_nav_view)).setCheckedItem(R.id.nav_notification);
                     }else if( id == R.id.navigation_reminder){
                         ft.replace(R.id.container, reminderFragment);
-                        toolbarText.setText("Reminders");
+                        toolbarText.setText(R.string.Reminders);
                         ((NavigationView)findViewById(R.id.side_nav_view)).setCheckedItem(R.id.nav_reminder);
                     }else if(id == R.id.navigation_map){
                         ft.replace(R.id.container, mapFragment);
-                        toolbarText.setText("Map");
+                        toolbarText.setText(R.string.Map);
                         ((NavigationView)findViewById(R.id.side_nav_view)).setCheckedItem(R.id.nav_map);
                     }
                     ft.commit();
@@ -162,13 +162,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             if (id == R.id.profilePic){
                 profilePic = findViewById(R.id.profilePic);
-                profilePic.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Toast.makeText(MainActivity.this, "Clicked",Toast.LENGTH_SHORT).show();
-                        choosePic();
-                        drawerLayout.closeDrawer(GravityCompat.START);
-                    }
+                profilePic.setOnClickListener(view -> {
+                    Toast.makeText(MainActivity.this, "Clicked",Toast.LENGTH_SHORT).show();
+                    choosePic();
+                    drawerLayout.closeDrawer(GravityCompat.START);
                 });
                 choosePic();
             }
@@ -176,10 +173,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 medicationFragment = new MedicationFragment();
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.container, medicationFragment);
-                toolbarText.setText("Medications");
+                toolbarText.setText(R.string.Medications);
                 ((NavigationView)findViewById(R.id.side_nav_view)).setCheckedItem(R.id.nav_medication);
                 ft.commit();
-
             }
 
         //close navigation drawer
@@ -217,40 +213,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         pd.show();
         String user = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
-        StorageReference ref = FirebaseStorage.getInstance().getReference().child("images/" + user +"_profile_picture.jpg");
-        ref.putFile(imageURI).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+        try {
+            StorageReference ref = FirebaseStorage.getInstance().getReference().child("images/" + user + "_profile_picture.jpg");
+            ref.putFile(imageURI).addOnSuccessListener(taskSnapshot -> {
                 pd.dismiss();
                 Snackbar.make(findViewById(android.R.id.content), "Image uploaded", Snackbar.LENGTH_LONG).show();
 
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
+            }).addOnFailureListener(e -> {
                 pd.dismiss();
-                Toast.makeText(getApplicationContext(),"Upload Failed", Toast.LENGTH_SHORT).show();
-            }
-        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-                double progressPercent = (100.00 * snapshot.getBytesTransferred() /snapshot.getTotalByteCount());
-                pd.setMessage("Progress" + (int)progressPercent + " %");
-            }
-        });
+                Toast.makeText(getApplicationContext(), "Upload Failed", Toast.LENGTH_SHORT).show();
+            }).addOnProgressListener(snapshot -> {
+                double progressPercent = (100.00 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
+                pd.setMessage("Progress" + (int) progressPercent + " %");
+            });
+        }catch (Exception e){
+            Log.e("account","anonymous account");
+        }
 
     }
 
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-
-    }
 
     public void addReminder(View view) {
         Intent i = new Intent(this, addReminderActivity.class);
         startActivity(i);
     }
-
 
     public void launchAddOrEditMedication(View v)
     {
@@ -265,34 +251,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch(item.getItemId())
-        {
-
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
     //pop up logout window
     public void logout(MenuItem item) {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
         alertDialog.setMessage("Are you sure you want to log out?");
         alertDialog.setCancelable(false);
 
-        alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                FirebaseAuth.getInstance().signOut();
-                Toast.makeText(MainActivity.this, "Logged out", Toast.LENGTH_LONG).show();
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
-            }
-        });
-        alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
+        alertDialog.setPositiveButton("Yes", (dialogInterface, i) -> {
 
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            if(Objects.requireNonNull(user).isAnonymous()){
+                FirebaseFirestore.getInstance()
+                        .collection("Anonymous User Database")
+                        .document(user.getUid()).delete();
+                user.delete();
             }
+            FirebaseAuth.getInstance().signOut();
+            Toast.makeText(MainActivity.this, "Logged out", Toast.LENGTH_LONG).show();
+            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+
+        });
+        alertDialog.setNegativeButton("No", (dialogInterface, i) -> {
+
         });
         alertDialog.create().show();
     }
@@ -303,46 +283,38 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         alertDialog.setMessage("Do you want to upload a profile picture?");
         alertDialog.setCancelable(false);
 
-        alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                profilePic = findViewById(R.id.profilePic);
-                choosePic();
-            }
+        alertDialog.setPositiveButton("Yes", (dialogInterface, i) -> {
+            profilePic = findViewById(R.id.profilePic);
+            choosePic();
         });
-        alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
+        alertDialog.setNegativeButton("No", (dialogInterface, i) -> {
 
-            }
         });
         alertDialog.create().show();
     }
 
 
     public void getUserInfo(){
-        String user = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+        String user = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.side_nav_view);
+        NavigationView navigationView = findViewById(R.id.side_nav_view);
         View headerView = navigationView.getHeaderView(0);
-        TextView navUsername = (TextView) headerView.findViewById(R.id.my_user_name);
+        TextView navUsername = headerView.findViewById(R.id.my_user_name);
         navUsername.setText(user);
 
-        StorageReference ref = FirebaseStorage.getInstance().getReference().child("images/" + user +"_profile_picture.jpg");
+            StorageReference ref = FirebaseStorage.getInstance().getReference().child("images/" + user + "_profile_picture.jpg");
 
-        ref.getDownloadUrl().addOnSuccessListener(uri -> {
-            CircleImageView pic = (CircleImageView) headerView.findViewById(R.id.profilePic);
-            profilePic = findViewById(R.id.profilePic);
-            Glide.with(pic).load(uri).centerCrop().into(profilePic);
-        });
-
-
+            ref.getDownloadUrl().addOnSuccessListener(uri -> {
+                CircleImageView pic = headerView.findViewById(R.id.profilePic);
+                profilePic = findViewById(R.id.profilePic);
+                Glide.with(pic).load(uri).centerCrop().into(profilePic);
+            }).addOnFailureListener(e -> Log.i("log in info", "anonymous account"));
 
     }
 
 
     public void setting(MenuItem item) {
-
+        startActivity(new Intent(MainActivity.this, SettingActivity.class));
     }
 
 

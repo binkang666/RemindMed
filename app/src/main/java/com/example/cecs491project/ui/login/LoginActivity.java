@@ -1,11 +1,14 @@
 package com.example.cecs491project.ui.login;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -14,12 +17,21 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cecs491project.MainActivity;
 import com.example.cecs491project.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -28,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText email_txt;
     private EditText password_txt;
     private Button reset_btn;
+    private Button Skip;
 
     private CheckBox remember;
     private SharedPreferences preferences;
@@ -88,6 +101,7 @@ public class LoginActivity extends AppCompatActivity {
         password_txt = findViewById(R.id.password);
         reset_btn = findViewById(R.id.forgot_password);
         remember = findViewById(R.id.checkBox);
+        Skip = findViewById(R.id.skip);
 
         ImageView logo = (ImageView) findViewById(R.id.logo);
         logo.setImageResource(R.drawable.icon_logo);
@@ -110,27 +124,61 @@ public class LoginActivity extends AppCompatActivity {
         register_btn.setOnClickListener(onClick);
         login_btn.setOnClickListener(onClick);
         reset_btn.setOnClickListener(onClick);
+        Skip.setOnClickListener(onClick);
+
     }
 
 
     private class OnClick implements View.OnClickListener{
         @Override
         public void onClick(View view) {
-            switch(view.getId()){
-                case R.id.register:
-                    startActivity(new Intent(LoginActivity.this,RegisterActivity.class));
+            int id = view.getId();
+                if(id == R.id.register) {
+                    startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
                     finish();
-                    break;
-                case R.id.login:
+                }
+                if(id == R.id.login) {
                     String email_str = email_txt.getText().toString();
                     String password_str = password_txt.getText().toString();
                     loginUser(email_str, password_str);
-                    break;
-                case R.id.forgot_password:
+                }
+                if(id == R.id.forgot_password) {
                     startActivity(new Intent(LoginActivity.this, resetPasswordActivity.class));
                     finish();
-                    break;
-            }
+                }
+                if(id == R.id.skip){
+                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(LoginActivity.this);
+                    alertDialog.setMessage("Sign in anonymously? \n\n(Beware that if you don't link your account " +
+                                    "before signing out, you will lose all data.)");
+
+                    alertDialog.setCancelable(false);
+
+                    alertDialog.setPositiveButton("Yes", (dialogInterface, i) -> {
+
+                        auth.signInAnonymously().addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if(task.isSuccessful()){
+                                    Toast.makeText(LoginActivity.this, "Signed in Anonymously", Toast.LENGTH_LONG).show();
+                                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                    finish();
+                                }
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.e("account", "anonymous account");
+                            }
+                        });
+
+                    });
+                    alertDialog.setNegativeButton("No", (dialogInterface, i) -> {
+
+                    });
+                    alertDialog.create().show();
+
+                }
+
         }
     }
 
