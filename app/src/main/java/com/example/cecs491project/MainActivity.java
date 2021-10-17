@@ -27,6 +27,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
@@ -41,6 +42,7 @@ import com.example.cecs491project.ui.reminder.addReminderActivity;
 import com.example.cecs491project.ui.setting.SettingActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
@@ -49,9 +51,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.WriteBatch;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -261,9 +265,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             if(Objects.requireNonNull(user).isAnonymous()){
+                FirebaseFirestore.getInstance().collection("Anonymous User Database")
+                        .document(user.getUid()).collection("Medication")
+                        .get().addOnSuccessListener(queryDocumentSnapshots -> {
+                            WriteBatch batch = FirebaseFirestore.getInstance().batch();
+                            List<DocumentSnapshot> snapshotList = queryDocumentSnapshots.getDocuments();
+                            for(DocumentSnapshot snapshot: snapshotList){
+                                batch.delete(snapshot.getReference());
+                            }
+                            batch.commit().addOnSuccessListener(unused -> Log.d("TAG", "Success")).addOnFailureListener(e -> Log.d("TAG","Failed",e));
+                        });
+
                 FirebaseFirestore.getInstance()
                         .collection("Anonymous User Database")
-                        .document(user.getUid()).delete();
+                        .document(user.getUid())
+                        .delete();
                 user.delete();
             }
             FirebaseAuth.getInstance().signOut();
