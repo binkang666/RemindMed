@@ -38,7 +38,8 @@ import java.util.Objects;
 
 public class EditMedication extends AppCompatActivity {
 
-    EditText et_medName, et_medPillCount, et_medDosage, et_medRefillCount, medicationNote, medCate;
+    EditText et_medPillCount, et_medDosage, et_medRefillCount, medicationNote, medCate;
+    TextView medName;
     private TextView SAVE;
     private View Card_View ;
     private ImageView ASClose ;
@@ -82,7 +83,7 @@ public class EditMedication extends AppCompatActivity {
         int refill = bundle.getInt("refill");
         double dos = bundle.getDouble("dos");
 
-        et_medName.setText(name);
+        medName.setText(name);
         medicationNote.setText(note);
         et_medPillCount.setText(String.valueOf(count));
         et_medRefillCount.setText(String.valueOf(refill));
@@ -93,7 +94,7 @@ public class EditMedication extends AppCompatActivity {
 
 
     private void initializePage() {
-        et_medName = findViewById(R.id.editTextMedicationName);
+        medName = findViewById(R.id.TextMedicationName);
         et_medPillCount = findViewById(R.id.editTextPillCount);
         et_medDosage = findViewById(R.id.editTextDosage);
         et_medRefillCount = findViewById(R.id.editTextRefillCount);
@@ -125,7 +126,7 @@ public class EditMedication extends AppCompatActivity {
 
             Map<String, Object> tabletMap = new HashMap<>();
 
-            String medName = et_medName.getText().toString();
+            String Name = medName.getText().toString();
             tabletMap.put("Categories", categories);
             int pillCount = 0;
             double dosage = 0.0;
@@ -155,11 +156,18 @@ public class EditMedication extends AppCompatActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            DocumentReference userTablet = null;
+            if(FirebaseAuth.getInstance().getCurrentUser().isAnonymous()){
+                userTablet = db.collection("Anonymous User Database")
+                        .document(userID).collection("Medication").document(Name);
+            }
+            else{
+                userTablet = db.collection("User Database")
+                        .document(userID).collection("Medication").document(Name);
+            }
             try {
-                DocumentReference userTablet = db.collection("User Database")
-                        .document(userID).collection("Medication").document(medName);
 
-                Medications med = new Medications(medName, categories, pillCount, dosage, refillCount, Note);
+                Medications med = new Medications(Name, categories, pillCount, dosage, refillCount, Note);
 
                 userTablet.set(med).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override

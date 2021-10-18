@@ -59,8 +59,14 @@ public class MedicationFragment extends Fragment {
         db = FirebaseFirestore.getInstance();
         String uid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
-        Query query = db.collection("User Database")
-                .document(uid).collection("Medication");
+        Query query;
+        if(FirebaseAuth.getInstance().getCurrentUser().isAnonymous()){
+            query = db.collection("Anonymous User Database")
+                    .document(uid).collection("Medication");
+        }else{
+            query = db.collection("User Database")
+                    .document(uid).collection("Medication");
+        }
 
         FirestoreRecyclerOptions<Medications> options = new FirestoreRecyclerOptions.Builder<Medications>()
                 .setQuery(query,Medications.class)

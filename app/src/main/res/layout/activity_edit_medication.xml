@@ -57,12 +57,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/editTextMedicationName"
+        <TextView
+            android:id="@+id/TextMedicationName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
+            android:textSize="30sp"
             android:ems="10"
             android:hint="@string/medication_name"
             android:inputType="textPersonName"
@@ -80,7 +81,7 @@
             android:textColor="?attr/textColorSecondary"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextMedicationName" />
+            app:layout_constraintTop_toBottomOf="@+id/TextMedicationName" />
 
         <Button
             android:id="@+id/ctg_Tablet"
@@ -252,6 +253,8 @@
             android:layout_width="match_parent"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="top|start"
             android:background="@drawable/stroke_box"
             android:layout_height="60dp"
             android:inputType="text|textMultiLine"
@@ -299,7 +302,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="gone"
-            app:constraint_referenced_ids="camera_to_add_med, textView39, textViewMedicationName, editTextMedicationName, editTextPillCount, editTextPillCount, editTextDosage, textViewDosage, editTextRefillCount, textViewRefillCount, label_med_note, medication_note" />
+            app:constraint_referenced_ids="camera_to_add_med, textView39, textViewMedicationName, TextMedicationName, editTextPillCount, editTextPillCount, editTextDosage, textViewDosage, editTextRefillCount, textViewRefillCount, label_med_note, medication_note" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

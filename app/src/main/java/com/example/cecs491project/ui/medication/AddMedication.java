@@ -149,9 +149,16 @@ public class AddMedication extends AppCompatActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            try {
-                DocumentReference userTablet = db.collection("User Database")
+            DocumentReference userTablet = null;
+            if(FirebaseAuth.getInstance().getCurrentUser().isAnonymous()){
+                userTablet = db.collection("Anonymous User Database")
                         .document(userID).collection("Medication").document(medName);
+            }
+            else{
+                userTablet = db.collection("User Database")
+                        .document(userID).collection("Medication").document(medName);
+            }
+            try {
 
                 Medications med = new Medications(medName, categories, pillCount, dosage, refillCount, Note);
 

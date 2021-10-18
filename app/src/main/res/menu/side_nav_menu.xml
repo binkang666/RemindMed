@@ -29,8 +29,10 @@
 
     <item android:title="@string/app">
         <menu>
-            <item android:title="@string/setting"
-                android:icon="@drawable/ic_baseline_settings_applications_24" />
+            <item
+                android:title="@string/setting"
+                android:icon="@drawable/ic_baseline_settings_applications_24"
+                android:onClick="setting"/>
             <item android:title="@string/log_out"
                 android:icon="@drawable/ic_baseline_power_settings_new_24"
                 android:onClick="logout"/>

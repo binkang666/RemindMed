@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.setting.LinkAccountActivity">
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/stroke_box"
+        android:backgroundTint="@color/gainsboro"
+        android:ellipsize="end"
+        android:hint="@string/email"
+        android:padding="5dp"
+        android:layout_below="@id/note_2"
+        android:inputType="textEmailAddress"
+        android:autofillHints="emailAddress"
+        android:singleLine="true" />
+
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/password"
+        android:id="@+id/password"
+        android:layout_below="@+id/email"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:ellipsize="end"
+        android:background="@drawable/stroke_box"
+        android:backgroundTint="@color/gainsboro"
+        android:padding="5dp"
+        android:inputType="textPassword"
+        android:autofillHints="password"
+        android:singleLine="true" />
+
+    <Button
+        android:id="@+id/Link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/password"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:text="Link Now" />
+
+    <View
+        android:id="@+id/line1"
+        android:layout_width="300dp"
+        android:layout_height="1dip"
+        android:layout_below="@+id/Link"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="130dp"
+        android:background="@color/gainsboro" />
+
+    <Button
+        android:id="@+id/go_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/line1"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/transparent"
+        android:onClick="goBack"
+        android:text="Go back"
+        android:textColor="@color/colorPrimary"
+        android:textSize="11sp"
+        tools:ignore="UsingOnClickInXml" />
+
+    <TextView
+        android:id="@+id/note_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"
+        android:text="Link Account"
+        android:textSize="25sp">
+
+    </TextView>
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/link_account">
+
+    </ImageView>
+
+    <TextView
+        android:id="@+id/note_2"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/note_1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="We Glad You Stay!">
+
+    </TextView>
+
+
+</RelativeLayout>

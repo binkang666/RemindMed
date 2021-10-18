@@ -25,7 +25,7 @@
         android:background="@android:color/transparent"
         android:text="@string/register"
         android:textColor="@color/darkGray"
-        android:textSize="11sp"/>
+        android:textSize="11sp" />
 
     <Button
         android:id="@+id/forgot_password"
@@ -83,5 +83,18 @@
         android:layout_below="@id/password"
         android:layout_alignStart="@id/password"
         android:text="@string/remember_me" />
+
+    <Button
+        android:id="@+id/skip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/darkGray"
+        android:background="@android:color/transparent"
+        android:text="Skip" />
 
 </RelativeLayout>

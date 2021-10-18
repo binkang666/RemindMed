@@ -84,5 +84,10 @@
     <string name="select_medication">Select Medication</string>
     <string name="reminder_name">Reminder Name</string>
 
+    <string name="RemindMed">RemindMed</string>
+    <string name="Medications">Medications</string>
+    <string name="Notifications">Notifications</string>
+    <string name="Reminders">Reminders</string>
+    <string name="Map">Map</string>
     />
 </resources>
