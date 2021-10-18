@@ -42,7 +42,7 @@
     <string name="checkbox">CheckBox</string>
     <string name="remember_me">Remember me</string>
     <string name="openNavDrawer">Navigation Drawer Open</string>
-    />
+    
     <string name="closeNavDrawer">Navigation Drawer CLose</string>
     <string name="app">APP</string>
     <string name="your_personal_medical_assistant">Your Personal Medical Assistant</string>
@@ -64,7 +64,7 @@
     <string name="_6_hour">6 hour</string>
     <string name="_4_hour">4 hour</string>
     <string name="_2_hour">2 hour</string>
-    <string name="in_every">In every</string>
+    <string name="in_every">Duration</string>
     <string name="_22_sep_2021">22 Sep, 2021</string>
     <string name="end_date">End Date</string>
     <string name="_10_00pm">10:00pm</string>
@@ -81,10 +81,14 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="map">Map</string>
+    <string name="select_medication">Select Medication</string>
+    <string name="reminder_name">Reminder Name</string>
+
     <string name="RemindMed">RemindMed</string>
     <string name="Medications">Medications</string>
     <string name="Notifications">Notifications</string>
     <string name="Reminders">Reminders</string>
     <string name="Map">Map</string>
     />
+
 </resources>

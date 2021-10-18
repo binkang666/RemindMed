@@ -31,9 +31,6 @@
             android:name=".ui.reminder.addReminderActivity"
             android:exported="true" />
         <activity
-            android:name=".ui.reminder.ReminderActivity"
-            android:exported="true" />
-        <activity
             android:name=".ui.login.resetPasswordActivity"
             android:exported="true"
             android:theme="@style/Theme.CECS491Project.NoActionBar" />

@@ -30,6 +30,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -47,6 +48,7 @@ public class AddMedication extends AppCompatActivity {
     private Button cameraBtn;
     private ImageView medPic;
 
+
     private Button tablet, capsule, drops, injections;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -55,6 +57,7 @@ public class AddMedication extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_medication);
+
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -176,6 +179,8 @@ public class AddMedication extends AppCompatActivity {
         });
     }
 
+    // If the tablet, capsule... etc buttons are clicked on this function will instantiate
+    //
     public void onClickCategories( View view ){
         int id = view.getId();
         TransitionManager.beginDelayedTransition((ConstraintLayout)findViewById(R.id.Card_View));
