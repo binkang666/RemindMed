@@ -12,11 +12,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cecs491project.R;
 import com.example.cecs491project.databinding.FragmentReminderBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,12 +27,13 @@ import java.util.HashMap;
 public class ReminderFragment extends Fragment {
     private ArrayList<Reminder> remindersArrayList;
     private Button save;
-    private ReminderViewModel reminderViewModel;
     private FragmentReminderBinding binding;
+    private RecyclerView mReminderList;
+    private FirebaseFirestore mFirestore;
 
 
     protected void OnCreate(Bundle savedInstanceState){
-
+        //mReminderList = findViewByI;
 
     }
 

@@ -16,8 +16,6 @@ import com.google.firebase.firestore.DocumentSnapshot;
 
 
 public class MedicationAdapter extends FirestoreRecyclerAdapter<Medications, MedicationAdapter.ViewHolder> {
-
-
     private OnItemClickListener listener;
 
     public MedicationAdapter(@NonNull FirestoreRecyclerOptions<Medications> medications) {
