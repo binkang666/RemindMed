@@ -27,7 +27,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
@@ -40,26 +39,17 @@ import com.example.cecs491project.ui.notifications.NotificationsFragment;
 import com.example.cecs491project.ui.reminder.ReminderFragment;
 import com.example.cecs491project.ui.reminder.addReminderActivity;
 import com.example.cecs491project.ui.setting.SettingActivity;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.WriteBatch;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import java.io.Console;
 import java.util.List;
 import java.util.Objects;
 
@@ -236,9 +226,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-
-    public void addReminder(View view) {
-        Intent i = new Intent(this, addReminderActivity.class);
+    public void addReminder(View v)
+    {
+        Intent i = new Intent(MainActivity.this, addReminderActivity.class);
         startActivity(i);
     }
 

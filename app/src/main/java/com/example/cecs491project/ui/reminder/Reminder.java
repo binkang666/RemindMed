@@ -34,6 +34,14 @@ public class Reminder {
         this.note = note;
     }
 
+    public String getReminderName() {
+        return reminderName;
+    }
+
+    public void setReminderName(String reminderName) {
+        this.reminderName = reminderName;
+    }
+
     public String getMedicationName() {
         return medicationName;
     }
@@ -95,7 +103,11 @@ public class Reminder {
     }
 
     public String getTime() {
-        return time;
+        return this.time.replaceAll("[^0-9:]", "");
+    }
+
+    public String getAMPM(){
+        return this.time.replaceAll("[^a-zA-Z]+", "");
     }
 
     public String getStartDate() {

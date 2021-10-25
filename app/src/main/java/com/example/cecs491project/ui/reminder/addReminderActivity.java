@@ -69,7 +69,7 @@ import android.widget.ArrayAdapter;
 
 //TODO: user will probably need to select the medicine from the medication list.
 //TODO: by selecting the everyday check box, all the box will be checked automatically.
-public class addReminderActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+public class addReminderActivity extends AppCompatActivity implements OnItemSelectedListener{
     TextInputLayout et_reminderNote;
     TextInputLayout reminderName;
     //ProgressDialog progressDialog;
@@ -85,6 +85,7 @@ public class addReminderActivity extends AppCompatActivity implements AdapterVie
     private ArrayList<CheckBox> daysCheckBoxes;
     public String startDate, endDate;
     int hour, minutes;
+    String displayTime;
     ArrayAdapter<String> adapter;
     private String selectedItem;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -186,11 +187,7 @@ public class addReminderActivity extends AppCompatActivity implements AdapterVie
                     e.printStackTrace();
                 }
                 try {
-                    time = String.valueOf(hour) + ":" + String.valueOf(minutes);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                try {
+                    time = displayTime;
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -421,10 +418,12 @@ public class addReminderActivity extends AppCompatActivity implements AdapterVie
                             String minutes_str = "0"+ minutes;
                             String time = hour + ":" +minutes_str +" " +am_pm;
                             clockTime.setText(time);
+                            displayTime = time;
                         }
                         else{
                             String time = hour + ":" +minutes +" " +am_pm;
                             clockTime.setText(time);
+                            displayTime = time;
                         }
 
                     }, 12, 0, false

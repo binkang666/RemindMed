@@ -28,9 +28,6 @@
             android:name=".ui.medication.EditMedication"
             android:exported="true" />
         <activity
-            android:name=".ui.reminder.addReminderActivity"
-            android:exported="true" />
-        <activity
             android:name=".ui.login.resetPasswordActivity"
             android:exported="true"
             android:theme="@style/Theme.CECS491Project.NoActionBar" />
@@ -44,6 +41,7 @@
             android:exported="true"
             android:theme="@style/Theme.CECS491Project.NoActionBar" />
         <activity android:name=".ui.medication.AddMedication" />
+        <activity android:name=".ui.reminder.addReminderActivity" />
         <activity
             android:name=".ui.login.LoginActivity"
             android:exported="true"

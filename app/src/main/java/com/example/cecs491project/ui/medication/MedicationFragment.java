@@ -155,11 +155,5 @@ public class MedicationFragment extends Fragment {
         medicationAdapter.stopListening();
     }
 
-    public void launchAddOrEditMedication(View v)
-    {
-        Intent i = new Intent(getContext(), AddMedication.class);
-        startActivity(i);
-    }
-
 
 }
