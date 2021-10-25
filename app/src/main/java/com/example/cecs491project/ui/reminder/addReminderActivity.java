@@ -41,6 +41,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.EventListener;
@@ -217,10 +218,17 @@ public class addReminderActivity extends AppCompatActivity implements OnItemSele
     }
 
     private void EventChangeListener(){
-
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        db.collection("User Database")
-                .document(uid).collection("Medication").addSnapshotListener(new EventListener<QuerySnapshot>() {
+        CollectionReference collectionReference;
+        if(FirebaseAuth.getInstance().getCurrentUser().isAnonymous()){
+            collectionReference = db.collection("Anonymous User Database")
+                    .document(uid).collection("Medication");
+        }
+        else{
+            collectionReference = db.collection("User Database")
+                    .document(uid).collection("Medication");
+        }
+        collectionReference.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 if(error!=null){

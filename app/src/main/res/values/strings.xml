@@ -89,6 +89,7 @@
     <string name="Notifications">Notifications</string>
     <string name="Reminders">Reminders</string>
     <string name="Map">Map</string>
+    <string name="remind_link">We Glad You Stay! \n Please beware that your current data will be lost after linking process.</string>
     />
 
 </resources>
