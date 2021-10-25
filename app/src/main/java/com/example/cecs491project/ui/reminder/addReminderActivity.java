@@ -8,14 +8,10 @@ import static com.example.cecs491project.ui.reminder.Day.Thursday;
 import static com.example.cecs491project.ui.reminder.Day.Tuesday;
 import static com.example.cecs491project.ui.reminder.Day.Wednesday;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
-import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.text.format.Time;
 import android.transition.TransitionManager;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -26,7 +22,6 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -38,11 +33,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import com.example.cecs491project.R;
-
 import com.example.cecs491project.ui.medication.Medications;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -58,20 +50,14 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Calendar;
 import java.util.Objects;
-import android.widget.ArrayAdapter;
 
 //TODO: user will probably need to select the medicine from the medication list.
 //TODO: by selecting the everyday check box, all the box will be checked automatically.
 public class addReminderActivity extends AppCompatActivity implements OnItemSelectedListener{
-    TextInputLayout et_reminderNote;
-    TextInputLayout reminderName;
+    EditText et_reminderNote;
+    EditText reminderName;
     //ProgressDialog progressDialog;
     private Spinner medications;
     private ArrayList<Medications> medArrayList;
@@ -114,7 +100,7 @@ public class addReminderActivity extends AppCompatActivity implements OnItemSele
         // stored reminder attributes
         // This is to create the drop down menu
         //progressDialog = new ProgressDialog(getBaseContext());
-        et_reminderNote = findViewById(R.id.reminder_note);
+        et_reminderNote = findViewById(R.id.note);
         reminderName = findViewById(R.id.reminder_name_textInput);
         medications = findViewById(R.id.medication_spinner);
         startDate ="";
@@ -151,7 +137,7 @@ public class addReminderActivity extends AppCompatActivity implements OnItemSele
 
     private void addRemToDatabase(ArrayList<Day> days){
         SAVE.setOnClickListener(view -> {
-            if(reminderName.getEditText().getText().toString().trim() == ""){
+            if(reminderName.getText().toString().trim() == ""){
                 Toast.makeText(getApplicationContext(),"Please input a reminder name", Toast.LENGTH_SHORT).show();
             }
             else if(selectedItem == "Select Medication"){
@@ -171,12 +157,12 @@ public class addReminderActivity extends AppCompatActivity implements OnItemSele
                 String note = "";
                 String remName = "";
                 try{
-                    remName = reminderName.getEditText().getText().toString().trim();
+                    remName = reminderName.getText().toString().trim();
                 }catch(Exception e) {
                     e.printStackTrace();
                 }
                 try {
-                    note = et_reminderNote.getEditText().getText().toString().trim();
+                    note = et_reminderNote.getText().toString().trim();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

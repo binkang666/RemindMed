@@ -16,6 +16,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class ReminderAdapter extends FirestoreRecyclerAdapter<Reminder, ReminderAdapter.ViewHolder> {
@@ -31,23 +33,36 @@ public class ReminderAdapter extends FirestoreRecyclerAdapter<Reminder, Reminder
 
         holder.reminderName.setText(model.getReminderName());
         holder.medicationName.setText(model.getMedicationName());
-        holder.time.setText(model.getTimePart());
+
+        String timePart = model.getTime().replaceAll("[^0-9:]", "");
+        holder.time.setText(timePart);
 
         holder.startDate.setText(model.getStartDate());
         holder.endDate.setText(model.getEndDate());
 
-        String startDate, endDate;
-        startDate = model.getStartDate();
-        endDate = model.getEndDate();
+        String endDate = model.getEndDate();
+        String curr = "";
         try {
-            Date start=new SimpleDateFormat("dd/MM/yyyy").parse(startDate);
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                LocalDate localDate = LocalDate.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                curr = localDate.format(formatter);
+                System.out.println(curr);
+            }
+            Date start=new SimpleDateFormat("dd/MM/yyyy").parse(curr);
             Date end=new SimpleDateFormat("dd/MM/yyyy").parse(endDate);
             int days = (int) ((end.getTime() - start.getTime())/ (1000*60*60*24));
-            holder.daysToCom.setText(String.valueOf(days));
+            if(days < 0) {
+                holder.daysToCom.setText(String.valueOf(0));
+            }else holder.daysToCom.setText(String.valueOf(days));
+            System.out.println(end + " - " + start + " = " + days);
+
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        holder.AMPM.setText(model.getAMPM());
+
+        String AMPM = model.getTime().replaceAll("[^a-zA-Z]+", "");
+        holder.AMPM.setText(AMPM);
 
     }
 

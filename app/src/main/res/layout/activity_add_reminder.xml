@@ -58,29 +58,22 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/med_days" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/reminder_note"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+
+        <EditText
+            android:id="@+id/note"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
+            android:layout_marginEnd="@dimen/sixteen_dp"
+            android:hint="Enter Note Here"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/btnStartDate"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnStartDate">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/quicksand_regular"
-                android:hint="Add note here"
-                android:inputType="text"
-                android:textColor="?attr/textColorPrimary"
-                android:textColorHint="?attr/colorAccent"
-                android:textSize="17sp" />
-
-        </com.google.android.material.textfield.TextInputLayout>
+        </EditText>
 
 
         <TextView
@@ -339,19 +332,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/reminder_name_textInput"
-            android:layout_width="245dp"
+        <EditText
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/reminder_name_textInput"
+            android:fontFamily="@font/quicksand_medium"
+            android:textSize="24sp"
+            android:layout_marginStart="@dimen/sixteen_dp"
+            android:layout_marginEnd="@dimen/sixteen_dp"
+            android:hint="Enter Reminder Here"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/reminder_name_textview">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/reminder_name" />
-        </com.google.android.material.textfield.TextInputLayout>
+        </EditText>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -77,13 +77,14 @@
         android:id="@+id/medication_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:fontFamily="@font/quicksand_regular"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/quicksand_medium"
         android:text="(medicine name here)"
         android:textColor="@color/colorAccent"
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/label_medication_name"
-        app:layout_constraintTop_toTopOf="@+id/label_medication_name" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/label_medication_name"
+        app:layout_constraintBottom_toTopOf="@id/label_startDate" />
 
 
 
@@ -181,7 +182,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/quicksand_medium"
-        android:text="Name: "
+        android:text="Medication Name: "
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view14" />

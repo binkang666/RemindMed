@@ -106,14 +106,6 @@ public class Reminder {
         return this.time;
     }
 
-    public String getTimePart() {
-        return this.time.replaceAll("[^0-9:]", "");
-    }
-
-    public String getAMPM(){
-        return this.time.replaceAll("[^a-zA-Z]+", "");
-    }
-
     public String getStartDate() {
         return startDate;
     }
