@@ -23,7 +23,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cecs491project.MainActivity;
 import com.example.cecs491project.R;
-import com.example.cecs491project.databinding.FragmentReminderBinding;
 import com.example.cecs491project.ui.medication.AddMedication;
 import com.example.cecs491project.ui.medication.MedicationAdapter;
 import com.example.cecs491project.ui.medication.MedicationDetails;
@@ -92,6 +91,64 @@ public class ReminderFragment extends Fragment {
         myReminderList.setHasFixedSize(true);
         myReminderList.setLayoutManager(new LinearLayoutManager(getContext()));
         myReminderList.setAdapter(reminderAdapter);
+
+
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+                alertDialog.setMessage("Are you sure you want to delete this reminder?");
+                alertDialog.setCancelable(false);
+                alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        reminderAdapter.deleteItem(viewHolder.getAdapterPosition());
+                        Toast.makeText(getContext(), "Medication Deleted", Toast.LENGTH_LONG).show();
+                    }
+                });
+                alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        reminderAdapter.notifyItemChanged(viewHolder.getAdapterPosition());
+                    }
+                });
+                alertDialog.create().show();
+            }
+        }).attachToRecyclerView(myReminderList);
+        reminderAdapter.setOnItemClickListener(new ReminderAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(DocumentSnapshot documentSnapshot, int pos) {
+                String docID = documentSnapshot.getId();
+                Map<String, Object> s = documentSnapshot.getData();
+
+                String reminderName = (String) s.get("reminderName");
+                String name = (String) s.get("medicationName");
+                String start = (String) s.get("startDate");
+                String end = (String) s.get("endDate");
+                String time = (String) s.get("time");
+                String note = (String) s.get("note");
+                ArrayList<String> day = (ArrayList<String>) s.get("days");
+
+                Bundle bundle = new Bundle();
+                bundle.putString("remName", reminderName);
+                bundle.putString("medName", name);
+                bundle.putString("startD", start);
+                bundle.putString("endD", end);
+                bundle.putString("docID", docID);
+                bundle.putString("note", note);
+                bundle.putString("medTime",time);
+                bundle.putStringArrayList("days", day);
+
+                Intent i = new Intent(getContext(), ReminderDetails.class);
+                i.putExtras(bundle);
+                startActivity(i);
+            }
+        });
 
         query.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override

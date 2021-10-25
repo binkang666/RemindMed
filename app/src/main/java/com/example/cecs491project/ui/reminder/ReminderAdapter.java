@@ -31,7 +31,7 @@ public class ReminderAdapter extends FirestoreRecyclerAdapter<Reminder, Reminder
 
         holder.reminderName.setText(model.getReminderName());
         holder.medicationName.setText(model.getMedicationName());
-        holder.time.setText(model.getTime());
+        holder.time.setText(model.getTimePart());
 
         holder.startDate.setText(model.getStartDate());
         holder.endDate.setText(model.getEndDate());

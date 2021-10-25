@@ -47,7 +47,6 @@ import com.example.cecs491project.ui.medication.Medications;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
@@ -62,6 +61,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Calendar;
 import java.util.Objects;
@@ -69,11 +69,11 @@ import android.widget.ArrayAdapter;
 
 //TODO: user will probably need to select the medicine from the medication list.
 //TODO: by selecting the everyday check box, all the box will be checked automatically.
-public class addReminderActivity extends AppCompatActivity implements OnItemSelectedListener{
-    TextInputLayout et_reminderNote;
-    TextInputLayout reminderName;
+public class editReminderActivity extends AppCompatActivity implements OnItemSelectedListener{
+    EditText et_reminderNote;
+    TextView reminder_name;
     //ProgressDialog progressDialog;
-    private Spinner medications;
+    Spinner medications;
     private ArrayList<Medications> medArrayList;
     private ArrayList<Day> daysInput;
     private ImageView ASClose ;
@@ -90,12 +90,11 @@ public class addReminderActivity extends AppCompatActivity implements OnItemSele
     private String selectedItem;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_reminder);
+        setContentView(R.layout.activity_edit_reminder);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -105,17 +104,76 @@ public class addReminderActivity extends AppCompatActivity implements OnItemSele
         medNames.add("Select Medication");
         showMedications();
 
-        ASClose.setOnClickListener(v -> addReminderActivity.super.onBackPressed());
+        ASClose.setOnClickListener(v -> editReminderActivity.super.onBackPressed());
+
+
+        Bundle bundle = getIntent().getExtras();
+        String name = bundle.getString("remName");
+        String medName = bundle.getString("medName");
+        String startD = bundle.getString("startD");
+        String endD = bundle.getString("endD");
+        String remTime = bundle.getString("medTime");
+        String note = bundle.getString("note");
+        ArrayList<String> days = bundle.getStringArrayList("days");
+
+
+        reminder_name.setText(name);
+        btnStartDate.setText(startD);
+        btnEndDate.setText(endD);
+        startDate = startD;
+        endDate = endD;
+        clockTime.setText(remTime);
+        displayTime = remTime;
+        et_reminderNote.setText(note);
+        String[] week = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+        for(String s: week){
+            addDaysToEditMode(days, s);
+        }
+        selectedItem = medName;
+        medNames.add(selectedItem);
+        medications.post(new Runnable() {
+            @Override
+            public void run() {
+                medications.setSelection(1);
+            }
+        });
+
     }
 
+
+    private void addDaysToEditMode(ArrayList<String> days, String s){
+        CheckBox mon, tue, wed, thur, fri, sat, sun, all;
+        if(days.containsAll(Arrays.asList("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"))){
+            for(CheckBox c: daysCheckBoxes){
+                c.setChecked(false);
+                c.setEnabled(false);
+            }
+            addRemToDatabase(daysInput);
+            all = findViewById(R.id.every_day);
+            all.setChecked(true);
+        }
+        else if(days.contains(s)){
+            for(CheckBox c: daysCheckBoxes){
+                c.setEnabled(true);
+            }
+            if(s.equals("Monday")) {daysInput.add(Monday); addRemToDatabase(daysInput);mon = findViewById(R.id.dv_monday); mon.setChecked(true);}
+            if(s.equals("Tuesday")) {daysInput.add(Tuesday); addRemToDatabase(daysInput);tue = findViewById(R.id.dv_tuesday);tue.setChecked(true);}
+            if(s.equals("Wednesday")) {daysInput.add(Wednesday); addRemToDatabase(daysInput); wed = findViewById(R.id.dv_wednesday);wed.setChecked(true);}
+            if(s.equals("Thursday")) {daysInput.add(Thursday);addRemToDatabase(daysInput);  thur = findViewById(R.id.dv_thursday);thur.setChecked(true);}
+            if(s.equals("Friday")) {daysInput.add(Friday); addRemToDatabase(daysInput); fri = findViewById(R.id.dv_friday);fri.setChecked(true);}
+            if(s.equals("Saturday")) {daysInput.add(Saturday);addRemToDatabase(daysInput);  sat = findViewById(R.id.dv_saturday);sat.setChecked(true);}
+            if(s.equals("Sunday")) {daysInput.add(Sunday); addRemToDatabase(daysInput);sun = findViewById(R.id.dv_sunday);sun.setChecked(true);}
+        }
+    }
+    
 
 
     private void initializePage() {
         // stored reminder attributes
         // This is to create the drop down menu
         //progressDialog = new ProgressDialog(getBaseContext());
-        et_reminderNote = findViewById(R.id.reminder_note);
-        reminderName = findViewById(R.id.reminder_name_textInput);
+        et_reminderNote = findViewById(R.id.note);
+        reminder_name = findViewById(R.id.reminder_name_edit);
         medications = findViewById(R.id.medication_spinner);
         startDate ="";
         endDate ="";
@@ -151,7 +209,7 @@ public class addReminderActivity extends AppCompatActivity implements OnItemSele
 
     private void addRemToDatabase(ArrayList<Day> days){
         SAVE.setOnClickListener(view -> {
-            if(reminderName.getEditText().getText().toString().trim() == ""){
+            if(reminder_name.getText().toString().trim().equals("")){
                 Toast.makeText(getApplicationContext(),"Please input a reminder name", Toast.LENGTH_SHORT).show();
             }
             else if(selectedItem == "Select Medication"){
@@ -171,12 +229,12 @@ public class addReminderActivity extends AppCompatActivity implements OnItemSele
                 String note = "";
                 String remName = "";
                 try{
-                    remName = reminderName.getEditText().getText().toString().trim();
+                    remName = reminder_name.getText().toString().trim();
                 }catch(Exception e) {
                     e.printStackTrace();
                 }
                 try {
-                    note = et_reminderNote.getEditText().getText().toString().trim();
+                    note = et_reminderNote.getText().toString().trim();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -208,8 +266,8 @@ public class addReminderActivity extends AppCompatActivity implements OnItemSele
                             if (task.isSuccessful()) {
                                 makeSnackBarMessage("Reminder added");
                                 //Toast toast2 = Toast.makeText(getApplicationContext(),
-                                        //"Reminder" + daysInput.toString() + startDate + endDate
-                                        //, Toast.LENGTH_SHORT);
+                                //"Reminder" + daysInput.toString() + startDate + endDate
+                                //, Toast.LENGTH_SHORT);
                                 //toast2.show();
                             } else {
                                 makeSnackBarMessage("Failed");
@@ -275,7 +333,7 @@ public class addReminderActivity extends AppCompatActivity implements OnItemSele
         String text = arg0.getItemAtPosition(position).toString();
         selectedItem = medications.getSelectedItem().toString();
         if(text!="Select Medication")
-        Toast.makeText(arg0.getContext(), "Selected medication: "+text,Toast.LENGTH_SHORT).show();
+            Toast.makeText(arg0.getContext(), "Selected medication: "+text,Toast.LENGTH_SHORT).show();
     }
     @Override
     public void onNothingSelected(AdapterView<?> arg0) {
@@ -309,32 +367,32 @@ public class addReminderActivity extends AppCompatActivity implements OnItemSele
 
 
         if(checkBox.isChecked()) { // if they are checked
-                if (id == R.id.dv_sunday && !daysInput.contains(Sunday)) {
-                    //Log.d("DAYS:", "Clicked on Sunday");
-                    daysInput.add(Sunday);
-                    addRemToDatabase(daysInput);
-                } else if (id == R.id.dv_monday && !daysInput.contains(Monday)) {
-                    //Log.d("DAYS:", "Clicked on Monday");
-                    daysInput.add(Monday);
-                    addRemToDatabase(daysInput);
-                } else if (id == R.id.dv_tuesday && !daysInput.contains(Tuesday)) {
-                    //Log.d("DAYS:", "Clicked on Tuesday");
-                    daysInput.add(Tuesday);
-                    addRemToDatabase(daysInput);
-                } else if (id == R.id.dv_wednesday && !daysInput.contains(Wednesday)) {
-                    //Log.d("DAYS:", "Clicked on Wednesday");
-                    daysInput.add(Wednesday);
-                    addRemToDatabase(daysInput);
-                } else if (id == R.id.dv_thursday && !daysInput.contains(Thursday)) {
-                    daysInput.add(Thursday);
-                    addRemToDatabase(daysInput);
-                } else if (id == R.id.dv_friday && !daysInput.contains(Friday)) {
-                    daysInput.add(Friday);
-                    addRemToDatabase(daysInput);
-                } else if (id == R.id.dv_saturday && !daysInput.contains(Saturday)) {
-                    daysInput.add(Saturday);
-                    addRemToDatabase(daysInput);
-                }
+            if (id == R.id.dv_sunday && !daysInput.contains(Sunday)) {
+                //Log.d("DAYS:", "Clicked on Sunday");
+                daysInput.add(Sunday);
+                addRemToDatabase(daysInput);
+            } else if (id == R.id.dv_monday && !daysInput.contains(Monday)) {
+                //Log.d("DAYS:", "Clicked on Monday");
+                daysInput.add(Monday);
+                addRemToDatabase(daysInput);
+            } else if (id == R.id.dv_tuesday && !daysInput.contains(Tuesday)) {
+                //Log.d("DAYS:", "Clicked on Tuesday");
+                daysInput.add(Tuesday);
+                addRemToDatabase(daysInput);
+            } else if (id == R.id.dv_wednesday && !daysInput.contains(Wednesday)) {
+                //Log.d("DAYS:", "Clicked on Wednesday");
+                daysInput.add(Wednesday);
+                addRemToDatabase(daysInput);
+            } else if (id == R.id.dv_thursday && !daysInput.contains(Thursday)) {
+                daysInput.add(Thursday);
+                addRemToDatabase(daysInput);
+            } else if (id == R.id.dv_friday && !daysInput.contains(Friday)) {
+                daysInput.add(Friday);
+                addRemToDatabase(daysInput);
+            } else if (id == R.id.dv_saturday && !daysInput.contains(Saturday)) {
+                daysInput.add(Saturday);
+                addRemToDatabase(daysInput);
+            }
 
         }
         else{ //unchecked
@@ -375,13 +433,13 @@ public class addReminderActivity extends AppCompatActivity implements OnItemSele
 
         btnStartDate.setOnClickListener(view1 -> {
             DatePickerDialog datePickerDialog = new DatePickerDialog(
-                    addReminderActivity.this, (datePicker, year1, month1, day1) -> {
-                        month1 = month1 +1;
-                        String date2 = day1 + "/" + month1 + "/" + year1;
+                    editReminderActivity.this, (datePicker, year1, month1, day1) -> {
+                month1 = month1 +1;
+                String date2 = day1 + "/" + month1 + "/" + year1;
 
-                        btnStartDate.setText(date2);
-                        startDate = date2;
-                    }, year, month, day);
+                btnStartDate.setText(date2);
+                startDate = date2;
+            }, year, month, day);
 
             datePickerDialog.show();
 
@@ -390,12 +448,12 @@ public class addReminderActivity extends AppCompatActivity implements OnItemSele
 
         btnEndDate.setOnClickListener(view12 -> {
             DatePickerDialog datePickerDialog = new DatePickerDialog(
-                    addReminderActivity.this, (datePicker, year12, month12, day12) -> {
-                        month12 = month12 +1;
-                        String date2 = day12 + "/" + month12 + "/" + year12;
-                        btnEndDate.setText(date2);
-                        endDate = date2;
-                    }, year, month, day);
+                    editReminderActivity.this, (datePicker, year12, month12, day12) -> {
+                month12 = month12 +1;
+                String date2 = day12 + "/" + month12 + "/" + year12;
+                btnEndDate.setText(date2);
+                endDate = date2;
+            }, year, month, day);
             datePickerDialog.show();
 
         });
@@ -409,7 +467,7 @@ public class addReminderActivity extends AppCompatActivity implements OnItemSele
     public void showTimePicker( View view ){
         clockTime.setOnClickListener(view1 -> {
             TimePickerDialog timePickerDialog = new TimePickerDialog(
-                    addReminderActivity.this,
+                    editReminderActivity.this,
                     (timePicker, hr, min) -> {
                         hour = hr;
                         minutes = min;

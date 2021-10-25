@@ -103,6 +103,10 @@ public class Reminder {
     }
 
     public String getTime() {
+        return this.time;
+    }
+
+    public String getTimePart() {
         return this.time.replaceAll("[^0-9:]", "");
     }
 
