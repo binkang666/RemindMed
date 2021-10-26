@@ -3,8 +3,10 @@ package com.example.cecs491project.ui.medication;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -20,6 +22,7 @@ import com.example.cecs491project.ui.reminder.Reminder;
 import com.example.cecs491project.ui.reminder.ReminderAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -35,6 +38,8 @@ public class MedicationDetails extends AppCompatActivity {
     SimpleRelatedReminderAdpater related_adapter;
     RecyclerView related_reminder;
     FirebaseFirestore db;
+    TabLayout tabLayout;
+    ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +58,6 @@ public class MedicationDetails extends AppCompatActivity {
         collapse.getBackground().setAlpha(175);
 
 
-
-
         Bundle bundle = getIntent().getExtras();
         String name = bundle.getString("name");
         String note = bundle.getString("note");
@@ -70,12 +73,6 @@ public class MedicationDetails extends AppCompatActivity {
         tx_refill = findViewById(R.id.et_refill);
 
         collapse.setTitle(name);
-        tx_cate.setText(cate);
-        tx_note.setText(note);
-        tx_count.setText(String.valueOf(count));
-        tx_refill.setText(String.valueOf(refill));
-        tx_dosage.setText(String.valueOf(dos));
-        System.out.println(count + "  " + refill +"   "+  dos +"  check here");
 
         b = new Bundle();
         b.putString("name", name);
@@ -85,33 +82,23 @@ public class MedicationDetails extends AppCompatActivity {
         b.putInt("refill", refill);
         b.putDouble("dos", dos);
 
-        EventChangeListener(name);
+        tabLayout = findViewById(R.id.tabs);
+        viewPager = findViewById(R.id.viewPage);
+
+        tabLayout.setupWithViewPager(viewPager);
+        fragment_tab_details fragment_tab_details = new fragment_tab_details();
+        fragment_tab_related fragment_tab_related = new fragment_tab_related();
+        fragment_tab_details.setArguments(b);
+        fragment_tab_related.setArguments(b);
+        tabAdapter tabAdapter = new tabAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        tabAdapter.addFragment(fragment_tab_details, "Details");
+        tabAdapter.addFragment(fragment_tab_related, "Related");
+        viewPager.setAdapter(tabAdapter);
+
+
     }
 
-    public void EventChangeListener(String medName){
-        db = FirebaseFirestore.getInstance();
-        String uid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
-        Query query;
-        if(FirebaseAuth.getInstance().getCurrentUser().isAnonymous()){
-            query = db.collection("Anonymous User Database")
-                    .document(uid).collection("Reminder").whereEqualTo("medicationName", medName);
-
-        }else{
-            query = db.collection("User Database")
-                    .document(uid).collection("Reminder").whereEqualTo("medicationName", medName);
-        }
-
-        FirestoreRecyclerOptions<Reminder> options = new FirestoreRecyclerOptions.Builder<Reminder>()
-                .setQuery(query,Reminder.class)
-                .build();
-        related_adapter = new SimpleRelatedReminderAdpater(options);
-
-        related_reminder = findViewById(R.id.related_reminder);
-        related_reminder.setHasFixedSize(true);
-        related_reminder.setLayoutManager(new LinearLayoutManager(this));
-        related_reminder.setAdapter(related_adapter);
-    }
 
     public void editMed(View view) {
         Intent intent = new Intent(MedicationDetails.this, EditMedication.class);
@@ -126,17 +113,6 @@ public class MedicationDetails extends AppCompatActivity {
         super.onBackPressed();
         return true;
     }
-    @Override
-    public void onStart() {
-        super.onStart();
-        related_adapter.startListening();
 
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        related_adapter.stopListening();
-    }
 
 }
