@@ -1,4 +1,4 @@
-package com.example.cecs491project.ui.reminder;
+package com.example.cecs491project.ui.medication;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cecs491project.R;
+import com.example.cecs491project.ui.reminder.Reminder;
+import com.example.cecs491project.ui.reminder.ReminderAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -20,11 +22,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
-public class ReminderAdapter extends FirestoreRecyclerAdapter<Reminder, ReminderAdapter.ViewHolder> {
+public class SimpleRelatedReminderAdpater extends FirestoreRecyclerAdapter<Reminder, SimpleRelatedReminderAdpater.ViewHolder> {
 
     private OnItemClickListener listener;
 
-    public ReminderAdapter(@NonNull FirestoreRecyclerOptions<Reminder> reminders) {
+    public SimpleRelatedReminderAdpater(@NonNull FirestoreRecyclerOptions<Reminder> reminders) {
         super(reminders);
     }
 
@@ -32,10 +34,6 @@ public class ReminderAdapter extends FirestoreRecyclerAdapter<Reminder, Reminder
     protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull Reminder model) {
 
         holder.reminderName.setText(model.getReminderName());
-        holder.medicationName.setText(model.getMedicationName());
-
-        String timePart = model.getTime().replaceAll("[^0-9:]", "");
-        holder.time.setText(timePart);
 
         holder.startDate.setText(model.getStartDate());
         holder.endDate.setText(model.getEndDate());
@@ -59,15 +57,12 @@ public class ReminderAdapter extends FirestoreRecyclerAdapter<Reminder, Reminder
             e.printStackTrace();
         }
 
-        String AMPM = model.getTime().replaceAll("[^a-zA-Z]+", "");
-        holder.AMPM.setText(AMPM);
-
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_reminder_details,
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_related_reminder,
                 parent,false);
         ViewHolder viewHolder = new ViewHolder(v);
         return viewHolder;
@@ -80,22 +75,17 @@ public class ReminderAdapter extends FirestoreRecyclerAdapter<Reminder, Reminder
     class ViewHolder extends RecyclerView.ViewHolder{
 
         TextView reminderName;
-        TextView medicationName;
-        TextView time;
         TextView startDate;
         TextView endDate;
         TextView daysToCom;
-        TextView AMPM;
+
 
         public ViewHolder(View itemView) {
             super(itemView);
             reminderName = itemView.findViewById(R.id.reminder_name);
-            medicationName = itemView.findViewById(R.id.medication_name);
-            time = itemView.findViewById(R.id.timeToTake);
             startDate = itemView.findViewById(R.id.startDate);
             endDate = itemView.findViewById(R.id.endDate);
             daysToCom = itemView.findViewById(R.id.daysToCom);
-            AMPM = itemView.findViewById(R.id.amOrPm);
 
             itemView.setOnClickListener(view -> {
                 int pos = getAdapterPosition();

@@ -3,6 +3,8 @@ package com.example.cecs491project.ui.medication;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,7 +16,13 @@ import android.widget.TextView;
 
 import com.example.cecs491project.MainActivity;
 import com.example.cecs491project.R;
+import com.example.cecs491project.ui.reminder.Reminder;
+import com.example.cecs491project.ui.reminder.ReminderAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
 import java.util.Objects;
 
@@ -23,6 +31,10 @@ public class MedicationDetails extends AppCompatActivity {
     TextView tx_name, tx_cate, tx_count, tx_refill, tx_dosage, tx_note;
 
     Bundle b;
+
+    SimpleRelatedReminderAdpater related_adapter;
+    RecyclerView related_reminder;
+    FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +51,7 @@ public class MedicationDetails extends AppCompatActivity {
         collapse.setExpandedTitleTextAppearance(R.style.ExpandedAppBar);
         collapse.setCollapsedTitleTextAppearance(R.style.CollapsedAppBar);
         collapse.getBackground().setAlpha(175);
+
 
 
 
@@ -71,6 +84,33 @@ public class MedicationDetails extends AppCompatActivity {
         b.putInt("count", count);
         b.putInt("refill", refill);
         b.putDouble("dos", dos);
+
+        EventChangeListener(name);
+    }
+
+    public void EventChangeListener(String medName){
+        db = FirebaseFirestore.getInstance();
+        String uid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+
+        Query query;
+        if(FirebaseAuth.getInstance().getCurrentUser().isAnonymous()){
+            query = db.collection("Anonymous User Database")
+                    .document(uid).collection("Reminder").whereEqualTo("medicationName", medName);
+
+        }else{
+            query = db.collection("User Database")
+                    .document(uid).collection("Reminder").whereEqualTo("medicationName", medName);
+        }
+
+        FirestoreRecyclerOptions<Reminder> options = new FirestoreRecyclerOptions.Builder<Reminder>()
+                .setQuery(query,Reminder.class)
+                .build();
+        related_adapter = new SimpleRelatedReminderAdpater(options);
+
+        related_reminder = findViewById(R.id.related_reminder);
+        related_reminder.setHasFixedSize(true);
+        related_reminder.setLayoutManager(new LinearLayoutManager(this));
+        related_reminder.setAdapter(related_adapter);
     }
 
     public void editMed(View view) {
@@ -85,6 +125,18 @@ public class MedicationDetails extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         super.onBackPressed();
         return true;
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        related_adapter.startListening();
+
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        related_adapter.stopListening();
     }
 
 }
