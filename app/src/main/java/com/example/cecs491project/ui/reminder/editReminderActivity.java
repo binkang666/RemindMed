@@ -297,18 +297,22 @@ public class editReminderActivity extends AppCompatActivity implements OnItemSel
                 .document(uid).collection("Medication").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                if(error!=null){
+                if (error != null) {
                     Toast toast = Toast.makeText(getApplicationContext(), "error occured grabbing from database", Toast.LENGTH_SHORT);
                     toast.show();
                 }
-                for(DocumentChange dc : value.getDocumentChanges()){
-                    if(dc.getType() == DocumentChange.Type.ADDED) {
-                        Medications med = dc.getDocument().toObject(Medications.class);
-                        medArrayList.add(med);
-                        medNames.add(med.getMedicationName());
-                        Log.d("MEDICATION", dc.getDocument().toObject(Medications.class).toString());
-                        Log.d("MEDNAME:", dc.getDocument().toObject(Medications.class).getMedicationName());
+                try {
+                    for (DocumentChange dc : value.getDocumentChanges()) {
+                        if (dc.getType() == DocumentChange.Type.ADDED) {
+                            Medications med = dc.getDocument().toObject(Medications.class);
+                            medArrayList.add(med);
+                            medNames.add(med.getMedicationName());
+                            Log.d("MEDICATION", dc.getDocument().toObject(Medications.class).toString());
+                            Log.d("MEDNAME:", dc.getDocument().toObject(Medications.class).getMedicationName());
+                        }
                     }
+                } catch (NullPointerException e) {
+                    e.printStackTrace();
                 }
             }
         });
