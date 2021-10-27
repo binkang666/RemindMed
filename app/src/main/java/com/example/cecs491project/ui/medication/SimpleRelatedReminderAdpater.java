@@ -68,10 +68,6 @@ public class SimpleRelatedReminderAdpater extends FirestoreRecyclerAdapter<Remin
         return viewHolder;
     }
 
-    public void deleteItem(int pos){
-        getSnapshots().getSnapshot(pos).getReference().delete();
-    }
-
     class ViewHolder extends RecyclerView.ViewHolder{
 
         TextView reminderName;

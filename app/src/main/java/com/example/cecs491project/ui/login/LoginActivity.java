@@ -75,6 +75,8 @@ public class LoginActivity extends AppCompatActivity {
 
                 }else{
                     preferences.edit().clear().apply();
+                    email_txt.getText().clear();
+                    password_txt.getText().clear();
                 }
             }
         });

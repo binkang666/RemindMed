@@ -142,8 +142,10 @@ public class editReminderActivity extends AppCompatActivity implements OnItemSel
 
 
     private void addDaysToEditMode(ArrayList<String> days, String s){
+        daysInput = new ArrayList<>();
         CheckBox mon, tue, wed, thur, fri, sat, sun, all;
         if(days.containsAll(Arrays.asList("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"))){
+            daysInput.addAll(Arrays.asList(Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday));
             for(CheckBox c: daysCheckBoxes){
                 c.setChecked(false);
                 c.setEnabled(false);
