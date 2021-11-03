@@ -93,6 +93,27 @@ public class MedicationAdapter extends FirestoreRecyclerAdapter<Medications, Med
                     }
                 }
             });
+            db.collection("Anonymous User Database")
+                    .document(uid).collection("Notification").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                            Log.d("TAG", documentSnapshot.getId() + " => " + documentSnapshot.getData());
+                            Map<String, Object> map = documentSnapshot.getData();
+                            if(Objects.requireNonNull(map.get("medicationName")).toString().equals(medName)){
+                                db.collection("Anonymous User Database")
+                                        .document(uid).collection("Notification")
+                                        .document(documentSnapshot.getId())
+                                        .delete();
+                            }
+                        }
+                    }
+                    else{
+                        Log.d("TAG", "Error getting documents: ", task.getException());
+                    }
+                }
+            });
 
         }else{
             db.collection("User Database")
@@ -106,6 +127,28 @@ public class MedicationAdapter extends FirestoreRecyclerAdapter<Medications, Med
                             if(Objects.requireNonNull(map.get("medicationName")).toString().equals(medName)){
                                 db.collection("User Database")
                                         .document(uid).collection("Reminder")
+                                        .document(documentSnapshot.getId())
+                                        .delete();
+                            }
+
+                        }
+                    }
+                    else{
+                        Log.d("TAG", "Error getting documents: ", task.getException());
+                    }
+                }
+            });
+            db.collection("User Database")
+                    .document(uid).collection("Notification").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                            Log.d("TAG", documentSnapshot.getId() + " => " + documentSnapshot.getData());
+                            Map<String, Object> map = documentSnapshot.getData();
+                            if(Objects.requireNonNull(map.get("medicationName")).toString().equals(medName)){
+                                db.collection("User Database")
+                                        .document(uid).collection("Notification")
                                         .document(documentSnapshot.getId())
                                         .delete();
                             }
