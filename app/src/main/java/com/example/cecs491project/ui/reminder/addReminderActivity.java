@@ -36,6 +36,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.cecs491project.R;
 import com.example.cecs491project.ui.medication.Medications;
+import com.example.cecs491project.ui.notifications.Notification;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
@@ -179,16 +180,23 @@ public class addReminderActivity extends AppCompatActivity implements OnItemSele
                     e.printStackTrace();
                 }
                 DocumentReference userTablet = null;
+                DocumentReference noti = null;
                 if(FirebaseAuth.getInstance().getCurrentUser().isAnonymous()){
                     userTablet = db.collection("Anonymous User Database")
                             .document(userID).collection("Reminder").document(remName);
+                    noti = db.collection("Anonymous User Database")
+                            .document(userID).collection("Notification").document(remName);
                 }
                 else{
                     userTablet = db.collection("User Database")
                             .document(userID).collection("Reminder").document(remName);
+                    noti = db.collection("User Database")
+                            .document(userID).collection("Notification").document(remName);
                 }
                 try {
                     Reminder rem = new Reminder(remName, selectedItem, daysInput, time, startDate, endDate, note);
+                    Notification notification = new Notification(remName, selectedItem, time, 0);
+                    noti.set(notification);
                     userTablet.set(rem).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {

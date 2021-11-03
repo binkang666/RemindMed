@@ -82,17 +82,23 @@
         <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project11w/app/src/main/res/menu/sort_menu.xml" value="0.2712962962962963" />
         <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project13w/app/src/main/res/drawable/clock_border.xml" value="0.2861111111111111" />
         <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project13w/app/src/main/res/drawable/dashboard_clock_bg.xml" value="0.2861111111111111" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project13w/app/src/main/res/layout/activity_loading.xml" value="0.21965579710144928" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project13w/app/src/main/res/layout/activity_login.xml" value="0.17603850050658562" />
         <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project13w/app/src/main/res/layout/activity_reminder_details.xml" value="0.22146739130434784" />
         <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project13w/app/src/main/res/layout/activity_reminder_details_content.xml" value="0.22146739130434784" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project13w/app/src/main/res/layout/dialog_med_taken.xml" value="0.19519927536231885" />
         <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project13w/app/src/main/res/layout/fragment_home.xml" value="0.291866028708134" />
         <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project13w/app/src/main/res/layout/fragment_map.xml" value="0.25407608695652173" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project13w/app/src/main/res/layout/fragment_notifications.xml" value="0.21195652173913043" />
         <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project13w/app/src/main/res/layout/fragment_reminder.xml" value="0.22146739130434784" />
         <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project13w/app/src/main/res/layout/fragment_tab_details.xml" value="0.190625" />
         <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project13w/app/src/main/res/layout/fragment_tab_related.xml" value="0.190625" />
         <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project13w/app/src/main/res/layout/item_medication_details.xml" value="0.190625" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project13w/app/src/main/res/layout/item_notifications.xml" value="0.33" />
         <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project13w/app/src/main/res/layout/item_overview_home.xml" value="0.33" />
-        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project13w/app/src/main/res/layout/item_related_reminder.xml" value="0.190625" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project13w/app/src/main/res/layout/item_related_reminder.xml" value="0.33" />
         <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project13w/app/src/main/res/layout/item_reminder_details.xml" value="0.22146739130434784" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project13w/app/src/main/res/layout/nav_header_layout.xml" value="0.2265625" />
         <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project2/app/src/main/res/drawable-xhdpi/ic_baseline_access_time_24.xml" value="0.24114583333333334" />
         <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project2/app/src/main/res/drawable-xhdpi/ic_baseline_folder_24.xml" value="0.24114583333333334" />
         <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project2/app/src/main/res/drawable-xhdpi/ic_baseline_people_24.xml" value="0.24114583333333334" />

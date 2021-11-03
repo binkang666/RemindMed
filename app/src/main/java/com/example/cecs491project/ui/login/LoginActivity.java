@@ -106,7 +106,7 @@ public class LoginActivity extends AppCompatActivity {
         Skip = findViewById(R.id.skip);
 
         ImageView logo = (ImageView) findViewById(R.id.logo);
-        logo.setImageResource(R.drawable.icon_logo);
+        logo.setImageResource(R.drawable.logo);
         auth = FirebaseAuth.getInstance();
     }
 
