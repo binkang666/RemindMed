@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".ui.map.MapActivity">
+
+    <Button
+        android:id="@+id/go_back"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/ic_close_black_24dp"
+        android:textColor="@color/colorPrimary"
+        android:textSize="11sp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        tools:ignore="UsingOnClickInXml" />
+    <Button
+        android:id="@+id/hospital"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="find hospital"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/drawable_card_standard"
+        android:textSize="11sp"/>
+    <Button
+        android:id="@+id/pharmacy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="200dp"
+        android:background="@drawable/drawable_card_standard"
+        android:text="find pharmacy"
+        android:textSize="11sp">
+    </Button>
+
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"/>
+
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content">-->
+<!--    </androidx.recyclerview.widget.RecyclerView>-->
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -15,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/LightTheme">
         <activity
+            android:name=".ui.map.MapActivity"
+            android:exported="true" />
+        <activity
             android:name=".ui.reminder.editReminderActivity"
             android:exported="true" />
         <activity

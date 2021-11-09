@@ -3,21 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/navigation_setting"
-        android:title="@string/setting"
-        android:onClick="setting"
-        />
-    <item
-        android:id="@+id/navigation_logout"
-        android:title="@string/log_out"
-        android:onClick="logout"/>
-    <item
         android:id="@+id/camera"
-        android:title="camera"
-        android:onClick="openCamera"
+        android:onClick="openMap"
         app:showAsAction="ifRoom"
-        android:icon="@drawable/icon_my_camera"
-        />
-
+        android:icon="@drawable/ic_map"
+        android:title="@string/map" />
 
 </menu>

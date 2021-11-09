@@ -32,7 +32,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.bumptech.glide.Glide;
 import com.example.cecs491project.ui.home.HomeFragment;
 import com.example.cecs491project.ui.login.LoginActivity;
-import com.example.cecs491project.ui.map.MapFragment;
+import com.example.cecs491project.ui.map.MapActivity;
 import com.example.cecs491project.ui.medication.AddMedication;
 import com.example.cecs491project.ui.medication.MedicationFragment;
 import com.example.cecs491project.ui.notifications.NotificationsFragment;
@@ -67,7 +67,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     MedicationFragment medicationFragment;
     ReminderFragment reminderFragment;
     NotificationsFragment notificationsFragment;
-    MapFragment mapFragment;
 
     public MainActivity() {
     }
@@ -113,7 +112,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     homeFragment = new HomeFragment();
                     reminderFragment = new ReminderFragment();
                     notificationsFragment = new NotificationsFragment();
-                    mapFragment = new MapFragment();
 
                     FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                     int id = item.getItemId();
@@ -138,10 +136,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         ft.replace(R.id.container, reminderFragment);
                         toolbarText.setText(R.string.Reminders);
                         ((NavigationView)findViewById(R.id.side_nav_view)).setCheckedItem(R.id.nav_reminder);
-                    }else if(id == R.id.navigation_map){
-                        ft.replace(R.id.container, mapFragment);
-                        toolbarText.setText(R.string.Map);
-                        ((NavigationView)findViewById(R.id.side_nav_view)).setCheckedItem(R.id.nav_map);
                     }
                     ft.commit();
                     return true ;
@@ -336,5 +330,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(i, 100);
+    }
+
+    public void openMap(MenuItem item) {
+        startActivity(new Intent(MainActivity.this, MapActivity.class));
     }
 }

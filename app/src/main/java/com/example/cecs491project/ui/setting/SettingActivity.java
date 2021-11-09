@@ -1,21 +1,14 @@
 package com.example.cecs491project.ui.setting;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.cecs491project.MainActivity;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.example.cecs491project.R;
-import com.example.cecs491project.ui.login.RegisterActivity;
-
-import java.util.Set;
-
-import io.perfmark.Link;
 
 //TODO: Theme Setting
 //TODO: Alarm Music Setting
