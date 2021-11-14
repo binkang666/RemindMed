@@ -137,6 +137,48 @@
         <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project2/app/src/main/res/layout/nav_header_layout.xml" value="0.25" />
         <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project2/app/src/main/res/menu/bottom_nav_menu.xml" value="0.3411458333333333" />
         <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project2/app/src/main/res/menu/side_nav_menu.xml" value="0.32708333333333334" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/drawable-v24/button_background.xml" value="0.3142857142857143" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/drawable-v24/signin_button_background.xml" value="0.3142857142857143" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/drawable-xhdpi/accent_preview.xml" value="0.30092592592592593" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/drawable-xhdpi/drawable_card_standard.xml" value="0.1837719298245614" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/drawable-xhdpi/rect_dark.xml" value="0.30092592592592593" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/drawable-xhdpi/ripple_card_standard.xml" value="0.30092592592592593" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/drawable-xhdpi/setting_item_ripple.xml" value="0.1837719298245614" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/drawable-xhdpi/startend_rect.xml" value="0.1837719298245614" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/drawable-xxhdpi/card_background.xml" value="0.3142857142857143" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/drawable/clock_border.xml" value="0.1685185185185185" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/drawable/dashboard_clock_bg.xml" value="0.1837719298245614" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/drawable/ga_color_bg.xml" value="0.30092592592592593" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/drawable/gradiant_color_reverse.xml" value="0.3142857142857143" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/drawable/gradient_color.xml" value="0.30092592592592593" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/drawable/schedules_card_bg.xml" value="0.30092592592592593" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/drawable/stroke_box.xml" value="0.1837719298245614" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/drawable/stroke_oval.xml" value="0.1837719298245614" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/layout/activity_edit_reminder.xml" value="0.1488860325621251" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/layout/activity_loading.xml" value="0.33" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/layout/activity_login.xml" value="0.23097826086956522" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/layout/activity_main.xml" value="0.17603850050658562" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/layout/activity_main_appbar.xml" value="0.17603850050658562" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/layout/activity_main_content.xml" value="0.24682971014492755" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/layout/activity_map.xml" value="0.240625" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/layout/activity_medication_details_contents.xml" value="0.1488860325621251" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/layout/activity_register.xml" value="0.22" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/layout/activity_reset_password.xml" value="0.23097826086956522" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/layout/fragment_home.xml" value="0.20969202898550723" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/layout/fragment_medication.xml" value="0.17" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/layout/fragment_reminder.xml" value="0.1488860325621251" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/layout/fragment_tab_details.xml" value="0.1488860325621251" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/layout/fragment_tab_related.xml" value="0.1488860325621251" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/layout/item_medication_details.xml" value="0.22" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/layout/item_notifications.xml" value="0.1488860325621251" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/layout/item_overview_home.xml" value="0.33" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/layout/item_related_reminder.xml" value="0.1488860325621251" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/layout/item_reminder_details.xml" value="0.1488860325621251" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/layout/nav_header_layout.xml" value="0.1488860325621251" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/layout/row_schedules.xml" value="0.33" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/menu/bottom_nav_menu.xml" value="0.3008658008658009" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/menu/side_nav_menu.xml" value="0.28055555555555556" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/menu/top_nav_setting.xml" value="0.3008658008658009" />
         <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project2w/app/src/main/res/drawable-xhdpi/drawable_card_standard.xml" value="0.3758974358974359" />
         <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project2w/app/src/main/res/drawable/background_day_view.xml" value="0.3687179487179487" />
         <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project2w/app/src/main/res/drawable/button_on_click.xml" value="0.3758974358974359" />

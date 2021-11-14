@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:backgroundTint="@color/colorPrimary"
-        android:src="@android:drawable/ic_menu_add"
+        android:src="@drawable/ic_add_floating"
         android:onClick="launchAddOrEditMedication"
         android:layout_margin="@dimen/sixteen_dp"
         android:layout_gravity="bottom|end"/>
@@ -26,6 +26,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="5dp"
+        android:layoutAnimation="@anim/layout_animation_fall_down"
         android:scrollbars="vertical">
 
     </androidx.recyclerview.widget.RecyclerView>
@@ -38,7 +39,7 @@
         android:indeterminate="true"
         android:max="100"
         android:backgroundTint="@color/white"
-        android:indeterminateTint="#1a09d6"
+        android:indeterminateTint="@color/colorPrimary"
         android:layout_gravity="bottom"
         android:layout_marginBottom="-7dp"/>
 

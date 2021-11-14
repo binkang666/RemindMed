@@ -94,6 +94,8 @@
     <string name="pharmacy">Pharmacy</string>
 
     <string name="google_map_key">AIzaSyD7w9xXLFcDgB10Ba65oSWCCAGuFBZNrgU</string>
+    <string name="privacy">Before signing in make sure you agree to our Terms and Conditions and Privacy Policy.</string>
+    <string name="terms_text">By signing up you agree to our Terms of Use, Privacy Policy and Rules.</string>
     />
 
 </resources>

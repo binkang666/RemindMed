@@ -39,19 +39,27 @@ import com.example.cecs491project.ui.notifications.NotificationsFragment;
 import com.example.cecs491project.ui.reminder.ReminderFragment;
 import com.example.cecs491project.ui.reminder.addReminderActivity;
 import com.example.cecs491project.ui.setting.SettingActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.Source;
 import com.google.firebase.firestore.WriteBatch;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.ExecutionException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -61,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawerLayout;
     private CircleImageView profilePic;
     private TextView toolbarText;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
     public Uri imageURI;
 
     HomeFragment homeFragment;
@@ -295,20 +304,42 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     public void getUserInfo(){
-        String user = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
+        final String[] name = new String[1];
         NavigationView navigationView = findViewById(R.id.side_nav_view);
         View headerView = navigationView.getHeaderView(0);
         TextView navUsername = headerView.findViewById(R.id.my_user_name);
-        navUsername.setText(user);
+        String uid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+        DocumentReference docRef = db.collection("User Database")
+                .document(uid).collection("User Information").document("Personal Information");
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Log.d("TAG", "DocumentSnapshot data: " + document.getData());
+                        name[0] = document.getString("userName");
+                        navUsername.setText(name[0]);
+                    } else {
+                        navUsername.setText(uid);
+                        Log.d("TAG", "No such document");
+                    }
+                } else {
+                    Log.d("TAG", "get failed with ", task.getException());
+                }
+            }
+        });
+    try {
+        StorageReference ref = FirebaseStorage.getInstance().getReference().child("images/" + uid + "_profile_picture.jpg");
 
-            StorageReference ref = FirebaseStorage.getInstance().getReference().child("images/" + user + "_profile_picture.jpg");
-
-            ref.getDownloadUrl().addOnSuccessListener(uri -> {
-                CircleImageView pic = headerView.findViewById(R.id.profilePic);
-                profilePic = findViewById(R.id.profilePic);
-                Glide.with(pic).load(uri).centerCrop().into(profilePic);
-            }).addOnFailureListener(e -> Log.i("log in info", "anonymous account"));
+        ref.getDownloadUrl().addOnSuccessListener(uri -> {
+            CircleImageView pic = headerView.findViewById(R.id.profilePic);
+            profilePic = findViewById(R.id.profilePic);
+            Glide.with(pic).load(uri).centerCrop().into(profilePic);
+        }).addOnFailureListener(e -> Log.i("log in info", "anonymous account"));
+    }catch (Exception e){
+        e.printStackTrace();
+    }
 
     }
 

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cecs491project.R;
 import com.example.cecs491project.ui.medication.Medications;
+import com.example.cecs491project.ui.reminder.Reminder;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -26,8 +27,9 @@ import java.util.concurrent.CountDownLatch;
 
 public class HomeFragment extends Fragment {
 
-    RecyclerView overview;
+    RecyclerView overview, scheduleView;
     overviewAdapter overviewAdapter;
+    schedulesAdapter schedulesAdapter;
     FirebaseFirestore db;
     View view;
 
@@ -44,25 +46,37 @@ public class HomeFragment extends Fragment {
         db = FirebaseFirestore.getInstance();
         String uid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
-        Query query;
+        Query query, query2;
         if(FirebaseAuth.getInstance().getCurrentUser().isAnonymous()){
             query = db.collection("Anonymous User Database")
                     .document(uid).collection("Medication");
+            query2 = db.collection("Anonymous User Database")
+                    .document(uid).collection("Reminder");
         }else{
             query = db.collection("User Database")
                     .document(uid).collection("Medication");
+            query2 = db.collection("User Database")
+                    .document(uid).collection("Reminder");
         }
 
         FirestoreRecyclerOptions<Medications> options = new FirestoreRecyclerOptions.Builder<Medications>()
                 .setQuery(query,Medications.class)
                 .build();
-
         overviewAdapter = new overviewAdapter(options);
-
         overview = view.findViewById(R.id.UpcomingView);
-        overview.setHasFixedSize(true);
+
         overview.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL, false));
         overview.setAdapter(overviewAdapter);
+
+
+        FirestoreRecyclerOptions<Reminder> options2 = new FirestoreRecyclerOptions.Builder<Reminder>()
+                .setQuery(query2,Reminder.class)
+                .build();
+        schedulesAdapter = new schedulesAdapter(options2);
+        scheduleView = view.findViewById(R.id.recyclerView);
+
+        scheduleView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL, false));
+        scheduleView.setAdapter(schedulesAdapter);
 
     }
 
@@ -71,6 +85,7 @@ public class HomeFragment extends Fragment {
     public void onStart() {
         super.onStart();
         overviewAdapter.startListening();
+        schedulesAdapter.startListening();
 
     }
 
@@ -78,6 +93,7 @@ public class HomeFragment extends Fragment {
     public void onStop() {
         super.onStop();
         overviewAdapter.stopListening();
+        schedulesAdapter.stopListening();
     }
 
 }

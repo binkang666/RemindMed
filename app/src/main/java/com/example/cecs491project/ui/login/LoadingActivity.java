@@ -44,11 +44,11 @@ public class LoadingActivity extends AppCompatActivity {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             if(user !=null){
                 startActivity(new Intent(LoadingActivity.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
             }
             else{
                 startActivity(new Intent(LoadingActivity.this, LoginActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
             }
             finish();
         }, 4000);

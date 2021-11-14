@@ -3,6 +3,7 @@ package com.example.cecs491project.ui.login;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +12,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -25,6 +28,7 @@ import com.example.cecs491project.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -35,18 +39,19 @@ import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private Button register_btn;
+    private TextView register_btn;
     private Button login_btn;
-    private EditText email_txt;
-    private EditText password_txt;
-    private Button reset_btn;
+    private TextInputEditText email_txt;
+    private TextInputEditText password_txt;
+    private TextView reset_btn;
     private Button Skip;
 
     private CheckBox remember;
     private SharedPreferences preferences;
     private static final String PREFS_NAME = "PrefsFile";
-
+    private ConstraintLayout constraintLayout;
     private FirebaseAuth auth;
+    private TextView logo, register, info;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +62,7 @@ public class LoginActivity extends AppCompatActivity {
         bindWidget();
         setListeners();
         getPreferencesData();
+        AddAnimationToViews();
 
     }
 
@@ -104,9 +110,10 @@ public class LoginActivity extends AppCompatActivity {
         reset_btn = findViewById(R.id.forgot_password);
         remember = findViewById(R.id.checkBox);
         Skip = findViewById(R.id.skip);
-
-        ImageView logo = (ImageView) findViewById(R.id.logo);
-        logo.setImageResource(R.drawable.logo);
+        logo = findViewById(R.id.logo);
+        register = findViewById(R.id.register);
+        info = findViewById(R.id.textView2);
+        constraintLayout = findViewById(R.id.constraintLayout);
         auth = FirebaseAuth.getInstance();
     }
 
@@ -137,7 +144,7 @@ public class LoginActivity extends AppCompatActivity {
             int id = view.getId();
                 if(id == R.id.register) {
                     startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
-                    finish();
+                    overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
                 }
                 if(id == R.id.login) {
                     String email_str = email_txt.getText().toString();
@@ -146,6 +153,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 if(id == R.id.forgot_password) {
                     startActivity(new Intent(LoginActivity.this, resetPasswordActivity.class));
+                    overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
                     finish();
                 }
                 if(id == R.id.skip){
@@ -163,6 +171,7 @@ public class LoginActivity extends AppCompatActivity {
                                 if(task.isSuccessful()){
                                     Toast.makeText(LoginActivity.this, "Signed in Anonymously", Toast.LENGTH_LONG).show();
                                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                    overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
                                     finish();
                                 }
                             }
@@ -189,6 +198,7 @@ public class LoginActivity extends AppCompatActivity {
         auth.signInWithEmailAndPassword(email,password).addOnSuccessListener(authResult -> {
             Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_LONG).show();
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
             finish();
         }).addOnFailureListener(e -> Toast.makeText(LoginActivity.this,"Email or Password is Incorrect!", Toast.LENGTH_LONG).show());
     }
@@ -202,5 +212,17 @@ public class LoginActivity extends AppCompatActivity {
         if(user !=null){
             startActivity(new Intent(LoginActivity.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
         }
+    }
+
+    private void AddAnimationToViews() {
+
+        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.bottom_to_top);
+        Animation animation1 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.top_to_bottom);
+
+        constraintLayout.startAnimation(animation);
+        logo.startAnimation(animation1);
+        register.startAnimation(animation);
+        info.startAnimation(animation);
+
     }
 }
