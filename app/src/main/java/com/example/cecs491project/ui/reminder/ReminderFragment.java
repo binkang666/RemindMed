@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -86,10 +89,14 @@ public class ReminderFragment extends Fragment {
                 .build();
 
         reminderAdapter = new ReminderAdapter(options);
-
         myReminderList = ReminderView.findViewById(R.id.reminder_list);
-        myReminderList.setHasFixedSize(true);
-        myReminderList.setLayoutManager(new LinearLayoutManager(getContext()));
+        myReminderList.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+
+        int resId = R.anim.layout_animation_fall_down;
+        LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(getContext(), resId);
+        myReminderList.setLayoutAnimation(animation);
+        Animation animation1 = AnimationUtils.loadAnimation(getActivity(),R.anim.left_to_right);
+        myReminderList.startAnimation(animation1);
         myReminderList.setAdapter(reminderAdapter);
 
 

@@ -25,7 +25,7 @@
         android:clickable="true"
         android:focusable="true"
         app:backgroundTint="@color/colorPrimary"
-        android:src="@android:drawable/ic_menu_add"
+        android:src="@drawable/ic_add_floating"
         android:onClick="addReminder" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -42,7 +42,7 @@
         android:indeterminate="true"
         android:max="100"
         android:backgroundTint="@color/white"
-        android:indeterminateTint="#1a09d6"
+        android:indeterminateTint="@color/colorPrimary"
         android:layout_gravity="bottom"
         android:layout_marginBottom="-7dp"/>
 

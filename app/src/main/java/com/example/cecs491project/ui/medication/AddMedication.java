@@ -42,9 +42,8 @@ import java.util.Objects;
 public class AddMedication extends AppCompatActivity {
 
     EditText et_medName, et_medPillCount, et_medDosage, et_medRefillCount, medicationNote;
-    private TextView SAVE;
+    private Button SAVE;
     private View Card_View ;
-    private ImageView ASClose ;
     private Button cameraBtn;
     private ImageView medPic;
 
@@ -61,10 +60,14 @@ public class AddMedication extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle("Add Medication");
         Objects.requireNonNull(getSupportActionBar()).setTitle(0);
         initializePage();
 
-        ASClose.setOnClickListener(v -> AddMedication.super.onBackPressed());
+
         cameraBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,7 +91,6 @@ public class AddMedication extends AppCompatActivity {
         et_medPillCount = findViewById(R.id.editTextPillCount);
         et_medDosage = findViewById(R.id.editTextDosage);
         et_medRefillCount = findViewById(R.id.editTextRefillCount);
-        ASClose = findViewById(R.id.ASClose);
         SAVE = findViewById(R.id.SAVE);
         Card_View = findViewById(R.id.Card_View);
         medicationNote = findViewById(R.id.medication_note);
@@ -102,15 +104,12 @@ public class AddMedication extends AppCompatActivity {
 
         SAVE.setZ(20);
         Card_View.setZ(2);
-        ASClose.setZ(20);
     }
 
     private void makeSnackBarMessage(String message){
         Snackbar.make(Card_View, message, Snackbar.LENGTH_SHORT).show();
     }
 
-    //TODO： User should be able to add the medication even if some information remain unfinished. (right now, you need to add every information to add)
-    //TODO: add picture feature can be deleted if unnecessary.
     private void addMedToDatabase(String categories){
 
         SAVE.setOnClickListener(view -> {
@@ -283,5 +282,12 @@ public class AddMedication extends AppCompatActivity {
             medPic.setImageBitmap(captureImage);
 
         }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
+        return true;
     }
 }

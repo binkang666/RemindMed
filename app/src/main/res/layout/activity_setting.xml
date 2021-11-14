@@ -34,18 +34,19 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Link Account"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="20dp"
-            android:textAlignment="textStart"
-            android:textColor="@color/colorPrimary"
-            android:fontFamily="@font/quicksand_regular"
-            android:background="@color/trans"
-            android:id="@+id/link_account">
-        </Button>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="My Profile"
+                android:textAlignment="textStart"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:textColor="@color/colorPrimary"
+                android:fontFamily="@font/quicksand_regular"
+                android:background="@color/trans"
+                android:id="@+id/profile">
+            </Button>
 
         <View
             android:layout_width="match_parent"
@@ -72,18 +73,19 @@
             android:background="@color/gainsboro"
             android:layout_marginStart="@dimen/eight_dp"
             android:layout_marginEnd="@dimen/eight_dp"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Link Account"
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Theme"
-            android:textAlignment="textStart"
-            android:layout_marginStart="20dp"
-            android:textColor="@color/colorPrimary"
-            android:fontFamily="@font/quicksand_regular"
-            android:background="@color/trans"
-            android:id="@+id/theme">
-        </Button>
+                android:layout_marginStart="20dp"
+                android:textAlignment="textStart"
+                android:textColor="@color/colorPrimary"
+                android:fontFamily="@font/quicksand_regular"
+                android:background="@color/trans"
+                android:id="@+id/link_account">
+            </Button>
+
 
         <View
             android:layout_width="match_parent"

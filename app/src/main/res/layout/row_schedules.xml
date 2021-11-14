@@ -120,7 +120,7 @@
         android:paddingBottom="2dp"
         android:singleLine="false"
         android:text="9:30am"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/white"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/view5"
         app:layout_constraintEnd_toEndOf="parent" />

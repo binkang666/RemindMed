@@ -51,6 +51,6 @@ public class LoadingActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
             }
             finish();
-        }, 4000);
+        }, 4300);
     }
 }

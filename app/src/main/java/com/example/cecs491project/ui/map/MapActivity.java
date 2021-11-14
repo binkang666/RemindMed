@@ -7,8 +7,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
@@ -37,7 +39,8 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     double currentLat, currentLng;
     hospitalSearch hospitalSearch = new hospitalSearch();
     pharmacySearch pharmacySearch = new pharmacySearch();
-    Button hospital, pharmacy;
+    SwitchCompat changeDisplay;
+    TextView showing;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +51,14 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                 .findFragmentById(R.id.map);
         Objects.requireNonNull(mapFragment).getMapAsync(this);
         back = findViewById(R.id.go_back);
-        hospital = findViewById(R.id.hospital);
-        pharmacy = findViewById(R.id.pharmacy);
-        back.setOnClickListener(v -> MapActivity.super.onBackPressed());
+        changeDisplay = findViewById(R.id.toggleBtn);
+        showing = findViewById(R.id.showing);
+        back.setOnClickListener(view -> {
+            MapActivity.super.onBackPressed();
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
+        }
+        );
+        showing.setText(changeDisplay.getTextOn());
         client = LocationServices.getFusedLocationProviderClient(this);
     }
 
@@ -105,36 +113,37 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                         optionsNearby.title(name);
                         mMap.addMarker(optionsNearby);
                     }
-                    hospital.setOnClickListener(view -> {
-                        mMap.clear();
-                        PlacesSearchResult[] placesSearchResults1 = hospitalSearch.run().results;
+                    changeDisplay.setOnClickListener(view -> {
+                        if(changeDisplay.isChecked()) {
+                            showing.setText(changeDisplay.getTextOn());
+                            mMap.clear();
+                            PlacesSearchResult[] placesSearchResults1 = hospitalSearch.run().results;
 
-                        for (PlacesSearchResult placesSearchResult : placesSearchResults1) {
-                            Log.e("responseTag", placesSearchResult.toString());
-                            double lat = placesSearchResult.geometry.location.lat;
-                            double lng = placesSearchResult.geometry.location.lng;
-                            MarkerOptions optionsNearby = new MarkerOptions().position(new LatLng(lat, lng));
-                            String name = placesSearchResult.name;
-                            optionsNearby.title(name);
-                            mMap.addMarker(optionsNearby);
+                            for (PlacesSearchResult placesSearchResult : placesSearchResults1) {
+                                Log.e("responseTag", placesSearchResult.toString());
+                                double lat = placesSearchResult.geometry.location.lat;
+                                double lng = placesSearchResult.geometry.location.lng;
+                                MarkerOptions optionsNearby = new MarkerOptions().position(new LatLng(lat, lng));
+                                String name = placesSearchResult.name;
+                                optionsNearby.title(name);
+                                mMap.addMarker(optionsNearby);
+                            }
+                        }else if(!(changeDisplay.isChecked())){
+                            showing.setText(changeDisplay.getTextOff());
+                            mMap.clear();
+                            PlacesSearchResult[] placesSearchResults12 = pharmacySearch.run().results;
+
+                            for (PlacesSearchResult placesSearchResult : placesSearchResults12) {
+                                Log.e("responseTag", placesSearchResult.toString());
+                                double lat = placesSearchResult.geometry.location.lat;
+                                double lng = placesSearchResult.geometry.location.lng;
+                                MarkerOptions optionsNearby = new MarkerOptions().position(new LatLng(lat, lng));
+                                String name = placesSearchResult.name;
+                                optionsNearby.title(name);
+                                mMap.addMarker(optionsNearby);
+                            }
                         }
                     });
-
-                    pharmacy.setOnClickListener(view -> {
-                        mMap.clear();
-                        PlacesSearchResult[] placesSearchResults12 = pharmacySearch.run().results;
-
-                        for (PlacesSearchResult placesSearchResult : placesSearchResults12) {
-                            Log.e("responseTag", placesSearchResult.toString());
-                            double lat = placesSearchResult.geometry.location.lat;
-                            double lng = placesSearchResult.geometry.location.lng;
-                            MarkerOptions optionsNearby = new MarkerOptions().position(new LatLng(lat, lng));
-                            String name = placesSearchResult.name;
-                            optionsNearby.title(name);
-                            mMap.addMarker(optionsNearby);
-                        }
-                    });
-
                 });
             }
         });

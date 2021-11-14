@@ -23,16 +23,24 @@ import com.example.cecs491project.R;
 public class SettingActivity extends AppCompatActivity {
 
     Button link;
+    Button myProfile;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
         link = findViewById(R.id.link_account);
-
+        myProfile = findViewById(R.id.profile);
         link.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity( new Intent(SettingActivity.this, LinkAccountActivity.class));
+                finish();
+            }
+        });
+        myProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity( new Intent(SettingActivity.this, MyProfileActivity.class));
                 finish();
             }
         });

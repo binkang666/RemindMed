@@ -64,8 +64,7 @@ public class addReminderActivity extends AppCompatActivity implements OnItemSele
     private Spinner medications;
     private ArrayList<Medications> medArrayList;
     private ArrayList<Day> daysInput;
-    private ImageView ASClose ;
-    private TextView SAVE ;
+    private Button SAVE ;
     private View Card_View ;
     private Button clockTime;
     private Button btnStartDate , btnEndDate ;
@@ -87,13 +86,16 @@ public class addReminderActivity extends AppCompatActivity implements OnItemSele
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle("Add Reminder");
         Objects.requireNonNull(getSupportActionBar()).setTitle(0);
         initializePage();
         EventChangeListener();
         medNames.add("Select Medication");
         showMedications();
 
-        ASClose.setOnClickListener(v -> addReminderActivity.super.onBackPressed());
     }
 
 
@@ -123,7 +125,6 @@ public class addReminderActivity extends AppCompatActivity implements OnItemSele
 
 
         clockTime = findViewById(R.id.clockTime);
-        ASClose = findViewById(R.id.ASClose);
         SAVE = findViewById(R.id.SAVE);
         Card_View = findViewById(R.id.Card_View);
         btnStartDate = findViewById(R.id.btnStartDate);
@@ -131,7 +132,6 @@ public class addReminderActivity extends AppCompatActivity implements OnItemSele
 
         SAVE.setZ(20);
         Card_View.setZ(2);
-        ASClose.setZ(20);
 
 
     }
@@ -458,6 +458,11 @@ public class addReminderActivity extends AppCompatActivity implements OnItemSele
     }
 
 
-
+    @Override
+    public boolean onSupportNavigateUp() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
+        return true;
+    }
 
 }

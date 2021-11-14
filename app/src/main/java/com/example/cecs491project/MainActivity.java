@@ -233,12 +233,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     {
         Intent i = new Intent(MainActivity.this, addReminderActivity.class);
         startActivity(i);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
     }
 
     public void launchAddOrEditMedication(View v)
     {
         Intent i = new Intent(MainActivity.this, AddMedication.class);
         startActivity(i);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
     }
 
     @Override
@@ -365,5 +367,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void openMap(MenuItem item) {
         startActivity(new Intent(MainActivity.this, MapActivity.class));
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
     }
 }
