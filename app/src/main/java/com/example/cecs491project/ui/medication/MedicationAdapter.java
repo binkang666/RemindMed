@@ -164,6 +164,10 @@ public class MedicationAdapter extends FirestoreRecyclerAdapter<Medications, Med
 
     }
 
+    @Override
+    public int getItemCount() {
+        return super.getItemCount();
+    }
 
     class ViewHolder extends RecyclerView.ViewHolder{
 

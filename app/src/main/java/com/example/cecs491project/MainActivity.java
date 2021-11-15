@@ -348,6 +348,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void setting(MenuItem item) {
         startActivity(new Intent(MainActivity.this, SettingActivity.class));
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
     }
 
 

@@ -2,6 +2,7 @@ package com.example.cecs491project.ui.setting;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.content.Intent;
@@ -75,6 +76,14 @@ public class LinkAccountActivity extends AppCompatActivity {
                 linkAccount(email_str,password_str);
             }
         });
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle("Link Account");
+
     }
 
     //Hide input keypad after focus changed
@@ -167,14 +176,16 @@ public class LinkAccountActivity extends AppCompatActivity {
     }
 
 
-    public void goBack(View view) {
-        startActivity(new Intent(LinkAccountActivity.this, SettingActivity.class));
-        finish();
-    }
-
     @Override
     protected void onStart() {
         super.onStart();
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
+        return true;
     }
 
 

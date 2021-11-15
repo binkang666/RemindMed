@@ -27,6 +27,7 @@ public class SettingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_setting);
         link = findViewById(R.id.link_account);
         myProfile = findViewById(R.id.profile);
@@ -34,28 +35,29 @@ public class SettingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity( new Intent(SettingActivity.this, LinkAccountActivity.class));
-                finish();
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
             }
         });
         myProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity( new Intent(SettingActivity.this, MyProfileActivity.class));
-                finish();
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
             }
         });
-
-        Toolbar toolbar = findViewById(R.id.toolbar_setting);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setTitle("");
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle("Setting");
 
     }
 
     @Override
     public boolean onSupportNavigateUp() {
         super.onBackPressed();
-
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
         return true;
     }
 

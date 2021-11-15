@@ -98,6 +98,11 @@
     <string name="terms_text">By signing up you agree to our Terms of Use, Privacy Policy and Rules.</string>
     <string name="showing_nearby_hospital">Showing Nearby Hospital</string>
     <string name="showing_nearby_pharmacy">Showing Nearby Pharmacy</string>
+    <string name="desc_a">A tablet is a pharmaceutical oral dosage form or solid unit dosage form.</string>
+    <string name="desc_b">Drug-embedded empty capsule shells — A new class of capsule has been developed whereby drugs can be embedded in the capsule shell matrix.</string>
+    <string name="desc_c">Eyes drops sometimes do not have medications in them and are only lubricating and tear-replacing solutions.</string>
+    <string name="desc_d">An injection is the act of administering a liquid, especially a drug, into a person\'s body using a needle (usually a hypodermic needle) and a syringe.</string>
+
     />
 
 </resources>

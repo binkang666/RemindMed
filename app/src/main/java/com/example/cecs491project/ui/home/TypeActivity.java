@@ -1,29 +1,34 @@
-package com.example.cecs491project.ui.medication;
-
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.view.animation.LayoutAnimationController;
-import android.widget.ProgressBar;
-import android.widget.Toast;
+package com.example.cecs491project.ui.home;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.cecs491project.R;
+import com.example.cecs491project.ui.medication.MedicationAdapter;
+import com.example.cecs491project.ui.medication.MedicationDetails;
+import com.example.cecs491project.ui.medication.Medications;
+import com.example.cecs491project.ui.notifications.Notification;
+import com.example.cecs491project.ui.notifications.notificationAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -35,56 +40,67 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.CountDownLatch;
 
-public class MedicationFragment extends Fragment {
+public class TypeActivity extends AppCompatActivity {
 
-    RecyclerView recyclerView;
-    MedicationAdapter medicationAdapter;
     FirebaseFirestore db;
-    View view;
-    ProgressBar progressBar;
+    RecyclerView med_type_list;
+    MedicationAdapter medicationAdapter;
+    TextView desc;
+
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_type);
+        String newString, newString2;
+        if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if(extras == null) {
+                newString= null;
+                newString2 = null;
+            } else {
+                newString= extras.getString("Title");
+                newString2 = extras.getString("Desc");
+            }
+        } else {
+            newString= (String) savedInstanceState.getSerializable("Title");
+            newString2= (String) savedInstanceState.getSerializable("Desc");
+        }
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle(newString);
+        desc = findViewById(R.id.desc_med);
+        desc.setText(newString2);
+
+        EventChangeListener(newString);
+
     }
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.fragment_medication, container, false);
-
-        progressBar = view.findViewById(R.id.progressbar);
-
-        EventChangeListener();
-        return view;
-    }
-
-    private void EventChangeListener(){
-        CountDownLatch done = new CountDownLatch(1);
+    private void EventChangeListener(String typeName){
         db = FirebaseFirestore.getInstance();
         String uid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
         Query query;
         if(FirebaseAuth.getInstance().getCurrentUser().isAnonymous()){
             query = db.collection("Anonymous User Database")
-                    .document(uid).collection("Medication");
+                    .document(uid).collection("Medication").whereEqualTo("categories", typeName);
         }else{
             query = db.collection("User Database")
-                    .document(uid).collection("Medication");
+                    .document(uid).collection("Medication").whereEqualTo("categories", typeName);
         }
 
         FirestoreRecyclerOptions<Medications> options = new FirestoreRecyclerOptions.Builder<Medications>()
                 .setQuery(query,Medications.class)
                 .build();
 
-        recyclerView = view.findViewById(R.id.med_list);
-
-        Animation animation1 = AnimationUtils.loadAnimation(getActivity(),R.anim.left_to_right);
-        recyclerView.startAnimation(animation1);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-//        LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(getContext(), R.anim.layout_animation_fall_down);
-//        recyclerView.setLayoutAnimation(animation);
         medicationAdapter = new MedicationAdapter(options);
-        recyclerView.setAdapter(medicationAdapter);
+        med_type_list = findViewById(R.id.type_list);
+        med_type_list.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
+        med_type_list.setAdapter(medicationAdapter);
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
@@ -94,14 +110,14 @@ public class MedicationFragment extends Fragment {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(getApplicationContext());
                 alertDialog.setMessage("Are you sure you want to delete this medication?");
                 alertDialog.setCancelable(false);
                 alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         medicationAdapter.deleteItem(viewHolder.getAdapterPosition());
-                        Toast.makeText(getContext(), "Medication Deleted", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Medication Deleted", Toast.LENGTH_LONG).show();
                     }
                 });
                 alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -112,7 +128,7 @@ public class MedicationFragment extends Fragment {
                 });
                 alertDialog.create().show();
             }
-        }).attachToRecyclerView(recyclerView);
+        }).attachToRecyclerView(med_type_list);
         medicationAdapter.setOnItemClickListener(new MedicationAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(DocumentSnapshot documentSnapshot, int pos) {
@@ -135,20 +151,14 @@ public class MedicationFragment extends Fragment {
                 bundle.putInt("refill", refillCount);
                 bundle.putDouble("dos", dosage);
 
-                Intent i = new Intent(getContext(), MedicationDetails.class);
+                Intent i = new Intent(getApplicationContext(), MedicationDetails.class);
                 i.putExtras(bundle);
                 startActivity(i);
-                getActivity().overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
             }
         });
-        query.addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                progressBar.setVisibility(view.GONE);
-            }
-        });
-    }
 
+    }
 
     @Override
     public void onStart() {
@@ -164,4 +174,11 @@ public class MedicationFragment extends Fragment {
     }
 
 
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_in_down, R.anim.slide_out_down);
+        return true;
+    }
 }

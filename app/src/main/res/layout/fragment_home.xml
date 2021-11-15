@@ -7,6 +7,56 @@
     tools:context=".ui.home.HomeFragment">
 
 
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/constraintLayout5"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/card_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/tips">
+                </ImageView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/white"
+                android:fontFamily="@font/quicksand_bold"
+                android:text="Do You Know?">
+            </TextView>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+            <TextSwitcher
+                android:id="@+id/tips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_marginHorizontal="20dp"
+                android:fontFamily="@font/quicksand_bold"
+                android:inAnimation="@anim/slide_in_left"
+                android:outAnimation="@anim/slide_out_left"
+                >
+            </TextSwitcher>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <TextView
         android:id="@+id/textView5"
@@ -16,12 +66,12 @@
         android:gravity="left"
         android:lineSpacingExtra=".03dp"
         android:padding="8dp"
-        android:text="Today's schedule"
+        android:text="Medication Overview"
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/constraintLayout5"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/UpcomingView"

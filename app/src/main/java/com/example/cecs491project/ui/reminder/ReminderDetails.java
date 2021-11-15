@@ -90,8 +90,8 @@ public class ReminderDetails extends AppCompatActivity {
         Intent intent = new Intent(ReminderDetails.this, editReminderActivity.class);
         intent.putExtras(b);
         startActivity(intent);
+        finish();
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
-
     }
 
     @Override

@@ -1,9 +1,12 @@
 package com.example.cecs491project.ui.home;
 
 
+import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,62 +18,61 @@ import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.DocumentSnapshot;
 
-public class overviewAdapter extends FirestoreRecyclerAdapter<Medications, overviewAdapter.ViewHolder> {
-    private OnItemClickListener listener;
+import java.util.ArrayList;
 
-    public overviewAdapter(@NonNull FirestoreRecyclerOptions<Medications> medications) {
-        super(medications);
+
+public class overviewAdapter extends RecyclerView.Adapter<overviewAdapter.ViewHolder> {
+    private final ArrayList<String> ItemName;
+    private final ArrayList<Integer> ItemImage;
+    private final ArrayList<String> ItemDesc;
+    private final Context mContext;
+
+    public overviewAdapter(Context context, ArrayList<String> itemname, ArrayList<Integer> image, ArrayList<String> desc) {
+        ItemName=itemname;
+        mContext = context;
+        ItemImage = image;
+        ItemDesc =desc;
+    }
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_overview_home, parent, false);
+        return new ViewHolder(view);
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull Medications model) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
 
-        holder.med_name.setText(model.getMedicationName());
-        holder.med_type.setText(model.getCategories());
-
+        holder.itemName.setText(ItemName.get(position));
+        System.out.println(ItemDesc.get(position));
+//        holder.itemDesc.setText(ItemDesc.get(position));
+        holder.imageView.setAdjustViewBounds(true);
+        holder.imageView.setImageResource(ItemImage.get(position));
 
     }
 
-    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_overview_home,
-                parent,false);
-        return new ViewHolder(v);
+    public int getItemCount() {
+        return ItemName.size();
+    }
+
+    public Context getmContext() {
+        return mContext;
     }
 
 
+    public class ViewHolder extends RecyclerView.ViewHolder{
 
-    class ViewHolder extends RecyclerView.ViewHolder{
+        TextView itemName;
+        ImageView imageView;
+        TextView itemDesc;
 
-        TextView med_name;
-        TextView med_type;
-//        TextView timePart;
-//        TextView AMPM;
-//        TextView timesLeft;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            med_name = itemView.findViewById(R.id.medicineName);
-            med_type = itemView.findViewById(R.id.medicineType);
-//            timePart = itemView.findViewById(R.id.timeToTake);
-//            AMPM = itemView.findViewById(R.id.amOrPm);
-//            timesLeft =itemView.findViewById(R.id.timeLeft);
-
-            itemView.setOnClickListener(view -> {
-                int pos = getAdapterPosition();
-                if(pos != RecyclerView.NO_POSITION && listener != null){
-                    listener.onItemClick(getSnapshots().getSnapshot(pos), pos);
-                }
-
-            });
+            itemName = itemView.findViewById(R.id.text);
+            imageView = itemView.findViewById(R.id.imageView);
+            itemDesc = itemView.findViewById(R.id.desc_med);
         }
     }
 
-    public interface OnItemClickListener{
-        void onItemClick(DocumentSnapshot documentSnapshot, int pos);
-    }
-    public void setOnItemClickListener(OnItemClickListener listener){
-        this.listener = listener;
-    }
 }

@@ -12,71 +12,54 @@
     android:background="@drawable/ripple_card_standard"
     android:elevation="1dp">
 
-    <TextView
-        android:id="@+id/textView61"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/quicksand_regular"
-        android:text="Total: "
-        android:textColor="@color/black"
-        android:textSize="17sp"
-        app:layout_constraintStart_toStartOf="@+id/textView60"
-        app:layout_constraintTop_toBottomOf="@+id/textView60" />
 
     <TextView
-        android:id="@+id/mediHave"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/quicksand_medium"
-        android:text="21"
-        android:textColor="@color/black"
-        android:textSize="17sp"
-        app:layout_constraintStart_toEndOf="@+id/textView61"
-        app:layout_constraintTop_toTopOf="@+id/textView61" />
-
-    <TextView
-        android:id="@+id/textView65"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:fontFamily="@font/quicksand_regular"
-        android:text="Taken: "
-        android:textColor="@color/black"
-        android:textSize="17sp"
-        app:layout_constraintStart_toEndOf="@+id/mediHave"
-        app:layout_constraintTop_toTopOf="@+id/mediHave" />
-
-    <TextView
-        android:id="@+id/taken2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/quicksand_medium"
-        android:text="3"
-        android:textColor="@color/black"
-        android:textSize="17sp"
-        app:layout_constraintStart_toEndOf="@+id/textView65"
-        app:layout_constraintTop_toTopOf="@+id/textView65" />
-
-    <TextView
-        android:id="@+id/textView60"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/quicksand_regular"
-        android:text="Before Meal"
-        android:textColor="@color/black"
-        android:textSize="17sp"
-        app:layout_constraintStart_toStartOf="@+id/textView38"
-        app:layout_constraintTop_toBottomOf="@+id/textView38" />
-
-    <TextView
+        android:id="@+id/timeLeft"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:fontFamily="@font/quicksand_medium"
-        android:text="1hr 19min left"
+        android:text="1"
         android:textColor="@color/colorPrimary"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/takeTime"
+        app:layout_constraintEnd_toStartOf="@+id/hrs"
+        app:layout_constraintTop_toBottomOf="@+id/takeTime" />
+
+    <TextView
+        android:id="@+id/hrs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/quicksand_medium"
+        android:text="hr "
+        android:textColor="@color/colorPrimary"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/minsLeft"
+        app:layout_constraintTop_toBottomOf="@+id/takeTime" />
+
+    <TextView
+        android:id="@+id/minsLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/quicksand_medium"
+        android:text="30"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/mins"
+        app:layout_constraintTop_toBottomOf="@+id/takeTime" />
+
+
+    <TextView
+        android:id="@+id/mins"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/quicksand_medium"
+        android:text=" mins left  "
+        android:textColor="@color/colorPrimary"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/takeTime" />
 
     <TextView
@@ -85,7 +68,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:fontFamily="@font/quicksand_regular"
-        android:text="Type: "
+        android:text="Medication: "
         android:textColor="@color/black"
         android:textSize="17sp"
         app:layout_constraintStart_toStartOf="@+id/ReminderName"
@@ -98,7 +81,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/quicksand_medium"
-        android:text="@string/medication_name"
+        android:text="@string/reminder_name"
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -126,16 +109,30 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
-        android:id="@+id/medicineType"
+        android:id="@+id/MedicineName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
         android:fontFamily="@font/quicksand_regular"
-        android:text="Tablet"
+        android:text="Morphine"
         android:textColor="@color/black"
         android:textSize="17sp"
         app:layout_constraintStart_toEndOf="@+id/textView38"
         app:layout_constraintTop_toTopOf="@+id/textView38" />
+
+    <TextView
+        android:id="@+id/daysleft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/quicksand_regular"
+        android:text="7"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textView38"
+        app:layout_constraintTop_toBottomOf="@+id/MedicineName" />
+
 
     <TextView
         android:id="@+id/daysToComplete"
@@ -143,12 +140,12 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:fontFamily="@font/quicksand_regular"
-        android:text="7 days to complete"
+        android:text=" days To Complete"
         android:textColor="@color/black"
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/textView61"
-        app:layout_constraintTop_toBottomOf="@+id/textView61" />
+        app:layout_constraintStart_toEndOf="@+id/daysleft"
+        app:layout_constraintTop_toBottomOf="@+id/MedicineName" />
 
     <TextView
         android:id="@+id/MorLunDin"

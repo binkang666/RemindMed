@@ -6,21 +6,32 @@
     android:layout_height="match_parent"
     tools:context=".ui.setting.LinkAccountActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:elevation="2dp"
+        android:theme="?attr/toolbarTheme"
+        app:layout_collapseMode="pin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+    </androidx.appcompat.widget.Toolbar>
 
     <EditText
         android:id="@+id/email"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_below="@id/note_2"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:autofillHints="emailAddress"
         android:background="@drawable/stroke_box"
         android:backgroundTint="@color/gainsboro"
         android:ellipsize="end"
         android:hint="@string/email"
-        android:padding="5dp"
-        android:layout_below="@id/note_2"
         android:inputType="textEmailAddress"
-        android:autofillHints="emailAddress"
+        android:padding="5dp"
         android:singleLine="true" />
 
     <EditText
@@ -46,30 +57,10 @@
         android:layout_below="@+id/password"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"
+        android:background="@drawable/button_background"
         android:text="Link Now" />
 
-    <View
-        android:id="@+id/line1"
-        android:layout_width="300dp"
-        android:layout_height="1dip"
-        android:layout_below="@+id/Link"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="130dp"
-        android:background="@color/gainsboro" />
 
-    <Button
-        android:id="@+id/go_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/line1"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:background="@android:color/transparent"
-        android:onClick="goBack"
-        android:text="Go back"
-        android:textColor="@color/colorPrimary"
-        android:textSize="11sp"
-        tools:ignore="UsingOnClickInXml" />
 
     <TextView
         android:id="@+id/note_1"
@@ -108,12 +99,12 @@
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:indeterminate="true"
-        android:max="100"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="-7dp"
         android:backgroundTint="@color/white"
+        android:indeterminate="true"
         android:indeterminateTint="#1a09d6"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="-7dp"/>
+        android:max="100" />
 
 
 </RelativeLayout>

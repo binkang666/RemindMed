@@ -18,12 +18,13 @@ public class MyProfileActivity extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setTitle("My Profile");
     }
 
     @Override
     public boolean onSupportNavigateUp() {
         super.onBackPressed();
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
         return true;
     }
 }
