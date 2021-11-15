@@ -8,17 +8,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.medication.AddMedication">
 
-    <ImageView
-        android:id="@+id/ASClose"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:background="@drawable/ic_close_black_24dp"
-        android:contentDescription="@string/image"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:elevation="2dp"
+        android:theme="?attr/toolbarTheme"
+        app:layout_collapseMode="pin"
         app:layout_constraintStart_toStartOf="parent"
-        android:stateListAnimator="@null"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+    </androidx.appcompat.widget.Toolbar>
+
 
     <TextView
         android:id="@+id/SAVE"
@@ -307,25 +308,5 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:elevation="4dp"
-        android:gravity="center"
-        android:theme="?attr/toolbarTheme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="@font/quicksand_bold"
-            android:text="Edit Medication"
-            android:textColor="?attr/textColorPrimary"
-            android:textSize="20sp" />
-    </androidx.appcompat.widget.Toolbar>
 </androidx.constraintlayout.widget.ConstraintLayout>

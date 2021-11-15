@@ -64,7 +64,6 @@ public class AddMedication extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Add Medication");
-        Objects.requireNonNull(getSupportActionBar()).setTitle(0);
         initializePage();
 
 

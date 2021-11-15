@@ -157,6 +157,7 @@
         <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/drawable/stroke_oval.xml" value="0.1837719298245614" />
         <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/layout/activity_add_medication.xml" value="0.23097826086956522" />
         <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/layout/activity_add_reminder.xml" value="0.3048245614035088" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/layout/activity_edit_medication.xml" value="0.20877192982456141" />
         <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/layout/activity_edit_reminder.xml" value="0.1488860325621251" />
         <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/layout/activity_link_account.xml" value="0.23097826086956522" />
         <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/layout/activity_loading.xml" value="0.33" />
@@ -172,6 +173,7 @@
         <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/layout/activity_setting.xml" value="0.33" />
         <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/layout/fragment_home.xml" value="0.20969202898550723" />
         <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/layout/fragment_medication.xml" value="0.17" />
+        <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/layout/fragment_notifications.xml" value="0.20877192982456141" />
         <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/layout/fragment_reminder.xml" value="0.1488860325621251" />
         <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/layout/fragment_tab_details.xml" value="0.1488860325621251" />
         <entry key="..\:/Users/Deer0/AndroidStudioProjects/CECS491Project20w/app/src/main/res/layout/fragment_tab_related.xml" value="0.1488860325621251" />

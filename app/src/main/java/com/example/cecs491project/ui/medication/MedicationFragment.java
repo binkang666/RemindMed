@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
@@ -75,15 +76,14 @@ public class MedicationFragment extends Fragment {
                 .setQuery(query,Medications.class)
                 .build();
 
-        medicationAdapter = new MedicationAdapter(options);
         recyclerView = view.findViewById(R.id.med_list);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
 
-        int resId = R.anim.layout_animation_fall_down;
-        LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(getContext(), resId);
-        recyclerView.setLayoutAnimation(animation);
         Animation animation1 = AnimationUtils.loadAnimation(getActivity(),R.anim.left_to_right);
         recyclerView.startAnimation(animation1);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(getContext(), R.anim.layout_animation_fall_down);
+        recyclerView.setLayoutAnimation(animation);
+        medicationAdapter = new MedicationAdapter(options);
         recyclerView.setAdapter(medicationAdapter);
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
@@ -138,6 +138,7 @@ public class MedicationFragment extends Fragment {
                 Intent i = new Intent(getContext(), MedicationDetails.class);
                 i.putExtras(bundle);
                 startActivity(i);
+                getActivity().overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
             }
         });
         query.addSnapshotListener(new EventListener<QuerySnapshot>() {

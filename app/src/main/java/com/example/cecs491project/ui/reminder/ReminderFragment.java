@@ -154,6 +154,7 @@ public class ReminderFragment extends Fragment {
                 Intent i = new Intent(getContext(), ReminderDetails.class);
                 i.putExtras(bundle);
                 startActivity(i);
+                getActivity().overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
             }
         });
 

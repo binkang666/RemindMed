@@ -90,7 +90,6 @@ public class addReminderActivity extends AppCompatActivity implements OnItemSele
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Add Reminder");
-        Objects.requireNonNull(getSupportActionBar()).setTitle(0);
         initializePage();
         EventChangeListener();
         medNames.add("Select Medication");

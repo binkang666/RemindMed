@@ -42,7 +42,6 @@ public class EditMedication extends AppCompatActivity {
     TextView medName;
     private TextView SAVE;
     private View Card_View ;
-    private ImageView ASClose ;
     private Button cameraBtn;
     private ImageView medPic;
 
@@ -57,9 +56,11 @@ public class EditMedication extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setTitle(0);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle("Edit Reminder");
         initializePage();
-        ASClose.setOnClickListener(v -> EditMedication.super.onBackPressed());
         cameraBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -98,7 +99,6 @@ public class EditMedication extends AppCompatActivity {
         et_medPillCount = findViewById(R.id.editTextPillCount);
         et_medDosage = findViewById(R.id.editTextDosage);
         et_medRefillCount = findViewById(R.id.editTextRefillCount);
-        ASClose = findViewById(R.id.ASClose);
         SAVE = findViewById(R.id.SAVE);
         Card_View = findViewById(R.id.Card_View);
         medicationNote = findViewById(R.id.medication_note);
@@ -112,7 +112,6 @@ public class EditMedication extends AppCompatActivity {
 
         SAVE.setZ(20);
         Card_View.setZ(2);
-        ASClose.setZ(20);
     }
 
     private void makeSnackBarMessage(String message){
@@ -291,4 +290,10 @@ public class EditMedication extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
+        return true;
+    }
 }
