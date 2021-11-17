@@ -57,6 +57,7 @@ import com.google.firebase.firestore.WriteBatch;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ExecutionException;
@@ -211,7 +212,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String user = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
         try {
-            StorageReference ref = FirebaseStorage.getInstance().getReference().child("images/" + user + "_profile_picture.jpg");
+            StorageReference ref = FirebaseStorage.getInstance().getReference().child("images/" + user + "/profile_picture.jpg");
             ref.putFile(imageURI).addOnSuccessListener(taskSnapshot -> {
                 pd.dismiss();
                 Snackbar.make(findViewById(android.R.id.content), "Image uploaded", Snackbar.LENGTH_LONG).show();
@@ -322,6 +323,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         Log.d("TAG", "DocumentSnapshot data: " + document.getData());
                         name[0] = document.getString("userName");
                         navUsername.setText(name[0]);
+
+                        //load welcome msg
+                        Calendar c = Calendar.getInstance();
+                        int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
+                        TextView welcome_msg = (TextView) findViewById(R.id.user_name_label);
+                        if(timeOfDay >= 0 && timeOfDay < 12){
+                            welcome_msg.setText("Good Morning!");
+                        }else if(timeOfDay >= 12 && timeOfDay < 16){
+                            welcome_msg.setText("Good Afternoon!");
+                        }else if(timeOfDay >= 16 && timeOfDay < 21){
+                            welcome_msg.setText("Good Evening!");
+                        }else if(timeOfDay >= 21 && timeOfDay < 24){
+                            welcome_msg.setText("Good Night!");
+                        }
                     } else {
                         navUsername.setText(uid);
                         Log.d("TAG", "No such document");
@@ -332,13 +347,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
     try {
-        StorageReference ref = FirebaseStorage.getInstance().getReference().child("images/" + uid + "_profile_picture.jpg");
+        //load profile picture
+        StorageReference ref = FirebaseStorage.getInstance().getReference().child("images/" + uid + "/profile_picture.jpg");
 
         ref.getDownloadUrl().addOnSuccessListener(uri -> {
             CircleImageView pic = headerView.findViewById(R.id.profilePic);
             profilePic = findViewById(R.id.profilePic);
             Glide.with(pic).load(uri).centerCrop().into(profilePic);
         }).addOnFailureListener(e -> Log.i("log in info", "anonymous account"));
+
     }catch (Exception e){
         e.printStackTrace();
     }

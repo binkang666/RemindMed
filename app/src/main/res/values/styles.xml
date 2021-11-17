@@ -33,7 +33,7 @@
 
         <item name="colorPrimary">@color/darkPrimary</item>
         <item name="colorPrimaryDark">@color/darkPrimary</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/dimGray</item>
 
         <item name="colorBackground">#282828</item>
 

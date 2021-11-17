@@ -1,10 +1,12 @@
 package com.example.cecs491project.ui.home;
 
 
+import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -30,9 +32,10 @@ import java.util.Locale;
 
 public class schedulesAdapter extends FirestoreRecyclerAdapter<Reminder, schedulesAdapter.ViewHolder> {
     private OnItemClickListener listener;
-
-    public schedulesAdapter(@NonNull FirestoreRecyclerOptions<Reminder> reminders) {
+    private Context mContext;
+    public schedulesAdapter(Context context, @NonNull FirestoreRecyclerOptions<Reminder> reminders) {
         super(reminders);
+        mContext = context;
     }
 
     @Override
@@ -79,8 +82,6 @@ public class schedulesAdapter extends FirestoreRecyclerAdapter<Reminder, schedul
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-
     }
 
     @NonNull
@@ -91,7 +92,9 @@ public class schedulesAdapter extends FirestoreRecyclerAdapter<Reminder, schedul
         return new ViewHolder(v);
     }
 
-
+    public void deleteItem(int pos){
+        getSnapshots().getSnapshot(pos).getReference().delete();
+    }
 
     class ViewHolder extends RecyclerView.ViewHolder{
 
@@ -111,7 +114,7 @@ public class schedulesAdapter extends FirestoreRecyclerAdapter<Reminder, schedul
             time_left = itemView.findViewById(R.id.timeLeft);
             mins_left =itemView.findViewById(R.id.minsLeft);
             daysToCom = itemView.findViewById(R.id.daysleft);
-
+            itemView.setAnimation(AnimationUtils.loadAnimation(mContext,R.anim.item_animation_fall_down));
             itemView.setOnClickListener(view -> {
                 int pos = getAdapterPosition();
                 if(pos != RecyclerView.NO_POSITION && listener != null){

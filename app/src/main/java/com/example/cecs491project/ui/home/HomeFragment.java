@@ -1,6 +1,7 @@
 package com.example.cecs491project.ui.home;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -11,13 +12,17 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,8 +30,11 @@ import com.example.cecs491project.R;
 import com.example.cecs491project.ui.medication.AddMedication;
 import com.example.cecs491project.ui.medication.Medications;
 import com.example.cecs491project.ui.reminder.Reminder;
+import com.example.cecs491project.ui.reminder.ReminderAdapter;
+import com.example.cecs491project.ui.reminder.ReminderDetails;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.type.DateTime;
@@ -39,6 +47,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Objects;
 import android.os.Handler;
 import android.widget.Toast;
@@ -185,7 +194,7 @@ public class HomeFragment extends Fragment {
 
         itemName.add("Tablet");
         itemName.add("Capsule");
-        itemName.add("Drop");
+        itemName.add("Drops");
         itemName.add("Injection");
 
         itemDesc.add("A tablet is a pharmaceutical oral dosage form or solid unit dosage form.");
@@ -198,15 +207,6 @@ public class HomeFragment extends Fragment {
     private void EventChangeListener(){
         db = FirebaseFirestore.getInstance();
         String uid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-
-        List<String> day = new ArrayList<>();
-        day.add("Sunday");
-        day.add("Monday");
-        day.add("Tuesday");
-        day.add("Wednesday");
-        day.add("Thursday");
-        day.add("Friday");
-        day.add("Saturday");
 
         Calendar calendar = Calendar.getInstance();
         Date date = calendar.getTime();
@@ -250,12 +250,70 @@ public class HomeFragment extends Fragment {
         FirestoreRecyclerOptions<Reminder> options2 = new FirestoreRecyclerOptions.Builder<Reminder>()
                 .setQuery(query2,Reminder.class)
                 .build();
-        schedulesAdapter = new schedulesAdapter(options2);
+        schedulesAdapter = new schedulesAdapter(getActivity(),options2);
         scheduleView = view.findViewById(R.id.recyclerView);
 
         scheduleView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL, false));
         scheduleView.setAdapter(schedulesAdapter);
 
+
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+                alertDialog.setMessage("Are you sure you want to delete this reminder?");
+                alertDialog.setCancelable(false);
+                alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        schedulesAdapter.deleteItem(viewHolder.getAdapterPosition());
+                        Toast.makeText(getContext(), "Reminder Deleted", Toast.LENGTH_LONG).show();
+                    }
+                });
+                alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        schedulesAdapter.notifyItemChanged(viewHolder.getAdapterPosition());
+                    }
+                });
+                alertDialog.create().show();
+            }
+        }).attachToRecyclerView(scheduleView);
+        schedulesAdapter.setOnItemClickListener(new schedulesAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(DocumentSnapshot documentSnapshot, int pos) {
+                String docID = documentSnapshot.getId();
+                Map<String, Object> s = documentSnapshot.getData();
+
+                String reminderName = (String) s.get("reminderName");
+                String name = (String) s.get("medicationName");
+                String start = (String) s.get("startDate");
+                String end = (String) s.get("endDate");
+                String time = (String) s.get("time");
+                String note = (String) s.get("note");
+                ArrayList<String> day = (ArrayList<String>) s.get("days");
+
+                Bundle bundle = new Bundle();
+                bundle.putString("remName", reminderName);
+                bundle.putString("medName", name);
+                bundle.putString("startD", start);
+                bundle.putString("endD", end);
+                bundle.putString("docID", docID);
+                bundle.putString("note", note);
+                bundle.putString("medTime",time);
+                bundle.putStringArrayList("days", day);
+
+                Intent i = new Intent(getContext(), ReminderDetails.class);
+                i.putExtras(bundle);
+                startActivity(i);
+                getActivity().overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
+            }
+        });
 
     }
 

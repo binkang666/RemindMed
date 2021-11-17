@@ -1,6 +1,7 @@
 package com.example.cecs491project.ui.home;
 
 
+import android.content.ClipData;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +13,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.cecs491project.R;
 import com.example.cecs491project.ui.medication.Medications;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
@@ -42,11 +46,12 @@ public class overviewAdapter extends RecyclerView.Adapter<overviewAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
+        Glide.with(getmContext())
+                .load(ItemImage.get(position))
+                .apply(RequestOptions.bitmapTransform(new RoundedCorners(30)))
+                .into(holder.imageView);
         holder.itemName.setText(ItemName.get(position));
-        System.out.println(ItemDesc.get(position));
-//        holder.itemDesc.setText(ItemDesc.get(position));
-        holder.imageView.setAdjustViewBounds(true);
-        holder.imageView.setImageResource(ItemImage.get(position));
+
 
     }
 

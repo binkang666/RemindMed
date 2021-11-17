@@ -80,9 +80,10 @@ public class MedicationFragment extends Fragment {
 
         Animation animation1 = AnimationUtils.loadAnimation(getActivity(),R.anim.left_to_right);
         recyclerView.startAnimation(animation1);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 //        LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(getContext(), R.anim.layout_animation_fall_down);
 //        recyclerView.setLayoutAnimation(animation);
+//        recyclerView.scheduleLayoutAnimation();
         medicationAdapter = new MedicationAdapter(options);
         recyclerView.setAdapter(medicationAdapter);
 
